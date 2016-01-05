@@ -1,6 +1,21 @@
 {% extends "base.html" %}
-{% load profile_tags %}
+{% load profile_tags tariff_tags %}
 
 {% block after_header %}
     {% profile_menu %}
+{% endblock %}
+
+{% block content %}
+<div class="ui internally celled grid">
+    <div class="row">
+        <div class="twelve wide column">
+            {% block profile_content %}
+
+            {% endblock %}
+        </div>
+        <div class="four wide column">
+            {% my_tariff_card %}
+        </div>
+    </div>
+</div>
 {% endblock %}

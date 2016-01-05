@@ -1,0 +1,37 @@
+{% load humanize pytils_numeral %}
+
+
+<div class="ui card">
+    <div class="content">
+        <p class="center aligned">
+            <i class="big money icon"></i>
+            Ваш тарифный план:
+        </p>
+
+        <div class="header center aligned">
+            <h2>{{ tariff.name }}</h2>
+            <br>
+        </div>
+        <div class="ui two statistics">
+            <div class="statistic">
+                <div class="value">
+                    {{ tariff.goods|intcomma }}
+                </div>
+                <div class="label">
+                    товар{{ tariff.goods|choose_plural:",а,ов" }}
+                </div>
+            </div>
+            <div class="statistic">
+                <div class="value">
+                    {{ tariff.price|intcomma }}
+                </div>
+                <div class="label">
+                    руб/мес
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="extra content">
+        <a href="{% url "profile:tariff_list" %}" class="ui fluid primary button">Управление тарифами</a>
+    </div>
+</div>

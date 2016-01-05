@@ -3,6 +3,11 @@
 
 {% block content %}
     <h1>Тарифы</h1>
+{% if request.user.tariff %}
+    <h4>Ваш текуший тариф:</h4>
+    <p>{{ request.user.tariff.name }}</p>
+    <br><br>
+{% endif %}
     <div class="ui {{ tariff_count }} columns grid">
 {% for tariff in tariffs %}
         <div class="column">
@@ -16,7 +21,7 @@
                     <div class=""><b>{{ tariff.price|intcomma }} рубл{{ tariff.price|choose_plural:"ь,я,ей" }}</b></div>
                 </div>
                 <div class="extra content">
-                    <a href="" class="ui fluid primary button">Купить</a>
+                    <a href="{% url "tariff:set_tariff" tariff.id %}" class="ui fluid primary button">Купить</a>
                 </div>
             </div>
         </div>

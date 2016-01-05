@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 from django.core import validators
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
+from tariff.models import Tariff
 
 
 class MarketplaceUserManager(BaseUserManager):
@@ -64,6 +65,8 @@ class MarketplaceUser(AbstractBaseUser, PermissionsMixin):
                                                 'active. Unselect this instead of deleting accounts.'))
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
+    tariff = models.ForeignKey('tariff.Tariff', verbose_name=_('tariff'), blank=True, null=True)
+
     objects = MarketplaceUserManager()
 
     USERNAME_FIELD = 'username'
@@ -97,3 +100,10 @@ class MarketplaceUser(AbstractBaseUser, PermissionsMixin):
 
     def email_user(self, subject, message, from_email=None):
         send_mail(subject, message, from_email, [self.email])
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            tariff = Tariff.objects.get_default()
+            if tariff:
+                self.tariff = tariff
+        super().save(*args, **kwargs)
