@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load profile_tags tariff_tags %}
+{% load profile_tags tariff_tags user_tags %}
 
 {% block after_header %}
     {% profile_menu %}
@@ -15,6 +15,7 @@
         </div>
         <div class="four wide column">
             {% my_tariff_card %}
+            {% my_balance_card %}
         </div>
     </div>
 </div>

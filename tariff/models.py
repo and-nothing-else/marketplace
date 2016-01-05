@@ -14,7 +14,7 @@ class TariffManager(models.Manager):
 class Tariff(models.Model):
     name = models.CharField(_('name'), max_length=32)
     goods = models.PositiveSmallIntegerField(_('goods count'))
-    price = models.PositiveSmallIntegerField(_('price'), help_text=_('roubles per month'))
+    price = models.FloatField(_('price'), help_text=_('roubles per day'))
     ordering = models.IntegerField(_('ordering'), default=10)
     is_recommended = models.BooleanField(_('is recommended'), default=False)
     is_default = models.BooleanField(_('default'), default=False)

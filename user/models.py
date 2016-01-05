@@ -6,6 +6,7 @@ from django.core import validators
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from tariff.models import Tariff
+from math import floor
 
 
 class MarketplaceUserManager(BaseUserManager):
@@ -66,6 +67,7 @@ class MarketplaceUser(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
     tariff = models.ForeignKey('tariff.Tariff', verbose_name=_('tariff'), blank=True, null=True)
+    balance = models.FloatField(_('balanсe'), default=0)
 
     objects = MarketplaceUserManager()
 
@@ -100,6 +102,20 @@ class MarketplaceUser(AbstractBaseUser, PermissionsMixin):
 
     def email_user(self, subject, message, from_email=None):
         send_mail(subject, message, from_email, [self.email])
+
+    def change_balance(self, b_sum):
+        self.balance += b_sum
+        self.save()
+
+    def daily_write_off(self):
+        if self.tariff:
+            self.change_balance(-self.tariff.price)
+
+    def days_of_service_left(self):
+        if self.tariff:
+            if self.tariff.price > 0:
+                return floor(self.balanсe / self.tariff.price)
+        return None
 
     def save(self, *args, **kwargs):
         if not self.pk:

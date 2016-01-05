@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <div class="ui centered grid">
+        <div class="eight wide column">
+            <h1>Пополнение баланса</h1>
+            <form method="post" class="ui form">
+{% if form.non_field_errors %}
+                <div class="ui negative message">
+                    {{ form.non_field_errors }}
+                </div>
+{% endif %}
+                {% csrf_token %}
+{% for field in form %}
+                {% include "forms/_field.html" %}
+{% endfor %}
+                <button type="submit" class="ui primary button">Перейти к оплате</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

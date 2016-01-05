@@ -1,6 +1,6 @@
 {% load humanize pytils_numeral %}
 
-
+{% if tariff %}
 <div class="ui card">
     <div class="content">
         <p class="center aligned">
@@ -12,7 +12,7 @@
             <h2>{{ tariff.name }}</h2>
             <br>
         </div>
-        <div class="ui two statistics">
+        <div class="ui two small statistics">
             <div class="statistic">
                 <div class="value">
                     {{ tariff.goods|intcomma }}
@@ -26,7 +26,7 @@
                     {{ tariff.price|intcomma }}
                 </div>
                 <div class="label">
-                    руб/мес
+                    руб/день
                 </div>
             </div>
         </div>
@@ -35,3 +35,4 @@
         <a href="{% url "profile:tariff_list" %}" class="ui fluid primary button">Управление тарифами</a>
     </div>
 </div>
+{% endif %}

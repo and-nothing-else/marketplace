@@ -1,0 +1,21 @@
+{% load humanize pytils_numeral %}
+
+<div class="ui center aligned card">
+    <div class="content">
+        <p class="center aligned">
+            <i class="big money icon"></i>
+            Ваш баланс:
+        </p>
+        <div class="ui small fluid statistic">
+            <div class="value">
+                {{ user.balance|intcomma }}
+            </div>
+            <div class="center aligned label">
+                рубл{{ user.balance|choose_plural:"ь,я,ей" }}
+            </div>
+        </div>
+    </div>
+    <div class="extra content">
+        <a href="{% url "order:order_form" %}" class="ui fluid primary button">Пополнить баланс</a>
+    </div>
+</div>

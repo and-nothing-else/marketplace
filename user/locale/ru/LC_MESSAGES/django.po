@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-04 20:34+0300\n"
+"POT-Creation-Date: 2016-01-05 17:39+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,66 +20,78 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
+#: admin.py:11
+msgid "Services"
+msgstr "Услуги"
+
 #: apps.py:7
 msgid "Marketplace Users"
 msgstr "Пользователи торговой площадки"
 
-#: models.py:41
+#: models.py:43
 msgid "username"
 msgstr ""
 
-#: models.py:44
+#: models.py:46
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 
-#: models.py:48
+#: models.py:50
 msgid ""
 "Enter a valid username. This value may contain only letters, numbers and @/./"
 "+/-/_ characters."
 msgstr ""
 
-#: models.py:53
+#: models.py:55
 msgid "A user with that username already exists."
 msgstr ""
 
-#: models.py:56
+#: models.py:58
 msgid "first name"
 msgstr ""
 
-#: models.py:57
+#: models.py:59
 msgid "last name"
 msgstr ""
 
-#: models.py:58
+#: models.py:60
 msgid "email address"
 msgstr ""
 
-#: models.py:60
+#: models.py:62
 msgid "staff status"
 msgstr ""
 
-#: models.py:61
+#: models.py:63
 msgid "Designates whether the user can log into this admin site."
 msgstr ""
 
-#: models.py:62
+#: models.py:64
 msgid "active"
 msgstr ""
 
-#: models.py:63
+#: models.py:65
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
 
-#: models.py:65
+#: models.py:67
 msgid "date joined"
 msgstr ""
 
-#: models.py:73
+#: models.py:69
+msgid "tariff"
+msgstr "тариф"
+
+#: models.py:70
+msgid "balanсe"
+msgstr "баланс"
+
+#: models.py:78
 msgid "user"
 msgstr ""
 
-#: models.py:74
+#: models.py:79
 msgid "users"
 msgstr ""

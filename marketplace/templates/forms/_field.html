@@ -1,0 +1,19 @@
+{% load widget_tweaks %}
+
+    <div class="field">
+{% if field|widget_type == 'checkboxinput' %}
+        <div class="ui checkbox">
+            {{ field }}
+            <label>{{ field.label }}</label>
+        </div>
+{% elif field|widget_type == 'select' %}
+        <label>{{ field.label }}</label>
+        {{ field|add_class:"ui dropdown" }}
+{% else %}
+        <label>{{ field.label }}</label>
+        {{ field }}
+{% endif %}
+    </div>
+{% if field.errors %}
+    {{ field.errors }}
+{% endif %}
