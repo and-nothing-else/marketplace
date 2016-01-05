@@ -1,12 +1,13 @@
 from django.views.generic import UpdateView, ListView
 from django.core.urlresolvers import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Shop
 from .forms import ShopForm
 from tariff.models import Tariff
 from marketplace.utils import int2semantic_ui_class
 
 
-class ShopUpdateView(UpdateView):
+class ShopUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ShopForm
     template_name = 'profile/shop_update.html'
     success_url = reverse_lazy('profile:shop_update')
@@ -16,7 +17,7 @@ class ShopUpdateView(UpdateView):
         return shop
 
 
-class TariffList(ListView):
+class TariffList(LoginRequiredMixin, ListView):
     model = Tariff
     template_name = 'profile/tariff_select.html'
     context_object_name = 'tariffs'

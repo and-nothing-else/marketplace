@@ -1,11 +1,12 @@
 from django.views.generic import CreateView, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import redirect
 from .models import Order
 from .forms import OrderForm
 
 
-class OrderFormView(CreateView):
+class OrderFormView(LoginRequiredMixin, CreateView):
     model = Order
     form_class = OrderForm
     template_name = 'order/order_form.html'
@@ -25,5 +26,5 @@ class OrderFormView(CreateView):
         return redirect(self.get_success_url())
 
 
-class GoPayView(TemplateView):
+class GoPayView(LoginRequiredMixin, TemplateView):
     template_name = 'order/go_pay.html'
