@@ -38,14 +38,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'pytils',
     'django_geoip',
     'widget_tweaks',
     'user',
     'dictionary',
     'profile',
+    'tariff',
 ]
 
 GEOIP_LOCATION_MODEL = 'dictionary.models.Region'

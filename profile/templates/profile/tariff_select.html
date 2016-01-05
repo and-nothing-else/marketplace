@@ -1,0 +1,26 @@
+{% extends "profile/base.html" %}
+{% load humanize pytils_numeral %}
+
+{% block content %}
+    <h1>Тарифы</h1>
+    <div class="ui {{ tariff_count }} columns grid">
+{% for tariff in tariffs %}
+        <div class="column">
+            <div class="ui segment{% if tariff.is_recommended %} raised{% endif %}">
+{% if tariff.is_recommended %}
+                <a class="ui green ribbon label">Рекомендуем!</a>
+{% endif %}
+                <div class="">
+                    <h2>{{ tariff.name }}</h2>
+                    <p>{{ tariff.goods|intcomma }} товар{{ tariff.goods|choose_plural:",а,ов" }}</p>
+                    <div class=""><b>{{ tariff.price|intcomma }} рубл{{ tariff.price|choose_plural:"ь,я,ей" }}</b></div>
+                </div>
+                <div class="extra content">
+                    <a href="" class="ui fluid primary button">Купить</a>
+                </div>
+            </div>
+        </div>
+{% endfor %}
+    </div>
+
+{% endblock %}

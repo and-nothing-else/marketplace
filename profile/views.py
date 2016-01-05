@@ -1,7 +1,9 @@
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, ListView
 from django.core.urlresolvers import reverse_lazy
 from .models import Shop
 from .forms import ShopForm
+from tariff.models import Tariff
+from marketplace.utils import int2semantic_ui_class
 
 
 class ShopUpdateView(UpdateView):
@@ -12,3 +14,14 @@ class ShopUpdateView(UpdateView):
     def get_object(self, queryset=None):
         shop, created = Shop.objects.get_or_create(owner=self.request.user)
         return shop
+
+
+class TariffList(ListView):
+    model = Tariff
+    template_name = 'profile/tariff_select.html'
+    context_object_name = 'tariffs'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tariff_count'] = int2semantic_ui_class(self.object_list.count())
+        return context
