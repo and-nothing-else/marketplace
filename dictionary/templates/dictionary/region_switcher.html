@@ -1,0 +1,18 @@
+<div class="ui dropdown item" id="region_switcher">
+    <form id="region_switcher_form" method="post" action="{% url "geoip_change_location" %}">
+        {% csrf_token %}
+        <input type="hidden" name="location_id" value="" id="region_switcher_form_location_id">
+    </form>
+    Ваш город&nbsp;<span class="text">{{ location }}</span>
+    <div class="menu">
+        <div class="ui icon search input">
+            <i class="search icon"></i>
+            <input type="text" placeholder="Выберите регион...">
+        </div>
+        <div class="scrolling menu">
+        {% for region in regions %}
+            <div class="item" data-value="{{ region.id }}">{{ region.name }}</div>
+        {% endfor %}
+        </div>
+    </div>
+</div>

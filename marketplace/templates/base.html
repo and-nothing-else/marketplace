@@ -1,0 +1,52 @@
+{% load staticfiles dictionary_tags %}
+<!doctype html>
+<meta charset="utf-8">
+<title>{% block head_title %}Marketplace{% endblock %}</title>
+<link rel="stylesheet" href="{% static "semantic/semantic.min.css" %}">
+
+
+<body>
+    <div class="ui menu">
+        <div class="header item">
+            <h1><a href="/">YouStore</a></h1>
+        </div>
+        <div class="item">
+            <div class="ui action wide left icon input">
+                <i class="search icon"></i>
+                <input type="text" placeholder="Search">
+                <button class="ui button">Submit</button>
+            </div>
+        </div>
+        <div class="right menu">
+            {% region_switcher %}
+            {% if request.user.is_authenticated %}
+                <a class="item" href="{% url "profile:shop_update" %}">
+                Привет, {{ request.user }}
+                </a>
+                <a class="item" href="{% url "account_logout" %}">
+                    выйти
+                    <i class="log out icon"></i>
+                </a>
+            {% else %}
+            <a class="item" href="{% url "account_login" %}">
+                <i class="sign in icon"></i>
+                Вход
+            </a>
+            <a class="item" href="{% url "account_signup" %}">
+                <i class="add user icon"></i>
+                Регистрация
+            </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="ui centered grid">
+        <div class="fourteen wide column">
+{% block content %}
+{% endblock %}
+        </div>
+    </div>
+<script src="{% static "js/jquery.min.js" %}"></script>
+<script src="{% static "semantic/semantic.min.js" %}"></script>
+<script src="{% static "js/script.js" %}"></script>
+</body>
