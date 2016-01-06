@@ -3,4 +3,5 @@ mysqlclient==1.3.7
 django-allauth==0.24.1
 django-widget-tweaks==1.4.1
 pytils==0.3
+django-admin-tools==0.7.1
 -e git+https://git@github.com/futurecolors/django-geoip#egg=django_geoip

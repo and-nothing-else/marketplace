@@ -26,3 +26,8 @@ class Order(models.Model):
         if self.paid and not self.was_paid:
             self.user.change_balance(self.sum)
         super().save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['-date']
+        verbose_name = _('order')
+        verbose_name_plural = _('orders')

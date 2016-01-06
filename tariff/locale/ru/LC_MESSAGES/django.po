@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-05 12:01+0300\n"
+"POT-Creation-Date: 2016-01-06 14:36+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,42 +20,47 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: apps.py:7
+#: tariff/apps.py:7
 msgid "Tariff control"
 msgstr "Управление тарифными планами"
 
-#: models.py:6
+#: tariff/models.py:15
 msgid "name"
 msgstr "название"
 
-#: models.py:7
+#: tariff/models.py:16
 msgid "goods count"
 msgstr "количество товаров"
 
-#: models.py:8
-msgid "days"
-msgstr "дней"
-
-#: models.py:9
+#: tariff/models.py:17
 msgid "price"
 msgstr "цена"
 
-#: models.py:9
-msgid "roubles per month"
+#: tariff/models.py:17
+#, fuzzy
+#| msgid "roubles per month"
+msgid "roubles per day"
 msgstr "рублей в месяц"
 
-#: models.py:10
+#: tariff/models.py:18
 msgid "ordering"
 msgstr "сортировка"
 
-#: models.py:11
+#: tariff/models.py:19
 msgid "is recommended"
 msgstr "рекомендуемое"
 
-#: models.py:18
+#: tariff/models.py:20
+msgid "default"
+msgstr ""
+
+#: tariff/models.py:29
 msgid "tariff"
 msgstr "тариф"
 
-#: models.py:19
+#: tariff/models.py:30
 msgid "tariffs"
 msgstr "тарифы"
+
+#~ msgid "days"
+#~ msgstr "дней"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-05 17:39+0300\n"
+"POT-Creation-Date: 2016-01-06 14:36+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,78 +20,78 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: admin.py:11
+#: user/admin.py:11
 msgid "Services"
 msgstr "Услуги"
 
-#: apps.py:7
+#: user/apps.py:7
 msgid "Marketplace Users"
 msgstr "Пользователи торговой площадки"
 
-#: models.py:43
+#: user/models.py:43
 msgid "username"
 msgstr ""
 
-#: models.py:46
+#: user/models.py:46
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 
-#: models.py:50
+#: user/models.py:50
 msgid ""
 "Enter a valid username. This value may contain only letters, numbers and @/./"
 "+/-/_ characters."
 msgstr ""
 
-#: models.py:55
+#: user/models.py:55
 msgid "A user with that username already exists."
 msgstr ""
 
-#: models.py:58
+#: user/models.py:58
 msgid "first name"
 msgstr ""
 
-#: models.py:59
+#: user/models.py:59
 msgid "last name"
 msgstr ""
 
-#: models.py:60
+#: user/models.py:60
 msgid "email address"
 msgstr ""
 
-#: models.py:62
+#: user/models.py:62
 msgid "staff status"
 msgstr ""
 
-#: models.py:63
+#: user/models.py:63
 msgid "Designates whether the user can log into this admin site."
 msgstr ""
 
-#: models.py:64
+#: user/models.py:64
 msgid "active"
 msgstr ""
 
-#: models.py:65
+#: user/models.py:65
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
 
-#: models.py:67
+#: user/models.py:67
 msgid "date joined"
 msgstr ""
 
-#: models.py:69
+#: user/models.py:69
 msgid "tariff"
 msgstr "тариф"
 
-#: models.py:70
+#: user/models.py:70
 msgid "balanсe"
 msgstr "баланс"
 
-#: models.py:78
+#: user/models.py:78
 msgid "user"
 msgstr ""
 
-#: models.py:79
+#: user/models.py:79
 msgid "users"
 msgstr ""
