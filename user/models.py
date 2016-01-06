@@ -121,7 +121,7 @@ class MarketplaceUser(AbstractBaseUser, PermissionsMixin):
     def days_of_service_left(self):
         if self.tariff:
             if self.tariff.price > 0:
-                return floor(self.balanсe / self.tariff.price)
+                return floor(self.balance / self.tariff.price)
         return None
 
     def save(self, *args, **kwargs):
