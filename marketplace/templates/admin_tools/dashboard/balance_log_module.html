@@ -1,0 +1,28 @@
+{% load i18n %}
+{% if not module.is_empty %}
+    <div id="module_{{ module.id }}" class="{{ module.render_css_classes }}">
+        {% if module.show_title and module.title %}<h2>{% if module.title_url %}<a href="{{ module.title_url }}">{% trans module.title %}</a>{% else %}{% trans module.title|capfirst %}{% endif %}</h2>{% endif %}
+        <div class="dashboard-module-content">
+            {% spaceless %}
+            {% if module.pre_content %}
+            <p>{{ module.pre_content }}</p>
+            {% endif %}
+            {% block module_content %}
+                <table>
+            {% for child in module.children %}
+                    <tr>
+                        <td>{{ child.created_at|date:"j E Y H:i" }}</td>
+                        <td>{{ child.user }}</td>
+                        <td>{{ child.sum }} руб.</td>
+                        <td>{{ child.description }}</td>
+                    </tr>
+            {% endfor %}
+                </table>
+            {% endblock %}
+            {% if module.post_content %}
+            <p>{{ module.post_content }}</p>
+            {% endif %}
+            {% endspaceless %}
+        </div>
+    </div>
+{% endif %}

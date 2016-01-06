@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from logs.models import BalanceLog
 
 PAYMENT_TYPE_CHOICES = getattr(settings, 'YANDEX_MONEY_PAYMENT_TYPE_CHOICES', (
     ('PC', "Яндекс.Деньги"),
@@ -25,6 +26,12 @@ class Order(models.Model):
     def save(self, *args, **kwargs):
         if self.paid and not self.was_paid:
             self.user.change_balance(self.sum)
+            BalanceLog.write(
+                description='оплачено по заказу №{}'.format(self.id),
+                sum=self.sum,
+                user=self.user,
+                operation_type='payment'
+            )
         super().save(*args, **kwargs)
 
     class Meta:

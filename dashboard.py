@@ -16,6 +16,18 @@ from django.core.urlresolvers import reverse
 from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
 from admin_tools.utils import get_admin_site_name
 
+from logs.models import BalanceLog
+
+
+class BalanceLogDashboardModule(modules.DashboardModule):
+    title = 'История операций по счетам пользователей'
+    template = 'admin_tools/dashboard/balance_log_module.html'
+
+    def init_with_context(self, context):
+        self.children = [
+            event for event in BalanceLog.objects.all()[:10]
+        ]
+
 
 class CustomIndexDashboard(Dashboard):
     """
@@ -55,6 +67,8 @@ class CustomIndexDashboard(Dashboard):
                 )
             ]
         ))
+
+        self.children.append(BalanceLogDashboardModule())
 
         # append a recent actions module
         self.children.append(modules.RecentActions(_('Recent Actions'), 5))

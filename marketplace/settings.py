@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'profile',
     'tariff',
     'order',
+    'logs',
 ]
 
 GEOIP_LOCATION_MODEL = 'dictionary.models.Region'

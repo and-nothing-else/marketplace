@@ -6,6 +6,7 @@ from django.core import validators
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from tariff.models import Tariff
+from logs.models import BalanceLog
 from math import floor
 
 
@@ -110,6 +111,12 @@ class MarketplaceUser(AbstractBaseUser, PermissionsMixin):
     def daily_write_off(self):
         if self.tariff:
             self.change_balance(-self.tariff.price)
+            BalanceLog.write(
+                description='Ежедневное списание по тарифу {}'.format(self.tariff.name),
+                sum=-self.tariff.price,
+                user=self,
+                operation_type='daily_write_off'
+            )
 
     def days_of_service_left(self):
         if self.tariff:
