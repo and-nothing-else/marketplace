@@ -9,4 +9,4 @@ def set_tariff(request, tariff_id):
     user = user_model.objects.get(id=request.user.id)
     user.tariff = Tariff.objects.get(id=tariff_id)
     user.save()
-    return redirect(reverse_lazy('profile:tariff_list'))
+    return redirect(reverse_lazy('user:tariff_list'))

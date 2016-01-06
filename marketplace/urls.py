@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^admin_tools/', include('admin_tools.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^accounts/', include('profile.urls', namespace='profile')),
+    url(r'^accounts/', include('user.urls', namespace='user')),
     url(r'^tariff/', include('tariff.urls', namespace='tariff')),
     url(r'^order/', include('order.urls', namespace='order')),
     url(r'^geoip/', include('django_geoip.urls')),

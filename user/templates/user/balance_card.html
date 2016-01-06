@@ -14,7 +14,9 @@
                 рубл{{ user.balance|choose_plural:"ь,я,ей" }}
             </div>
         </div>
+{% if user.tariff.price > 0 %}
         <p>Этого хватит на {{ user.days_of_service_left }} {{ user.days_of_service_left|choose_plural:"день,дня,дней" }}</p>
+{% endif %}
     </div>
     <div class="extra content">
         <a href="{% url "order:order_form" %}" class="ui fluid primary button">Пополнить баланс</a>

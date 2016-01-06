@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'user',
     'dictionary',
-    'profile',
+    'shops',
     'tariff',
     'order',
     'logs',
