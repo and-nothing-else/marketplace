@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <h1>{{ shop.name }}</h1>
+    <div class="ui list">
+{% if shop.address %}
+        <div class="item">
+            <i class="marker icon"></i>
+            <div class="content">
+                {{ shop.address }}
+            </div>
+        </div>
+{% endif %}
+{% if shop.phone %}
+        <div class="item">
+            <i class="phone icon"></i>
+            <div class="content">
+                {{ shop.phone }}
+            </div>
+        </div>
+{% endif %}
+{% if shop.description %}
+        <div class="item">
+            <div class="content">
+                {{ shop.description|safe }}
+            </div>
+        </div>
+{% endif %}
+    </div>
+{% endblock %}

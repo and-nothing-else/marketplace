@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<ul>
+{% for shop in shops %}
+    <li>
+        <a href="{{ shop.get_absolute_url }}">{{ shop.name }}</a>
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}

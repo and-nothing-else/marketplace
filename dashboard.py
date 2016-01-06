@@ -52,7 +52,7 @@ class CustomIndexDashboard(Dashboard):
                     title="Пользователи",
                     models=[
                         'user.models.MarketplaceUser',
-                        'profile.models.Shop',
+                        'shops.models.Shop',
                     ]
                 ),
                 modules.ModelList(

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'pytils',
     'django_geoip',
     'widget_tweaks',
+    'ckeditor',
     'user',
     'dictionary',
     'shops',
@@ -153,6 +154,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'marketplace', 'static'),
 )
+
+
+try:
+    from .ckeditor_settings import *
+except ImportError:
+    pass
 
 
 try:

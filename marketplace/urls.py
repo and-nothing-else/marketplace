@@ -25,5 +25,6 @@ urlpatterns = [
     url(r'^tariff/', include('tariff.urls', namespace='tariff')),
     url(r'^order/', include('order.urls', namespace='order')),
     url(r'^geoip/', include('django_geoip.urls')),
+    url(r'^shops/', include('shops.urls', namespace='shops')),
     url(r'^$', TemplateView.as_view(template_name='index.html')),
 ]

@@ -6,8 +6,9 @@ class ShopForm(forms.ModelForm):
     class Meta:
         model = Shop
         fields = [
+            'region',
             'name',
             'address',
             'phone',
-            'region',
+            'description'
         ]

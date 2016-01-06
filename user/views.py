@@ -10,7 +10,7 @@ from marketplace.utils import int2semantic_ui_class
 class ShopUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ShopForm
     template_name = 'user/shop_update.html'
-    success_url = reverse_lazy('profile:shop_update')
+    success_url = reverse_lazy('user:shop_update')
 
     def get_object(self, queryset=None):
         shop, created = Shop.objects.get_or_create(owner=self.request.user)
