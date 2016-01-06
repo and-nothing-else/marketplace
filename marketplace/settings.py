@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django_geoip',
     'widget_tweaks',
     'ckeditor',
+    'addresspicker',
     'user',
     'dictionary',
     'shops',

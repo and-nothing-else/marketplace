@@ -3,6 +3,13 @@
 
 {% block content %}
     <h1>{{ shop.name }}</h1>
+{% if shop.map_point %}
+    <div class="ui grid">
+        <div class="eight wide column">
+            <div id="map" style="height: 300px"></div>
+        </div>
+        <div class="eight wide column">
+{% endif %}
     <div class="ui list">
 {% if shop.address %}
         <div class="item">
@@ -28,4 +35,25 @@
         </div>
 {% endif %}
     </div>
+{% if shop.map_point %}
+        </div>
+    </div>
+{% endif %}
+{% endblock %}
+
+
+{% block extra_scripts %}
+{{ block.super }}
+{% if shop.map_point %}
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script>
+    ymaps.ready(function(){
+        var map_data = {{ shop.map_point|safe }};
+        var map = new ymaps.Map("map", {
+            center: map_data['latlng'].split(','),
+            zoom: map_data['zoom']
+        });
+    });
+    </script>
+{% endif %}
 {% endblock %}

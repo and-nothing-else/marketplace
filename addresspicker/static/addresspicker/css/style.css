@@ -1,0 +1,17 @@
+.addresspicker-widget {
+    float: left;
+}
+.addresspicker-search {
+    width: 480px;
+}
+.addresspicker-map {
+    height: 400px;
+    width: 800px;
+    margin: 8px 0;
+}
+.addresspicker-result {
+    width: 640px;
+}
+.addresspicker-coords {
+    width: 320px;
+}

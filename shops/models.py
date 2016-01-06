@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse_lazy
 from ckeditor.fields import RichTextField
+from addresspicker.fields import AddressPickerField
 
 
 class ShopManager(models.Manager):
@@ -13,6 +14,7 @@ class Shop(models.Model):
     owner = models.ForeignKey('user.MarketplaceUser', verbose_name=_('owner'))
     name = models.CharField(_('shop name'), max_length=512)
     address = models.CharField(_('address'), max_length=512)
+    map_point = AddressPickerField(_('on map'), blank=True, null=True)
     phone = models.CharField(_('phone'), max_length=128)
     region = models.ForeignKey('dictionary.Region', verbose_name=_('region'), blank=True, null=True)
     description = RichTextField(_('description'), blank=True, config_name='minimal')

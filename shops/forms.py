@@ -9,6 +9,7 @@ class ShopForm(forms.ModelForm):
             'region',
             'name',
             'address',
+            'map_point',
             'phone',
             'description'
         ]

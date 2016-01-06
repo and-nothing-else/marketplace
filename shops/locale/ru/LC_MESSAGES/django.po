@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-06 18:57+0300\n"
+"POT-Creation-Date: 2016-01-06 19:22+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,42 +21,45 @@ msgstr ""
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: apps.py:7
-#| msgid "shops"
 msgid "Shops"
 msgstr "Магазины"
 
-#: models.py:13
+#: models.py:14
 msgid "owner"
 msgstr "владелец"
 
-#: models.py:14
+#: models.py:15
 msgid "shop name"
 msgstr "название магазина"
 
-#: models.py:15
+#: models.py:16
 msgid "address"
 msgstr "адрес"
 
-#: models.py:16
+#: models.py:17
+msgid "on map"
+msgstr "на карте"
+
+#: models.py:18
 msgid "phone"
 msgstr "телефон"
 
-#: models.py:17
+#: models.py:19
 msgid "region"
 msgstr "регион"
 
-#: models.py:18
+#: models.py:20
 msgid "description"
 msgstr "описание"
 
-#: models.py:20
+#: models.py:22
 msgid "active"
 msgstr "активность"
 
-#: models.py:32
+#: models.py:34
 msgid "shop"
 msgstr "магазин"
 
-#: models.py:33
+#: models.py:35
 msgid "shops"
 msgstr "магазины"
