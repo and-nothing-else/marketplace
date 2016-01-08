@@ -8,7 +8,7 @@ class ShopListView(ListView):
     context_object_name = 'shops'
 
     def get_queryset(self):
-        return self.request.location.shop_set.all()
+        return self.model.objects.filter(region__id=self.request.location.id)
 
 
 class ShopDetailView(DetailView):
