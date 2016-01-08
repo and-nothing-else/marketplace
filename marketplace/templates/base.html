@@ -7,37 +7,33 @@
 
 
 <body>
-    <header>
-        <div class="ui menu">
-            <div class="header item">
+    <header class="page_head">
+        <div class="ui stackable grid container">
+            <div class="three wide column">
                 <h1><a href="/">YouStore</a></h1>
             </div>
-            <div class="item">
-                <div class="ui action wide left icon input">
+            <div class="ten wide column">
+                <div class="ui action wide left icon fluid input">
                     <i class="search icon"></i>
                     <input type="text" placeholder="Search">
                     <button class="ui button">Submit</button>
                 </div>
             </div>
-            <div class="right menu">
-                {% region_switcher %}
+            <div class="three wide column">
+                <div class="page_head__region_switcher">
+                    {% region_switcher %}
+                </div>
                 {% if request.user.is_authenticated %}
                     <a class="item" href="{% url "user:shop_update" %}">
-                    Привет, {{ request.user }}
-                    </a>
+                        <i class="user icon"></i>
+                        {{ request.user }}
+                    </a> /
                     <a class="item" href="{% url "account_logout" %}">
                         выйти
                         <i class="log out icon"></i>
                     </a>
                 {% else %}
-                <a class="item" href="{% url "account_login" %}">
-                    <i class="sign in icon"></i>
-                    Вход
-                </a>
-                <a class="item" href="{% url "account_signup" %}">
-                    <i class="add user icon"></i>
-                    Регистрация
-                </a>
+                <a class="item" href="{% url "account_login" %}">Вход</a> / <a class="item" href="{% url "account_signup" %}">Регистрация</a>
                 {% endif %}
             </div>
         </div>
@@ -45,15 +41,13 @@
         {% endblock %}
     </header>
 
-    <div class="ui centered grid">
-        <div class="fourteen wide column">
+
+
+    <div class="ui stackable grid container">
 {% block content %}
 {% endblock %}
-        </div>
     </div>
-    <div class="ui centered grid">
-        <div class="fourteen wide column">
-        </div>
+    <div class="ui stackable grid container">
     </div>
 <script src="{% static "vendor/jquery.min.js" %}"></script>
 <script src="{% static "vendor/semantic/semantic.min.js" %}"></script>

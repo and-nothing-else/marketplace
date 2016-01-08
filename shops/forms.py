@@ -8,8 +8,8 @@ class ShopForm(forms.ModelForm):
         fields = [
             'region',
             'name',
+            'description',
+            'phone',
             'address',
             'map_point',
-            'phone',
-            'description'
         ]
