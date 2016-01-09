@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'order',
     'logs',
     'feedback',
+    'help',
 ]
 
 GEOIP_LOCATION_MODEL = 'dictionary.models.Region'

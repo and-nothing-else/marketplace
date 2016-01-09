@@ -55,6 +55,13 @@ class CustomIndexDashboard(Dashboard):
             ]
         ))
 
+        self.children.append(modules.ModelList(
+            title="Контент",
+            models=[
+                'help.models.Help',
+            ]
+        ))
+
         self.children.append(modules.Group(
             title="Администрирование сайта",
             display="tabs",

@@ -1,0 +1,17 @@
+{% extends "user/base.html" %}
+
+
+{% block profile_content %}
+    <h1>Справка</h1>
+    <div class="ui selection list">
+{% for article in articles %}
+        <a class="item" href="{{ article.get_absolute_url }}">
+            <div class="content">
+                <div class="header">
+                    {{ article.title }}
+                </div>
+            </div>
+        </a>
+{% endfor %}
+    </div>
+{% endblock %}

@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
     url(r'^accounts/', include('user.urls', namespace='user')),
     url(r'^feedback/', include('feedback.urls', namespace='feedback')),
+    url(r'^help/', include('help.urls', namespace='help')),
     url(r'^tariff/', include('tariff.urls', namespace='tariff')),
     url(r'^order/', include('order.urls', namespace='order')),
     url(r'^geoip/', include('django_geoip.urls')),
