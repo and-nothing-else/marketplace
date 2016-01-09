@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-09 12:06+0300\n"
+"POT-Creation-Date: 2016-01-09 14:20+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,58 +24,58 @@ msgstr ""
 msgid "Feedback"
 msgstr "Обратная связь"
 
-#: models.py:8
+#: models.py:13
 msgid "open"
 msgstr "открыто"
 
-#: models.py:9
+#: models.py:14
 msgid "resolved"
 msgstr "разрешено"
 
-#: models.py:11 models.py:35
+#: models.py:16 models.py:42
 msgid "created at"
 msgstr "создано"
 
-#: models.py:12
+#: models.py:17
 msgid "updated at"
 msgstr "обновлено"
 
-#: models.py:13 models.py:36
+#: models.py:18 models.py:43
 msgid "author"
 msgstr "автор"
 
-#: models.py:14
+#: models.py:19
 msgid "subject"
 msgstr "тема"
 
-#: models.py:15 models.py:37
+#: models.py:20
 msgid "message"
 msgstr "сообщение"
 
-#: models.py:16
+#: models.py:21
 msgid "status"
 msgstr "статус"
 
-#: models.py:18
+#: models.py:23
 msgid "is read by user"
 msgstr "прочитано пользователем"
 
-#: models.py:19
+#: models.py:24
 msgid "is read by staff"
 msgstr "прочитано сотрудником"
 
-#: models.py:29 models.py:34
+#: models.py:36 models.py:41
 msgid "ticket"
 msgstr "обращение"
 
-#: models.py:30
+#: models.py:37
 msgid "tickets"
 msgstr "обращения"
 
-#: models.py:53
+#: models.py:44 models.py:61
 msgid "comment"
 msgstr "комментарий"
 
-#: models.py:54
+#: models.py:62
 msgid "comments"
 msgstr "комментарии"

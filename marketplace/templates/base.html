@@ -1,4 +1,4 @@
-{% load staticfiles dictionary_tags %}
+{% load staticfiles dictionary_tags user_tags %}
 <!doctype html>
 <meta charset="utf-8">
 <title>{% block head_title %}Marketplace{% endblock %}</title>
@@ -12,11 +12,8 @@
             <div class="three wide column">
                 <h1><a href="/">YouStore</a></h1>
             </div>
-{% if request.user.has_unread_messages %}
-            <div class="nine wide column">
-{% else %}
-            <div class="ten wide column">
-{% endif %}
+            <div class="{% if request.user.has_unread_messages %}nine{% else %}ten{% endif %} wide column">
+
                 <div class="ui action wide left icon fluid input">
                     <i class="search icon"></i>
                     <input type="text" placeholder="Search">
@@ -55,6 +52,7 @@
 
 
     <div class="ui stackable grid container">
+        {% messages %}
 {% block content %}
 {% endblock %}
     </div>

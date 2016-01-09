@@ -13,6 +13,7 @@ class ShopManager(models.Manager):
 class Shop(models.Model):
     owner = models.ForeignKey('user.MarketplaceUser', verbose_name=_('owner'))
     name = models.CharField(_('shop name'), max_length=512)
+    slug = models.SlugField(_('slug'), unique=True, help_text=_('used for create url'))
     address = models.CharField(_('address'), max_length=512)
     map_point = AddressPickerField(_('on map'), blank=True, null=True)
     phone = models.CharField(_('phone'), max_length=128)
@@ -27,7 +28,7 @@ class Shop(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse_lazy('shops:detail', args=[str(self.pk)])
+        return reverse_lazy('shops:detail', args=[str(self.slug)])
 
     class Meta:
         ordering = ['name']
