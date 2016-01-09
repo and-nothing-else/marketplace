@@ -49,10 +49,12 @@
         {% endblock %}
     </header>
 
+    {% block main_menu %}
     {% catalog_menu %}
+    {% endblock %}
 
 
-    <div class="ui stackable grid container">
+    <div class="ui container">
         {% messages %}
 {% block content %}
 {% endblock %}
