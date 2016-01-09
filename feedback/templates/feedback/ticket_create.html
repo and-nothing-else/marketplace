@@ -1,0 +1,20 @@
+{% extends "user/base.html" %}
+{% load widget_tweaks %}
+
+
+{% block profile_content %}
+    <form class="ui form" method="post">
+        <h1>Новое обращение</h1>
+        {% csrf_token %}
+{% for field in form %}
+                {% include "forms/_field.html" %}
+{% endfor %}
+        <button type="submit" class="ui primary button">Отправить</button>
+    </form>
+{% endblock %}
+
+
+{% block extra_scripts %}
+    {{ block.super }}
+    {{ form.media }}
+{% endblock %}

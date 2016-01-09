@@ -1,0 +1,38 @@
+{% extends "user/base.html" %}
+
+
+{% block profile_content %}
+    <div class="ui message">
+        <h1>{{ ticket.subject }}</h1>
+        <div class="meta">{{ ticket.created_at|date:"j E Y" }}</div>
+        <article>{{ ticket.message }}</article>
+    </div>
+    <div class="ui feed">
+{% for comment in ticket.comment_set.all %}
+        <div class="event">
+            <div class="content">
+                <div class="summary">
+                    <a class="user">
+                        {{ comment.user }}
+                    </a> пишет
+                    <div class="date">
+                        {{ comment.created_at|date:"j E Y" }}
+                    </div>
+                </div>
+                <div class="extra text">{{ comment.message|safe }}</div>
+            </div>
+        </div>
+{% endfor %}
+
+    </div>
+    <form method="post" class="ui reply form">
+        {% csrf_token %}
+{% for field in form %}
+        {% include "forms/_field.html" %}
+{% endfor %}
+        <button type="submit" class="ui primary submit labeled icon button">
+            <i class="icon edit"></i>
+            Написать ответ
+        </button>
+    </form>
+{% endblock %}

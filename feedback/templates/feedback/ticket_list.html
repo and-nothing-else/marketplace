@@ -1,0 +1,18 @@
+{% extends "user/base.html" %}
+
+
+{% block profile_content %}
+    <a href="{% url "feedback:ticket_create" %}" class="ui primary button">Новое обращение</a>
+    <div class="ui selection list">
+{% for ticket in tickets %}
+        <a class="item" href="{{ ticket.get_absolute_url }}">
+{% if ticket.status == 'resolved' %}
+            <i class="green checkmark icon"></i>
+{% else %}
+            <i class="red help circle icon"></i>
+{% endif %}
+            {{ ticket.subject }}
+        </a>
+{% endfor %}
+    </div>
+{% endblock %}
