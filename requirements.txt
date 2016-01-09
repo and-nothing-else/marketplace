@@ -8,4 +8,4 @@ django-admin-tools==0.7.1
 django-ckeditor==5.0.2
 django-cuser==2014.9.28
 django-treebeard==4.0
--e git+https://git@github.com/and-nothing-else/django-geoip#egg=django_geoip
+-e git+https://git@github.com/and-nothing-else/django-geoip@dev#egg=django_geoip
