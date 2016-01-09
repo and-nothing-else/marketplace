@@ -1,12 +1,12 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse_lazy
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Help(models.Model):
     title = models.CharField(_('title'), max_length=512)
-    text = RichTextField(_('text'))
+    text = RichTextUploadingField(_('text'))
     slug = models.SlugField(_('slug'), unique=True)
     ordering = models.IntegerField(_('ordering'), default=100)
 
