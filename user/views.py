@@ -1,6 +1,8 @@
 from django.views.generic import UpdateView, ListView
 from django.core.urlresolvers import reverse_lazy
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from shops.models import Shop
 from shops.forms import ShopForm
 from tariff.models import Tariff
@@ -15,6 +17,17 @@ class ShopUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         shop, created = Shop.objects.get_or_create(owner=self.request.user)
         return shop
+
+    def get_initial(self):
+        initial = super().get_initial()
+        shop = self.get_object()
+        initial['region'] = shop.region or self.request.location
+        initial['slug'] = shop.slug or self.request.user.username
+        return initial
+
+    def form_valid(self, form):
+        messages.add_message(self.request, messages.SUCCESS, _('Your shop info has been updated successfully'))
+        return super().form_valid(form)
 
 
 class TariffList(LoginRequiredMixin, ListView):

@@ -1,6 +1,6 @@
 {% load widget_tweaks %}
 
-    <div class="field">
+    <div class="field{% if field.field.required %} required{% endif %}{% if field.errors %} error{% endif %}">
 {% if field|widget_type == 'checkboxinput' %}
         <div class="ui checkbox">
             {{ field }}
@@ -13,7 +13,7 @@
         <label>{{ field.label }}</label>
         {{ field }}
 {% endif %}
-    </div>
 {% if field.errors %}
     {{ field.errors }}
 {% endif %}
+    </div>

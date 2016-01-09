@@ -1,0 +1,10 @@
+
+{% if messages %}
+    <div class="sixteen wide column">
+{% for message in messages %}
+        <div class="ui{% if message.tags %} {{ message.tags }}{% endif %} message">
+            {{ message }}
+        </div>
+{% endfor %}
+    </div>
+{% endif %}

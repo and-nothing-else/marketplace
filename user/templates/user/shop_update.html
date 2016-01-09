@@ -7,14 +7,7 @@
         <h1>Ваш магазин</h1>
         {% csrf_token %}
 {% for field in form %}
-        <div class="field">
-            <label>{{ field.label }}</label>
-{% if field|widget_type == 'select' %}
-            {{ field|add_class:"ui dropdown" }}
-{% else %}
-            {{ field }}
-{% endif %}
-        </div>
+        {% include "forms/_field.html" %}
 {% endfor %}
         <button type="submit" class="ui primary button">Сохранить</button>
     </form>
@@ -22,5 +15,6 @@
 
 
 {% block extra_scripts %}
+    {{ block.super }}
     {{ form.media }}
 {% endblock %}
