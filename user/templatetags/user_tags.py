@@ -6,6 +6,7 @@ register = template.Library()
 @register.inclusion_tag('user/profile_menu.html', takes_context=True)
 def profile_menu(context):
     return {
+        'user': context['request'].user
     }
 
 

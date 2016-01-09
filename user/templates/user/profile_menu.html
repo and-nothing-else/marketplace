@@ -2,4 +2,7 @@
     <a href="{% url "user:shop_update" %}" class="item">Мой магазин</a>
     <a href="{% url "user:tariff_list" %}" class="item">Тарифы</a>
     <a href="{% url "feedback:ticket_list" %}" class="item">Обратная связь</a>
+{% if user.is_staff and user.is_active %}
+    <a href="{% url "admin:index" %}" class="item">Админ-интерфейс</a>
+{% endif %}
 </div>

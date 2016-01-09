@@ -5,4 +5,5 @@ django-widget-tweaks==1.4.1
 pytils==0.3
 django-admin-tools==0.7.1
 django-ckeditor==5.0.2
+django-cuser==2014.9.28
 -e git+https://git@github.com/and-nothing-else/django-geoip#egg=django_geoip

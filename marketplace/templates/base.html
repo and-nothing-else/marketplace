@@ -12,13 +12,24 @@
             <div class="three wide column">
                 <h1><a href="/">YouStore</a></h1>
             </div>
+{% if request.user.has_unread_messages %}
+            <div class="nine wide column">
+{% else %}
             <div class="ten wide column">
+{% endif %}
                 <div class="ui action wide left icon fluid input">
                     <i class="search icon"></i>
                     <input type="text" placeholder="Search">
                     <button class="ui button">Submit</button>
                 </div>
             </div>
+{% if request.user.has_unread_messages %}
+            <div class="column">
+                <a href="{{ request.user.get_unread_messages_link }}">
+                    <i class="big green comment icon"></i>
+                </a>
+            </div>
+{% endif %}
             <div class="three wide column">
                 <div class="page_head__region_switcher">
                     {% region_switcher %}

@@ -17,6 +17,7 @@ from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
 from admin_tools.utils import get_admin_site_name
 
 from logs.models import BalanceLog
+from feedback.models import Ticket
 
 
 class BalanceLogDashboardModule(modules.DashboardModule):
@@ -26,6 +27,16 @@ class BalanceLogDashboardModule(modules.DashboardModule):
     def init_with_context(self, context):
         self.children = [
             event for event in BalanceLog.objects.all()[:10]
+        ]
+
+
+class FeedbackDashboardModule(modules.DashboardModule):
+    title = 'Обращения пользователей'
+    template = 'admin_tools/dashboard/feedback_module.html'
+
+    def init_with_context(self, context):
+        self.children = [
+            ticket for ticket in Ticket.objects.unread_by_staff()
         ]
 
 
@@ -68,10 +79,12 @@ class CustomIndexDashboard(Dashboard):
             ]
         ))
 
+        self.children.append(FeedbackDashboardModule())
+
         self.children.append(BalanceLogDashboardModule())
 
         # append a recent actions module
-        self.children.append(modules.RecentActions(_('Recent Actions'), 5))
+        # self.children.append(modules.RecentActions(_('Recent Actions'), 5))
 
 
 class CustomAppIndexDashboard(AppIndexDashboard):

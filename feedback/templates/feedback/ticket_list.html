@@ -9,7 +9,11 @@
 {% if ticket.status == 'resolved' %}
             <i class="green checkmark icon"></i>
 {% else %}
+{% if ticket.is_read_by_user %}
             <i class="red help circle icon"></i>
+{% else %}
+            <i class="blue comment icon"></i>
+{% endif %}
 {% endif %}
             {{ ticket.subject }}
         </a>

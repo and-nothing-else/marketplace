@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.core import validators
 from django.core.mail import send_mail
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse_lazy
 from tariff.models import Tariff
 from logs.models import BalanceLog
 from math import floor
@@ -79,12 +79,6 @@ class MarketplaceUser(AbstractBaseUser, PermissionsMixin):
         verbose_name = _('user')
         verbose_name_plural = _('users')
 
-    def get_absolute_url(self):
-        return reverse("users:detail", args=[self.pk])
-
-    def get_edit_url(self):
-        return reverse("users:edit", args=[self.pk])
-
     def get_full_name(self):
         """
         Returns the first_name plus the last_name, with a space in between.
@@ -123,6 +117,21 @@ class MarketplaceUser(AbstractBaseUser, PermissionsMixin):
             if self.tariff.price > 0:
                 return floor(self.balance / self.tariff.price)
         return None
+
+    def get_unread_messages(self):
+        return self.ticket_set.filter(is_read_by_user=False)
+
+    def get_unread_messages_link(self):
+        messages = self.get_unread_messages()
+        if messages.count() == 1:
+            return messages[0].get_absolute_url()
+        elif messages.count() > 1:
+            return reverse_lazy('feedback:ticket_list')
+        else:
+            return None
+
+    def has_unread_messages(self):
+        return self.get_unread_messages().count() > 0
 
     def save(self, *args, **kwargs):
         if not self.pk:

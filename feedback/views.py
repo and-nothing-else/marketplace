@@ -28,6 +28,12 @@ class TicketDetailView(LoginRequiredMixin, DetailView):
         context['form'] = CommentForm(self.request.POST or None)
         return context
 
+    def get(self, request, *args, **kwargs):
+        ticket = self.get_object()
+        ticket.is_read_by_user = True
+        ticket.save()
+        return super().get(request, *args, **kwargs)
+
     def post(self, *args, **kwargs):
         form = CommentForm(self.request.POST)
         if form.is_valid():
