@@ -5,4 +5,4 @@ $("#region_switcher").dropdown({
 }});
 
 $('.ui.checkbox').checkbox();
-$('select.dropdown').dropdown();
+$('.dropdown').dropdown();

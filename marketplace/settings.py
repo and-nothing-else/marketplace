@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'admin_tools.theming',
     'admin_tools.menu',
     'admin_tools.dashboard',
+    'treebeard',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sites',
@@ -61,6 +62,7 @@ INSTALLED_APPS = [
     'logs',
     'feedback',
     'help',
+    'catalog',
 ]
 
 GEOIP_LOCATION_MODEL = 'dictionary.models.Region'
@@ -84,8 +86,9 @@ SITE_ID = 1
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'marketplace', 'templates'), ],
-        # 'APP_DIRS': True,
+        'DIRS': [
+            os.path.join(BASE_DIR, 'marketplace', 'templates'),
+        ],
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',

@@ -1,4 +1,4 @@
-{% load staticfiles dictionary_tags user_tags %}
+{% load staticfiles dictionary_tags user_tags catalog_tags %}
 <!doctype html>
 <meta charset="utf-8">
 <title>{% block head_title %}Marketplace{% endblock %}</title>
@@ -49,6 +49,7 @@
         {% endblock %}
     </header>
 
+    {% catalog_menu %}
 
 
     <div class="ui stackable grid container">

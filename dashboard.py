@@ -48,6 +48,13 @@ class CustomIndexDashboard(Dashboard):
         site_name = get_admin_site_name(context)
 
         self.children.append(modules.ModelList(
+            title="Каталог",
+            models=[
+                'catalog.models.Category',
+            ]
+        ))
+
+        self.children.append(modules.ModelList(
             title="Платные услуги",
             models=[
                 'tariff.models.Tariff',
