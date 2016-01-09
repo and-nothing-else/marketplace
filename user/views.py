@@ -34,8 +34,3 @@ class TariffList(LoginRequiredMixin, ListView):
     model = Tariff
     template_name = 'user/tariff_select.html'
     context_object_name = 'tariffs'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tariff_count'] = int2semantic_ui_class(self.object_list.count())
-        return context
