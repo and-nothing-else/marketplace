@@ -14,6 +14,11 @@ class TicketListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return self.model.objects.filter(user=self.request.user)
 
+    def get(self, request, *args, **kwargs):
+        if self.get_queryset().count() <= 0:
+            return redirect('feedback:ticket_create')
+        return super().get(request, *args, **kwargs)
+
 
 class TicketDetailView(LoginRequiredMixin, DetailView):
     model = Ticket

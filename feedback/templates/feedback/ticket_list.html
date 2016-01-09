@@ -2,6 +2,7 @@
 
 
 {% block profile_content %}
+    <h1>Мои обращения</h1>
     <a href="{% url "feedback:ticket_create" %}" class="ui primary button">Новое обращение</a>
     <div class="ui selection list">
 {% for ticket in tickets %}
