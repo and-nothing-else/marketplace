@@ -105,13 +105,35 @@ class MarketplaceUser(AbstractBaseUser, PermissionsMixin):
     def daily_write_off(self):
         if self.tariff:
             if self.tariff.price > 0:
-                self.change_balance(-self.tariff.price)
-                BalanceLog.write(
-                    description='Ежедневное списание по тарифу {}'.format(self.tariff.name),
-                    sum=-self.tariff.price,
-                    user=self,
-                    operation_type='daily_write_off'
-                )
+                if self.tariff.price > self.balance:
+                    BalanceLog.write(
+                        description="""
+                                    Не удалось списать средства по тарифу {}.
+                                    На счету {} руб., требуется {} руб.
+                                    Услуги приостановлены.
+                                    """
+                        .format(
+                            self.tariff.name,
+                            self.balance,
+                            self.tariff.price
+                        ),
+                        sum=-self.tariff.price,
+                        user=self,
+                        operation_type='daily_write_off'
+                    )
+                    self.service_disable()
+                else:
+                    self.change_balance(-self.tariff.price)
+                    BalanceLog.write(
+                        description='Ежедневное списание по тарифу {}'.format(self.tariff.name),
+                        sum=-self.tariff.price,
+                        user=self,
+                        operation_type='daily_write_off'
+                    )
+
+    def service_disable(self):
+        # TODO: приостановить услуги
+        pass
 
     def days_of_service_left(self):
         if self.tariff:
