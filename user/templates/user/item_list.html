@@ -1,0 +1,29 @@
+{% extends "user/base.html" %}
+
+
+{% block profile_content %}
+    <h1>Мои товары</h1>
+    <table class="ui sortable celled table">
+    <thead><tr>
+        <th>Название</th>
+        <th>Артикул</th>
+        <th>Цена</th>
+        <th>Активность</th>
+    </tr></thead>
+    <tbody>
+    {% for item in items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.article }}</td>
+            <td>{{ item.price }}</td>
+            <td>{% if item.active %}<i class="large green checkmark icon"></i>{% endif %}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot><tr><th colspan="4">
+        <a class="ui right floated small primary labeled icon button">
+            <i class="plus icon"></i> Создать товар
+        </a>
+    </th></tr></tfoot>
+    </table>
+{% endblock %}

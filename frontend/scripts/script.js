@@ -8,3 +8,4 @@ $('.ui.checkbox').checkbox();
 $('.dropdown').dropdown();
 
 $('.fancybox').fancybox();
+$('table.sortable').tablesort();

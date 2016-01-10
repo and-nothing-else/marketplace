@@ -26,7 +26,8 @@ const
     files = {
         vendor: {
             jquery: `${dirs.vendor}/jquery/dist/jquery.min.js`,
-            fancybox: `${dirs.vendor}/fancybox/dist/**/*.*`
+            fancybox: `${dirs.vendor}/fancybox/dist/**/*.*`,
+            tablesort: `${dirs.vendor}/jquery-tablesort/jquery.tablesort.min.js`
         },
         semantic: {
             js: `${dirs.semantic}/dist/semantic.min.js`,
@@ -59,6 +60,9 @@ gulp.task('clean', () => {
 gulp.task('copy', () => {
     gulp.src(files.vendor.jquery)
         .pipe(newer(`${files.dest.vendor}/jquery.min.js`))
+        .pipe(gulp.dest(files.dest.vendor));
+    gulp.src(files.vendor.tablesort)
+        .pipe(newer(`${files.dest.vendor}/jquery.tablesort.min.js`))
         .pipe(gulp.dest(files.dest.vendor));
     gulp.src(files.vendor.fancybox)
         .pipe(gulp.dest(files.dest.fancybox));

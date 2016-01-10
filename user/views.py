@@ -6,7 +6,7 @@ from django.contrib import messages
 from shops.models import Shop
 from shops.forms import ShopForm
 from tariff.models import Tariff
-from marketplace.utils import int2semantic_ui_class
+from catalog.models import Item
 
 
 class ShopUpdateView(LoginRequiredMixin, UpdateView):
@@ -34,3 +34,9 @@ class TariffList(LoginRequiredMixin, ListView):
     model = Tariff
     template_name = 'user/tariff_select.html'
     context_object_name = 'tariffs'
+
+
+class UserItemListView(LoginRequiredMixin, ListView):
+    model = Item
+    template_name = 'user/item_list.html'
+    context_object_name = 'items'
