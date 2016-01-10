@@ -1,0 +1,7 @@
+{% if items %}
+<div class="ui link cards">
+{% for item in items %}
+{% include "catalog/_catalog_item_card.html" %}
+{% endfor %}
+</div>
+{% endif %}

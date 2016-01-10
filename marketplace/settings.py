@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'sorl.thumbnail',
     'pytils',
     'cuser',
     'django_geoip',
@@ -64,6 +65,8 @@ INSTALLED_APPS = [
     'help',
     'catalog',
 ]
+
+THUMBNAIL_DEBUG = True
 
 GEOIP_LOCATION_MODEL = 'dictionary.models.Region'
 
@@ -143,7 +146,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'ru_RU'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'Europe/Moscow'
 

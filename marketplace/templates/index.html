@@ -1,6 +1,8 @@
 {% extends "base.html" %}
+{% load catalog_tags %}
 
 
 {% block content %}
+    {% catalog_latest_goods %}
 <a href="{% url "shops:list" %}">Список магазинов</a>
 {% endblock %}

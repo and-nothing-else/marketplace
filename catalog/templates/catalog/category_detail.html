@@ -3,5 +3,7 @@
 
 {% block content %}
     <h1>{{ category.name }}</h1>
-    тут будет страница категории
+    {% with category.item_set.all as items %}
+        {% include "catalog/_catalog_item_card_list.html" %}
+    {% endwith %}
 {% endblock %}
