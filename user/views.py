@@ -52,34 +52,54 @@ class ItemPhotoInline(InlineFormSet):
     fields = ['photo']
 
 
-class UserItemCreateView(LoginRequiredMixin, CreateWithInlinesView):
-    form_class = UserItemForm
-    template_name = 'user/item_create.html'
+class UserItemViewMixin(LoginRequiredMixin):
     model = Item
+    form_class = UserItemForm
     inlines = [ItemPhotoInline]
+    success_url = reverse_lazy('user:item_list')
 
     def forms_valid(self, form, inlines):
         instance = form.save(commit=False)
         instance.shop = self.request.user.shop
+        user_items = self.request.user.shop.item_set.active()
+        if instance.pk:
+            user_items = user_items.exclude(pk=instance.pk)
+        if user_items.count() >= instance.shop.owner.tariff.goods:
+            instance.active = False
+            messages.add_message(self.request, messages.ERROR, _("""
+            <p>You have reached the maximum number of goods.</p>
+            <p>Please <a href="%s">upgrade you tariff</a> to place more goods.
+            """ % reverse_lazy('user:tariff_list')))
         instance.save()
+        return super().forms_valid(form, inlines)
+
+
+class UserItemCreateView(UserItemViewMixin, CreateWithInlinesView):
+    template_name = 'user/item_create.html'
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['active'] = self.request.user.can_increase_active_items()
+        return initial
+
+    def forms_valid(self, form, inlines):
         messages.add_message(self.request, messages.SUCCESS,
-                             _('%s has been added successfully' % instance.name)
+                             _('%s has been added successfully' % form.instance.name)
                              )
         return super().forms_valid(form, inlines)
 
 
-class UserItemUpdateView(LoginRequiredMixin, UpdateWithInlinesView):
-    form_class = UserItemForm
+class UserItemUpdateView(UserItemViewMixin, UpdateWithInlinesView):
     template_name = 'user/item_update.html'
-    context_object_name = 'item'
-    model = Item
-    inlines = [ItemPhotoInline]
+
+    def get_initial(self):
+        initial = super().get_initial()
+        if not self.request.user.can_increase_active_items() and not self.object.active:
+            initial['active'] = False
+        return initial
 
     def forms_valid(self, form, inlines):
-        instance = form.save(commit=False)
-        instance.shop = self.request.user.shop
-        instance.save()
         messages.add_message(self.request, messages.SUCCESS,
-                             _('%s has been updated successfully' % instance.name)
+                             _('%s has been updated successfully' % form.instance.name)
                              )
         return super().forms_valid(form, inlines)

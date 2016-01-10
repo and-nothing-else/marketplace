@@ -3,6 +3,9 @@
 
 {% block profile_content %}
     <h1>Мои товары</h1>
+    <div class="ui info message">
+        Размещено в каталоге: <b>{{ request.user.get_catalog_active_items_count }}</b> из <b>{{ request.user.tariff.goods }}</b>
+    </div>
     <table class="ui sortable celled table">
     <thead><tr>
         <th>Название</th>

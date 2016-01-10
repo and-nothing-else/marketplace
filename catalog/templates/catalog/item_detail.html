@@ -4,6 +4,16 @@
 
 {% block content %}
     <div class="ui stackable grid">
+{% if not item.active %}
+    <div class="row">
+    <div class="sixteen wide column">
+        <div class="ui error message">
+            <div class="header">Внимание!</div>
+            <p>Вы смотрите товар, который находится в архиве. Уточняйте наличие и цены у продавца.</p>
+        </div>
+    </div>
+    </div>
+{% endif %}
         <div class="six wide column">
 {% thumbnail item.get_image "405" as im %}
             <a href="{{ item.get_image.url }}" class="fancybox" rel="gallery">
@@ -28,10 +38,12 @@
                 <div class="row">
                     <div class="eight wide column">
                         <h1>{{ item.name }}</h1>
+{% if item.active %}
                         <div class="ui massive tag label">
                             {{ item.price|intcomma }}
                             <i class="ruble icon"></i>
                         </div>
+{% endif %}
                     </div>
                     <div class="eight wide column">
                         <table class="ui very basic table">

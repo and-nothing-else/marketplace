@@ -118,6 +118,21 @@ class MarketplaceUser(AbstractBaseUser, PermissionsMixin):
                 return floor(self.balance / self.tariff.price)
         return None
 
+    def get_catalog_items(self):
+        return self.shop.item_set.all()
+
+    def get_catalog_active_items(self):
+        return self.shop.item_set.active()
+
+    def get_catalog_active_items_count(self):
+        return self.get_catalog_active_items().count()
+
+    def has_active_items(self):
+        return self.get_catalog_active_items_count() > 0
+
+    def can_increase_active_items(self):
+        return self.get_catalog_active_items_count() < self.tariff.goods
+
     def get_unread_messages(self):
         return self.ticket_set.filter(is_read_by_user=False)
 

@@ -50,6 +50,14 @@ class Item(models.Model):
         except (ItemPhoto.DoesNotExist, AttributeError):
             return None
 
+    def save(self, *args, **kwargs):
+        user_items = self.shop.item_set.active()
+        if self.pk:
+            user_items = user_items.exclude(pk=self.pk)
+        if user_items.count() >= self.shop.owner.tariff.goods:
+            self.active = False
+        super().save(*args, **kwargs)
+
     class Meta:
         ordering = ['-created_at']
         verbose_name = _('catalog item')
