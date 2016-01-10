@@ -21,6 +21,11 @@ class Category(MP_Node):
         verbose_name_plural = _('catalog sections')
 
 
+class ItemManager(models.Manager):
+    def active(self):
+        return self.get_queryset().filter(active=True)
+
+
 class Item(models.Model):
     created_at = models.DateTimeField(_('created at'), auto_now_add=True)
     category = models.ForeignKey(Category, verbose_name=_('category'))
@@ -31,6 +36,8 @@ class Item(models.Model):
     price = models.PositiveIntegerField(_('price'))
     description = RichTextField(_('description'), blank=True, config_name='minimal')
 
+    objects = ItemManager()
+
     def __str__(self):
         return self.name
 
@@ -40,7 +47,7 @@ class Item(models.Model):
     def get_image(self):
         try:
             return self.itemphoto_set.first().photo
-        except ItemPhoto.DoesNotExist:
+        except (ItemPhoto.DoesNotExist, AttributeError):
             return None
 
     class Meta:

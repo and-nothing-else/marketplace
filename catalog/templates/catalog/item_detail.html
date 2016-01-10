@@ -10,15 +10,24 @@
                 <img src="{{ im.url }}" class="ui fluid image">
             </a>
 {% empty %}
+            <div class="no_photo"><div class="no_photo__content">
+                <i class="massive photo icon"></i>
+            </div></div>
 {% endthumbnail %}
         </div>
         <div class="ten wide column">
+{% if item.shop.owner == request.user %}
+            <a href="{% url "user:item_update" item.id %}" class="ui right floated red labeled icon button">
+                <i class="edit icon"></i>
+                Редактировать
+            </a>
+{% endif %}
             <div class="ui stackable grid">
                 <div class="eight wide column">
                     <h1>{{ item.name }}</h1>
-                    <div class="ui massive label">
+                    <div class="ui massive tag label">
                         {{ item.price|intcomma }}
-                        рубл{{ item.price|choose_plural:"ь,я,ей" }}
+                        <i class="ruble icon"></i>
                     </div>
                 </div>
                 <div class="eight wide column">

@@ -1,0 +1,29 @@
+{% extends "user/base.html" %}
+
+
+{% block profile_content %}
+    <form class="ui form" method="post" enctype="multipart/form-data">
+        <h1>Редактирование: {{ item.name }}</h1>
+        {% csrf_token %}
+{% for field in form %}
+        {% include "forms/_field.html" %}
+{% endfor %}
+{% for formset in inlines %}
+        <div id="{{ formset.prefix }}">
+        {% for subform in formset.forms %}
+            <table>
+            {{ subform.as_table }}
+            </table>
+        {% endfor %}
+        {{ formset.management_form }}
+        </div>
+{% endfor %}
+        <button type="submit" class="ui primary button">Сохранить</button>
+    </form>
+{% endblock %}
+
+
+{% block extra_scripts %}
+    {{ block.super }}
+    {{ form.media }}
+{% endblock %}

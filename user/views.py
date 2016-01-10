@@ -3,10 +3,12 @@ from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from extra_views import InlineFormSet, CreateWithInlinesView, UpdateWithInlinesView
 from shops.models import Shop
 from shops.forms import ShopForm
 from tariff.models import Tariff
-from catalog.models import Item
+from catalog.models import Item, ItemPhoto
+from catalog.forms import UserItemForm
 
 
 class ShopUpdateView(LoginRequiredMixin, UpdateView):
@@ -40,3 +42,41 @@ class UserItemListView(LoginRequiredMixin, ListView):
     model = Item
     template_name = 'user/item_list.html'
     context_object_name = 'items'
+
+
+class ItemPhotoInline(InlineFormSet):
+    model = ItemPhoto
+    fields = ['photo']
+
+
+class UserItemCreateView(LoginRequiredMixin, CreateWithInlinesView):
+    form_class = UserItemForm
+    template_name = 'user/item_create.html'
+    model = Item
+    inlines = [ItemPhotoInline]
+
+    def forms_valid(self, form, inlines):
+        instance = form.save(commit=False)
+        instance.shop = self.request.user.shop
+        instance.save()
+        messages.add_message(self.request, messages.SUCCESS,
+                             _('%s has been added successfully' % instance.name)
+                             )
+        return super().forms_valid(form, inlines)
+
+
+class UserItemUpdateView(LoginRequiredMixin, UpdateWithInlinesView):
+    form_class = UserItemForm
+    template_name = 'user/item_update.html'
+    context_object_name = 'item'
+    model = Item
+    inlines = [ItemPhotoInline]
+
+    def forms_valid(self, form, inlines):
+        instance = form.save(commit=False)
+        instance.shop = self.request.user.shop
+        instance.save()
+        messages.add_message(self.request, messages.SUCCESS,
+                             _('%s has been updated successfully' % instance.name)
+                             )
+        return super().forms_valid(form, inlines)

@@ -10,3 +10,4 @@ django-cuser==2014.9.28
 django-treebeard==4.0
 -e git+https://git@github.com/and-nothing-else/django-geoip@dev#egg=django_geoip
 sorl-thumbnail==12.4a1
+django-extra-views==0.7.1

@@ -11,7 +11,7 @@ class ShopManager(models.Manager):
 
 
 class Shop(models.Model):
-    owner = models.ForeignKey('user.MarketplaceUser', verbose_name=_('owner'))
+    owner = models.OneToOneField('user.MarketplaceUser', verbose_name=_('owner'))
     name = models.CharField(_('shop name'), max_length=512)
     slug = models.SlugField(_('slug'), unique=True, help_text=_('used for create url'))
     address = models.CharField(_('address'), max_length=512)
