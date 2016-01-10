@@ -12,7 +12,7 @@
             {% for child in module.children %}
                     <tr>
                         <td>{{ child.created_at|date:"j E Y H:i" }}</td>
-                        <td>{{ child.user }}</td>
+                        <td><a href="{% url "admin:user_marketplaceuser_change" child.user.id %}">{{ child.user }}</a></td>
                         <td><a href="{% url "admin:feedback_ticket_change" child.id %}">{{ child.subject }}</a></td>
                     </tr>
             {% endfor %}
