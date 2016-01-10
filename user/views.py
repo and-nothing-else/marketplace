@@ -43,6 +43,9 @@ class UserItemListView(LoginRequiredMixin, ListView):
     template_name = 'user/item_list.html'
     context_object_name = 'items'
 
+    def get_queryset(self):
+        return super().get_queryset().filter(shop__owner=self.request.user)
+
 
 class ItemPhotoInline(InlineFormSet):
     model = ItemPhoto

@@ -16,13 +16,15 @@
 {% endthumbnail %}
         </div>
         <div class="ten wide column">
-{% if item.shop.owner == request.user %}
-            <a href="{% url "user:item_update" item.id %}" class="ui right floated red labeled icon button">
-                <i class="edit icon"></i>
-                Редактировать
-            </a>
-{% endif %}
             <div class="ui stackable grid">
+{% if item.shop.owner == request.user %}
+                <div class="sixteen wide column">
+                    <a href="{% url "user:item_update" item.id %}" class="ui right floated red labeled icon button">
+                        <i class="edit icon"></i>
+                        Редактировать
+                    </a>
+                </div>
+{% endif %}
                 <div class="eight wide column">
                     <h1>{{ item.name }}</h1>
                     <div class="ui massive tag label">
