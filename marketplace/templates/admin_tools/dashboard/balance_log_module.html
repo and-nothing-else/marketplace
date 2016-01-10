@@ -13,14 +13,14 @@
                     <tr>
                         <td>{{ child.created_at|date:"j E Y H:i" }}</td>
                         <td><a href="{% url "admin:user_marketplaceuser_change" child.user.id %}">{{ child.user }}</a></td>
-                        <td>{{ child.sum }} руб.</td>
+                        <td>{{ child.sum }}&nbsp;руб.</td>
                         <td>{{ child.description }}</td>
                     </tr>
             {% endfor %}
                 </table>
             {% endblock %}
             {% if module.post_content %}
-            <p>{{ module.post_content }}</p>
+            <p>{{ module.post_content|safe }}</p>
             {% endif %}
             {% endspaceless %}
         </div>

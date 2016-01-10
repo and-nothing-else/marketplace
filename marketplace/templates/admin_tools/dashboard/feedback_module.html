@@ -19,7 +19,7 @@
                 </table>
             {% endblock %}
             {% if module.post_content %}
-            <p>{{ module.post_content }}</p>
+            <p>{{ module.post_content|safe }}</p>
             {% endif %}
             {% endspaceless %}
         </div>

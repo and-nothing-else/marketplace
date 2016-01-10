@@ -11,7 +11,7 @@ And to activate the app index dashboard::
 """
 
 from django.utils.translation import pgettext_lazy, ugettext_lazy as _
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse_lazy
 
 from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
 from admin_tools.utils import get_admin_site_name
@@ -28,6 +28,9 @@ class BalanceLogDashboardModule(modules.DashboardModule):
         self.children = [
             event for event in BalanceLog.objects.all()[:10]
         ]
+        self.post_content = """
+            <a href="{}">Вся история</a>
+        """.format(reverse_lazy("admin:logs_balancelog_changelist"))
 
 
 class FeedbackDashboardModule(modules.DashboardModule):
@@ -38,6 +41,9 @@ class FeedbackDashboardModule(modules.DashboardModule):
         self.children = [
             ticket for ticket in Ticket.objects.unread_by_staff()
         ]
+        self.post_content = """
+            <a href="{}">Все обращения</a>
+        """.format(reverse_lazy("admin:feedback_ticket_changelist"))
 
 
 class CustomIndexDashboard(Dashboard):
