@@ -104,13 +104,14 @@ class MarketplaceUser(AbstractBaseUser, PermissionsMixin):
 
     def daily_write_off(self):
         if self.tariff:
-            self.change_balance(-self.tariff.price)
-            BalanceLog.write(
-                description='Ежедневное списание по тарифу {}'.format(self.tariff.name),
-                sum=-self.tariff.price,
-                user=self,
-                operation_type='daily_write_off'
-            )
+            if self.tariff.price > 0:
+                self.change_balance(-self.tariff.price)
+                BalanceLog.write(
+                    description='Ежедневное списание по тарифу {}'.format(self.tariff.name),
+                    sum=-self.tariff.price,
+                    user=self,
+                    operation_type='daily_write_off'
+                )
 
     def days_of_service_left(self):
         if self.tariff:
