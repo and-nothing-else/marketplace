@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load thumbnail humanize pytils_numeral catalog_tags %}
+
+
+{% block content %}
+    <div class="ui stackable grid">
+        <div class="six wide column">
+{% thumbnail item.get_image "405" as im %}
+            <a href="{{ item.get_image.url }}" class="fancybox" rel="gallery">
+                <img src="{{ im.url }}" class="ui fluid image">
+            </a>
+{% empty %}
+{% endthumbnail %}
+        </div>
+        <div class="ten wide column">
+            <div class="ui stackable grid">
+                <div class="eight wide column">
+                    <h1>{{ item.name }}</h1>
+                    <div class="ui massive label">
+                        {{ item.price|intcomma }}
+                        рубл{{ item.price|choose_plural:"ь,я,ей" }}
+                    </div>
+                </div>
+                <div class="eight wide column">
+                    <table class="ui very basic table">
+                        <tbody>
+                            <tr>
+                                <td>Магазин</td>
+                                <td><a href="{{ item.shop.get_absolute_url }}">{{ item.shop.name }}</a></td>
+                            </tr>
+                            <tr>
+                                <td>Телефон</td>
+                                <td>{{ item.shop.phone }}</td>
+                            </tr>
+                            <tr>
+                                <td>Адрес</td>
+                                <td>{{ item.shop.address }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="ui small images">
+{% for photo in item.itemphoto_set.all %}
+{% thumbnail photo.photo "150x150" crop="center" as im %}
+                <a href="{{ photo.photo.url }}" class="fancybox" rel="gallery">
+                    <img src="{{ im.url }}">
+                </a>
+{% empty %}
+{% endthumbnail %}
+{% endfor %}
+            </div>
+            {{ item.description|safe }}
+        </div>
+    </div>
+    {% catalog_shop_goods item.shop.id %}
+{% endblock %}

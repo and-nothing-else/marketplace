@@ -34,6 +34,9 @@ class Item(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse_lazy('catalog:item_detail', args=[self.category.slug, self.pk])
+
     def get_image(self):
         try:
             return self.itemphoto_set.first().photo

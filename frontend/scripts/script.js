@@ -6,3 +6,5 @@ $("#region_switcher").dropdown({
 
 $('.ui.checkbox').checkbox();
 $('.dropdown').dropdown();
+
+$('.fancybox').fancybox();

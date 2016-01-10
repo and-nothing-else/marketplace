@@ -1,5 +1,5 @@
 {% load thumbnail humanize %}
-<div class="ui card">
+<a href="{{ item.get_absolute_url }}" class="ui card">
     <div class="image">
 {% thumbnail item.get_image "290x290" crop="center" as im %}
         <img src="{{ im.url }}">
@@ -10,4 +10,4 @@
         <h4 class="header">{{ item.name }}</h4>
         <p class="right floated">{{ item.price|intcomma }} руб.</p>
     </div>
-</div>
+</a>

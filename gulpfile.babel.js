@@ -25,7 +25,8 @@ const
     },
     files = {
         vendor: {
-            jquery: `${dirs.vendor}/jquery/dist/jquery.min.js`
+            jquery: `${dirs.vendor}/jquery/dist/jquery.min.js`,
+            fancybox: `${dirs.vendor}/fancybox/dist/**/*.*`
         },
         semantic: {
             js: `${dirs.semantic}/dist/semantic.min.js`,
@@ -39,6 +40,7 @@ const
         },
         dest: {
             vendor: `${dirs.dest}/vendor`,
+            fancybox: `${dirs.dest}/vendor/fancybox`,
             semantic: `${dirs.dest}/vendor/semantic`,
             semantic_theme: `${dirs.dest}/vendor/semantic/themes/default/`,
             scripts: `${dirs.dest}/scripts`,
@@ -58,6 +60,8 @@ gulp.task('copy', () => {
     gulp.src(files.vendor.jquery)
         .pipe(newer(`${files.dest.vendor}/jquery.min.js`))
         .pipe(gulp.dest(files.dest.vendor));
+    gulp.src(files.vendor.fancybox)
+        .pipe(gulp.dest(files.dest.fancybox));
     gulp.src(files.semantic.js)
         .pipe(newer(`${files.dest.semantic}/semantic.min.js`))
         .pipe(gulp.dest(files.dest.semantic));
