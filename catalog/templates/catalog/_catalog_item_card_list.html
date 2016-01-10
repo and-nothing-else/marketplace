@@ -1,7 +1,9 @@
 {% if items %}
-<div class="ui link cards">
+<div class="ui stackable grid">
 {% for item in items %}
+    <div class="four wide column">
 {% include "catalog/_catalog_item_card.html" %}
+    </div>
 {% endfor %}
 </div>
 {% endif %}

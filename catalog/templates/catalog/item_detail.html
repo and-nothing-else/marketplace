@@ -25,43 +25,49 @@
                     </a>
                 </div>
 {% endif %}
-                <div class="eight wide column">
-                    <h1>{{ item.name }}</h1>
-                    <div class="ui massive tag label">
-                        {{ item.price|intcomma }}
-                        <i class="ruble icon"></i>
+                <div class="row">
+                    <div class="eight wide column">
+                        <h1>{{ item.name }}</h1>
+                        <div class="ui massive tag label">
+                            {{ item.price|intcomma }}
+                            <i class="ruble icon"></i>
+                        </div>
+                    </div>
+                    <div class="eight wide column">
+                        <table class="ui very basic table">
+                            <tbody>
+                                <tr>
+                                    <td>Магазин</td>
+                                    <td><a href="{{ item.shop.get_absolute_url }}">{{ item.shop.name }}</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Телефон</td>
+                                    <td>{{ item.shop.phone }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Адрес</td>
+                                    <td>{{ item.shop.address }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="eight wide column">
-                    <table class="ui very basic table">
-                        <tbody>
-                            <tr>
-                                <td>Магазин</td>
-                                <td><a href="{{ item.shop.get_absolute_url }}">{{ item.shop.name }}</a></td>
-                            </tr>
-                            <tr>
-                                <td>Телефон</td>
-                                <td>{{ item.shop.phone }}</td>
-                            </tr>
-                            <tr>
-                                <td>Адрес</td>
-                                <td>{{ item.shop.address }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="ui small images">
+                <div class="row">
+                    <div class="ui small images">
 {% for photo in item.itemphoto_set.all %}
 {% thumbnail photo.photo "150x150" crop="center" as im %}
-                <a href="{{ photo.photo.url }}" class="fancybox" rel="gallery">
-                    <img src="{{ im.url }}">
-                </a>
+                        <a href="{{ photo.photo.url }}" class="fancybox" rel="gallery">
+                            <img src="{{ im.url }}">
+                        </a>
 {% empty %}
 {% endthumbnail %}
 {% endfor %}
+                    </div>
+                </div>
+                <div class="row">
+                    {{ item.description|safe }}
+                </div>
             </div>
-            {{ item.description|safe }}
         </div>
     </div>
     {% catalog_shop_goods item.shop.id %}

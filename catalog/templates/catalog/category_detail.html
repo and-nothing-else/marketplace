@@ -3,7 +3,7 @@
 
 {% block content %}
     <h1>{{ category.name }}</h1>
-    {% with category.item_set.all as items %}
+    {% with category.item_set.active as items %}
         {% include "catalog/_catalog_item_card_list.html" %}
     {% endwith %}
 {% endblock %}

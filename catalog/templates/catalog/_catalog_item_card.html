@@ -1,5 +1,5 @@
 {% load thumbnail humanize %}
-<a href="{{ item.get_absolute_url }}" class="ui card">
+<a href="{{ item.get_absolute_url }}" class="ui fluid card">
     <div class="image">
 {% thumbnail item.get_image "290x290" crop="center" as im %}
         <img src="{{ im.url }}">
