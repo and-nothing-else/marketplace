@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'cuser',
     'django_geoip',
     'widget_tweaks',
+    'django_filters',
     'ckeditor',
     'ckeditor_uploader',
     'addresspicker',
