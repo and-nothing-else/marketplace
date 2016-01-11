@@ -72,6 +72,7 @@ class CustomIndexDashboard(Dashboard):
         self.children.append(modules.ModelList(
             title="Контент",
             models=[
+                'superbanner.models.SuperBanner',
                 'help.models.Help',
             ]
         ))

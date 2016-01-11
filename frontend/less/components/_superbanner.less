@@ -1,0 +1,86 @@
+.superbanner {
+  position: relative;
+  .iosslider {
+    position: relative;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 400px;
+    margin-bottom: 16px;
+    .slider {
+      width: 100%;
+      height: 100%;
+      .slide {
+        float: left;
+        width: 1155px;
+        height: 400px;
+        &__inner {
+          margin: 0 14px;
+          border-radius: 4px;
+          overflow: hidden;
+          &_bg {
+            display: block;
+          }
+          &_title {
+            position: absolute;
+            left: 100px;
+            top: 50px;
+            font-size: 32px;
+            color: white;
+            white-space: nowrap;
+            text-shadow: rgba(0, 0, 0, .5) 2px 2px 2px;
+            transform: translate(100px);
+            opacity: 0;
+            transition: all .6s ease;
+          }
+          &_text {
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            font-size: 16px;
+            color: white;
+            text-shadow: rgba(0, 0, 0, .5) 2px 2px 2px;
+            transform: translate(100px);
+            opacity: 0;
+            transition: all .6s ease .5s;
+          }
+          &_button {
+            position: absolute;
+            right: 100px;
+            bottom: 50px;
+            transform: translate(-100px);
+            opacity: 0;
+            transition: all .6s ease .5s;
+          }
+        }
+        &.active .slide__inner_title,
+        &.active .slide__inner_text,
+        &.active .slide__inner_button {
+          transform: translate(0px);
+          opacity: 1;
+        }
+      }
+    }
+  }
+  &__nav {
+    position: absolute;
+    z-index: 16;
+    bottom: 20px;
+    left: 0;
+    width:100%;
+    text-align: center;
+    &_item {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin: 0 4px;
+      border-radius: 50%;
+      background: #999;
+      transition: background .3s ease;
+      &.selected {
+        background: white;
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "marketplace",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "and nothing else"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/and-nothing-else/marketplace",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "iosslider": "~1.3.12"
+  }
+}

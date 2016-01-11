@@ -1,0 +1,33 @@
+{% load thumbnail %}
+
+{% if banners %}
+    <div class="superbanner">
+        <div class="iosslider">
+            <div class="slider">
+{% for banner in banners %}
+                <div class="slide">
+                    <div class="slide__inner">
+{% thumbnail banner.image "1127x400" crop="center" as im %}
+                        <img src="{{ im.url }}" class="slide__inner_bg">
+{% endthumbnail %}
+{% if banner.title %}
+                        <div class="slide__inner_title">{{ banner.title }}</div>
+{% endif %}
+{% if banner.text %}
+                        <div class="slide__inner_text">{{ banner.text|safe }}</div>
+{% endif %}
+{% if banner.button_link and banner.button_label %}
+                        <a class="slide__inner_button ui primary button" href="{{ banner.button_link }}">{{ banner.button_label }}</a>
+{% endif %}
+                    </div>
+                </div>
+{% endfor %}
+            </div>
+        </div>
+        <div class="superbanner__nav">
+{% for banner in banners %}
+            <div class="superbanner__nav_item{% if forloop.first %} selected{% endif %}"></div>
+{% endfor %}
+        </div>
+    </div>
+{% endif %}

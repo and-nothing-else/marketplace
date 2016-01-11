@@ -1,8 +1,50 @@
 {% extends "base.html" %}
-{% load catalog_tags %}
+{% load catalog_tags superbanner_tags staticfiles %}
+
+
+{% block before_content %}
+    {% superbanner %}
+{% endblock %}
 
 
 {% block content %}
     {% catalog_latest_goods %}
-<a href="{% url "shops:list" %}">Список магазинов</a>
+{% endblock %}
+
+
+{% block extra_scripts %}
+    {{ block.super }}
+    <script src="{% static "vendor/jquery.iosslider.min.js" %}"></script>
+    <script>
+        $(function(){
+            $('.iosslider').iosSlider({
+                desktopClickDrag: true,
+                snapToChildren: true,
+                infiniteSlider: true,
+                snapSlideCenter: true,
+                keyboardControls: true,
+                navSlideSelector: '.superbanner__nav_item',
+                onSlideChange: slideChange,
+                onSlideComplete: slideComplete,
+                onSliderLoaded: sliderLoaded
+            });
+
+			function slideChange(args) {
+				$('.superbanner__nav_item').removeClass('selected');
+				$('.superbanner__nav_item:eq(' + (args.currentSlideNumber - 1) + ')').addClass('selected');
+			}
+
+            function slideComplete(args) {
+                if(!args.slideChanged) return false;
+                $(args.sliderObject).find('.slide').removeClass('active');
+                $(args.currentSlideObject).addClass('active');
+            }
+
+            function sliderLoaded(args) {
+                $(args.sliderObject).find('.slide').removeClass('active');
+                $(args.currentSlideObject).addClass('active');
+                slideChange(args);
+            }
+        });
+    </script>
 {% endblock %}

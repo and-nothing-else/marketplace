@@ -18,16 +18,18 @@ import uglify from 'gulp-uglify'
 
 const
     dirs = {
-        vendor: './node_modules',
+        npm: './node_modules',
+        bower: './bower_components',
         src: './frontend',
         semantic: './frontend/semantic',
         dest: './marketplace/static'
     },
     files = {
         vendor: {
-            jquery: `${dirs.vendor}/jquery/dist/jquery.min.js`,
-            fancybox: `${dirs.vendor}/fancybox/dist/**/*.*`,
-            tablesort: `${dirs.vendor}/jquery-tablesort/jquery.tablesort.min.js`
+            jquery: `${dirs.npm}/jquery/dist/jquery.min.js`,
+            fancybox: `${dirs.npm}/fancybox/dist/**/*.*`,
+            iosslider: `${dirs.bower}/iosslider/_src/jquery.iosslider.min.js`,
+            tablesort: `${dirs.npm}/jquery-tablesort/jquery.tablesort.min.js`
         },
         semantic: {
             js: `${dirs.semantic}/dist/semantic.min.js`,
@@ -63,6 +65,9 @@ gulp.task('copy', () => {
         .pipe(gulp.dest(files.dest.vendor));
     gulp.src(files.vendor.tablesort)
         .pipe(newer(`${files.dest.vendor}/jquery.tablesort.min.js`))
+        .pipe(gulp.dest(files.dest.vendor));
+    gulp.src(files.vendor.iosslider)
+        .pipe(newer(`${files.dest.vendor}/jquery.iosslider.min.js`))
         .pipe(gulp.dest(files.dest.vendor));
     gulp.src(files.vendor.fancybox)
         .pipe(gulp.dest(files.dest.fancybox));

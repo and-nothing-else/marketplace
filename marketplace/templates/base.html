@@ -48,7 +48,8 @@
     {% block main_menu %}
     {% catalog_menu %}
     {% endblock %}
-
+    {% block before_content %}
+    {% endblock %}
 
     <div class="ui container">
         {% messages %}

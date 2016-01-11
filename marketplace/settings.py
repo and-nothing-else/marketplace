@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'help',
     'catalog',
     'search',
+    'superbanner',
 ]
 
 THUMBNAIL_DEBUG = True
