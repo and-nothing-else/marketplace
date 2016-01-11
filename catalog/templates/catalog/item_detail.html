@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load thumbnail humanize pytils_numeral catalog_tags %}
+
+
+{% block content %}
+    <div class="ui stackable grid">
+{% if not item.active %}
+    <div class="row">
+    <div class="sixteen wide column">
+        <div class="ui error message">
+            <div class="header">Внимание!</div>
+            <p>Вы смотрите товар, который находится в архиве. Уточняйте наличие и цены у продавца.</p>
+        </div>
+    </div>
+    </div>
+{% endif %}
+        <div class="six wide column">
+{% thumbnail item.get_image "405" as im %}
+            <a href="{{ item.get_image.url }}" class="fancybox" rel="gallery">
+                <img src="{{ im.url }}" class="ui fluid image">
+            </a>
+{% empty %}
+            <div class="no_photo"><div class="no_photo__content">
+                <i class="massive photo icon"></i>
+            </div></div>
+{% endthumbnail %}
+        </div>
+        <div class="ten wide column">
+            <div class="ui stackable grid">
+{% if item.shop.owner == request.user %}
+                <div class="sixteen wide column">
+                    <a href="{% url "user:item_update" item.id %}" class="ui right floated red labeled icon button">
+                        <i class="edit icon"></i>
+                        Редактировать
+                    </a>
+                </div>
+{% endif %}
+                <div class="row">
+                    <div class="eight wide column">
+                        <h1>{{ item.name }}</h1>
+{% if item.active %}
+                        <div class="ui massive tag label">
+                            {{ item.price|intcomma }}
+                            <i class="ruble icon"></i>
+                        </div>
+{% endif %}
+                    </div>
+                    <div class="eight wide column">
+                        <table class="ui very basic table">
+                            <tbody>
+                                <tr>
+                                    <td>Магазин</td>
+                                    <td><a href="{{ item.shop.get_absolute_url }}">{{ item.shop.name }}</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Телефон</td>
+                                    <td>{{ item.shop.phone }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Адрес</td>
+                                    <td>{{ item.shop.address }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="ui small images">
+{% for photo in item.itemphoto_set.all %}
+{% thumbnail photo.photo "150x150" crop="center" as im %}
+                        <a href="{{ photo.photo.url }}" class="fancybox" rel="gallery">
+                            <img src="{{ im.url }}">
+                        </a>
+{% empty %}
+{% endthumbnail %}
+{% endfor %}
+                    </div>
+                </div>
+                <div class="row">
+                    {{ item.description|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% catalog_shop_goods item.shop.id %}
+{% endblock %}

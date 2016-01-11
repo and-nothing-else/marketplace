@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <h1>Результаты поиска по запросу «{{ query }}»</h1>
+    {% include "catalog/_catalog_item_card_list.html" %}
+{% endblock %}

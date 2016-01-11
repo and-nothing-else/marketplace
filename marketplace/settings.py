@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'admin_tools.theming',
     'admin_tools.menu',
     'admin_tools.dashboard',
+    'treebeard',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sites',
@@ -46,10 +47,12 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'sorl.thumbnail',
     'pytils',
     'cuser',
     'django_geoip',
     'widget_tweaks',
+    'django_filters',
     'ckeditor',
     'ckeditor_uploader',
     'addresspicker',
@@ -61,7 +64,11 @@ INSTALLED_APPS = [
     'logs',
     'feedback',
     'help',
+    'catalog',
+    'search',
 ]
+
+THUMBNAIL_DEBUG = True
 
 GEOIP_LOCATION_MODEL = 'dictionary.models.Region'
 
@@ -84,8 +91,9 @@ SITE_ID = 1
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'marketplace', 'templates'), ],
-        # 'APP_DIRS': True,
+        'DIRS': [
+            os.path.join(BASE_DIR, 'marketplace', 'templates'),
+        ],
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -140,7 +148,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'ru_RU'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'Europe/Moscow'
 

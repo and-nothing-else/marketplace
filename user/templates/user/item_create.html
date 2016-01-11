@@ -1,0 +1,13 @@
+{% extends "user/base.html" %}
+
+
+{% block profile_content %}
+    <h1>Добавление товара</h1>
+    {% include "user/_item_form.html" %}
+{% endblock %}
+
+
+{% block extra_scripts %}
+    {{ block.super }}
+    {{ form.media }}
+{% endblock %}

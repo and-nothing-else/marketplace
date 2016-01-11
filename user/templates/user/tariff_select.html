@@ -8,7 +8,7 @@
     <p>{{ request.user.tariff.name }}</p>
     <br><br>
 {% endif %}
-    <div class="ui {{ tariff_count }} columns grid">
+    <div class="ui equal width stackable grid">
 {% for tariff in tariffs %}
         <div class="column">
             <div class="ui segment{% if tariff.is_recommended %} raised{% endif %}">

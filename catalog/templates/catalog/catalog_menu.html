@@ -1,0 +1,21 @@
+<div class="ui inverted container menu">
+{% for category, info in category_list %}
+{% if info.level <= 1 %}
+    {% if info.level == 0 %}
+        <div class="ui dropdown item">
+    {% endif %}
+    {% if info.level == 1 and info.open %}
+        <div class="menu">
+    {% endif %}
+{% if info.level == 0 %}
+    {{ category }}
+    <i class="dropdown icon"></i>
+{% else %}
+    <a href="{{ category.get_absolute_url }}" class="item">{{ category }}</a>
+{% endif %}
+    {% if info.close %}
+        </div></div>
+    {% endif %}
+{% endif %}
+{% endfor %}
+</div>

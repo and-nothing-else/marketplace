@@ -1,0 +1,18 @@
+<div class="ui text right floated menu">
+    <a class="item" href="?{{ date_link }}">
+{% if current_ordering == 'created_at' %}
+        <i class="sort content ascending icon"></i>
+{% elif current_ordering == '-created_at' %}
+        <i class="sort content descending icon"></i>
+{% endif %}
+        по дате
+    </a>
+    <a class="item" href="?{{ price_link }}">
+{% if current_ordering == 'price' %}
+        <i class="sort content ascending icon"></i>
+{% elif current_ordering == '-price' %}
+        <i class="sort content descending icon"></i>
+{% endif %}
+        по цене
+    </a>
+</div>

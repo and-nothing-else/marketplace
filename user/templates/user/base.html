@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% load tariff_tags user_tags %}
 
-{% block after_header %}
+{% block main_menu %}
     {% profile_menu %}
 {% endblock %}
 
 {% block content %}
-<div class="ui internally celled grid">
+<div class="ui stackable grid">
     <div class="row">
         <div class="twelve wide column">
             {% block profile_content %}
