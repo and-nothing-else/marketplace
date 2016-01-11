@@ -25,6 +25,9 @@ class ItemManager(models.Manager):
     def active(self):
         return self.get_queryset().filter(active=True)
 
+    def active_for_location(self, location):
+        return self.active().filter(shop__region__id=location.id)
+
 
 class Item(models.Model):
     created_at = models.DateTimeField(_('created at'), auto_now_add=True)

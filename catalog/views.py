@@ -10,7 +10,7 @@ class CatalogCategoryView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
-        items = self.get_object().item_set.active()
+        items = self.get_object().item_set.active_for_location(self.request.location)
         sort = self.request.GET.get('sort')
         if sort in ['date', 'price']:
             if sort == 'date':
