@@ -3,7 +3,26 @@
 
 
 {% block content %}
-    {% catalog_sort %}
-    <h1>{{ category.name }}</h1>
-    {% include "catalog/_catalog_item_card_list.html" %}
+<div class="ui stackable grid">
+    <div class="row">
+        <div class="ten wide column">
+            <h1>{{ category.name }}</h1>
+        </div>
+        <div class="six wide column">
+            {% catalog_sort %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="four wide column">
+            {% with filter.form as form %}
+                {% include "catalog/_category_filter.html" %}
+            {% endwith %}
+        </div>
+        <div class="twelve wide column">
+            {% with filter as items %}
+                {% include "catalog/_catalog_item_card_list.html" %}
+            {% endwith %}
+        </div>
+    </div>
+</div>
 {% endblock %}

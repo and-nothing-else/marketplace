@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-10 14:13+0300\n"
+"POT-Creation-Date: 2016-01-11 14:45+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Catalog"
 msgstr "Каталог"
 
-#: models.py:10 models.py:28
+#: models.py:10 models.py:37
 msgid "name"
 msgstr "название"
 
@@ -40,51 +40,55 @@ msgstr "раздел каталога"
 msgid "catalog sections"
 msgstr "разделы каталога"
 
-#: models.py:25
+#: models.py:33
 msgid "created at"
 msgstr "время создания"
 
-#: models.py:26
+#: models.py:34
 msgid "category"
 msgstr "раздел"
 
-#: models.py:27
+#: models.py:35
+msgid "shop"
+msgstr "магазин"
+
+#: models.py:36
 msgid "active"
 msgstr "активность"
 
-#: models.py:29
+#: models.py:38
 msgctxt "catalog item article"
 msgid "article"
 msgstr "артикул"
 
-#: models.py:30
+#: models.py:39
 msgid "price"
 msgstr "цена"
 
-#: models.py:31
+#: models.py:40
 msgid "description"
 msgstr "описание"
 
-#: models.py:38 models.py:43
+#: models.py:66 models.py:71
 msgid "catalog item"
 msgstr "товар"
 
-#: models.py:39
+#: models.py:67
 msgid "catalog items"
 msgstr "товары"
 
-#: models.py:44
+#: models.py:72
 msgid "image"
 msgstr "картинка"
 
-#: models.py:45
+#: models.py:73
 msgid "ordering"
 msgstr "сортировка"
 
-#: models.py:52
+#: models.py:80
 msgid "photo"
 msgstr "фото"
 
-#: models.py:53
+#: models.py:81
 msgid "photos"
 msgstr "фотографии"

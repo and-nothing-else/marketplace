@@ -1,0 +1,12 @@
+<div class="ui attached message">
+    <div class="header">Фильтр</div>
+</div>
+<form class="ui form attached fluid segment" method="get">
+{% for field in form %}
+{% if field.html_name != 'o' %}
+    {% include "forms/_field.html" %}
+{% endif %}
+{% endfor %}
+    <input type="hidden" name="o" value="{{ form.o.value }}">
+    <button type="submit" class="ui primary button">Показать</button>
+</form>

@@ -1,6 +1,7 @@
 from django.views.generic import DetailView
 from django.shortcuts import get_object_or_404
 from .models import Category, Item
+from .filters import ItemFilter
 
 
 class CatalogCategoryView(DetailView):
@@ -11,14 +12,8 @@ class CatalogCategoryView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         items = self.get_object().item_set.active_for_location(self.request.location)
-        sort = self.request.GET.get('sort')
-        if sort in ['date', 'price']:
-            if sort == 'date':
-                sort = 'created_at'
-            if self.request.GET.get('order') == 'desc':
-                sort = '-' + sort
-            items = items.order_by(sort)
-        context['items'] = items
+        f = ItemFilter(self.request.GET, items)
+        context['filter'] = f
         return context
 
 
