@@ -1,9 +1,9 @@
 {% extends "base.html" %}
+{% load catalog_tags %}
 
 
 {% block content %}
+    {% catalog_sort %}
     <h1>{{ category.name }}</h1>
-    {% with category.item_set.active as items %}
-        {% include "catalog/_catalog_item_card_list.html" %}
-    {% endwith %}
+    {% include "catalog/_catalog_item_card_list.html" %}
 {% endblock %}

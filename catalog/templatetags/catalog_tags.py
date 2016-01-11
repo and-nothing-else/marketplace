@@ -26,3 +26,12 @@ def catalog_shop_goods(context, shop_id, number=4):
     return {
         'items': items
     }
+
+
+@register.inclusion_tag('catalog/sort.html', takes_context=True)
+def catalog_sort(context):
+    params = context['request'].GET
+    return {
+        'sort': params.get('sort'),
+        'order': params.get('order')
+    }

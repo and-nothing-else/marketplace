@@ -8,6 +8,19 @@ class CatalogCategoryView(DetailView):
     context_object_name = 'category'
     template_name = 'catalog/category_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        items = self.get_object().item_set.active()
+        sort = self.request.GET.get('sort')
+        if sort in ['date', 'price']:
+            if sort == 'date':
+                sort = 'created_at'
+            if self.request.GET.get('order') == 'desc':
+                sort = '-' + sort
+            items = items.order_by(sort)
+        context['items'] = items
+        return context
+
 
 class ItemDetailView(DetailView):
     model = Item

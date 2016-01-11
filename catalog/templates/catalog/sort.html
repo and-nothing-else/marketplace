@@ -1,0 +1,19 @@
+<div class="ui text right floated menu">
+{% if sort == 'price' %}
+{% if order == 'desc' %}
+    <a class="item" href="?sort=date&order=desc">по дате</a>
+    <a class="item" href="?sort=price&order=asc"><i class="sort content descending icon"></i> по цене</a>
+{% else %}
+    <a class="item" href="?sort=date&order=desc">по дате</a>
+    <a class="item" href="?sort=price&order=desc"><i class="sort content ascending icon"></i> по цене</a>
+{% endif %}
+{% else %}
+{% if order == 'asc' %}
+    <a class="item" href="?sort=date&order=desc"><i class="sort content ascending icon"></i> по дате</a>
+    <a class="item" href="?sort=price&order=asc">по цене</a>
+{% else %}
+    <a class="item" href="?sort=date&order=asc"><i class="sort content descending icon"></i> по дате</a>
+    <a class="item" href="?sort=price&order=asc">по цене</a>
+{% endif %}
+{% endif %}
+</div>
