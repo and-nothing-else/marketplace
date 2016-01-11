@@ -1,0 +1,5 @@
+<form class="ui action wide left icon fluid input" method="get" action="{% url "search:catalog_search" %}">
+    <i class="search icon"></i>
+    <input type="text" placeholder="Search" name="q" value="{{ q }}">
+    <button type="submit" class="ui button">Submit</button>
+</form>

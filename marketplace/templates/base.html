@@ -1,4 +1,4 @@
-{% load staticfiles dictionary_tags user_tags catalog_tags %}
+{% load staticfiles dictionary_tags user_tags catalog_tags search_tags %}
 <!doctype html>
 <meta charset="utf-8">
 <title>{% block head_title %}Marketplace{% endblock %}</title>
@@ -14,12 +14,7 @@
                 <h1><a href="/">YouStore</a></h1>
             </div>
             <div class="{% if request.user.has_unread_messages %}nine{% else %}ten{% endif %} wide column">
-
-                <div class="ui action wide left icon fluid input">
-                    <i class="search icon"></i>
-                    <input type="text" placeholder="Search">
-                    <button class="ui button">Submit</button>
-                </div>
+                {% search_form %}
             </div>
 {% if request.user.has_unread_messages %}
             <div class="column">

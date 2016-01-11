@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'feedback',
     'help',
     'catalog',
+    'search',
 ]
 
 THUMBNAIL_DEBUG = True
