@@ -12,7 +12,7 @@ def catalog_menu(context):
     }
 
 
-@register.inclusion_tag('catalog/_catalog_item_card_list.html', takes_context=True)
+@register.inclusion_tag('catalog/catalog_latest_goods.html', takes_context=True)
 def catalog_latest_goods(context, number=4):
     items = Item.objects.active_for_location(context['request'].location)[:number]
     return {
