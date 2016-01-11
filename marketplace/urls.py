@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^geoip/', include('django_geoip.urls')),
     url(r'^shops/', include('shops.urls', namespace='shops')),
     url(r'^search/', include('search.urls', namespace='search')),
+    url(r'^articles/', include('articles.urls', namespace='articles')),
     url(r'^$', TemplateView.as_view(template_name='index.html')),
     url(r'^', include('catalog.urls', namespace='catalog')),
 ]

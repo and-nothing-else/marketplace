@@ -73,6 +73,7 @@ class CustomIndexDashboard(Dashboard):
             title="Контент",
             models=[
                 'superbanner.models.SuperBanner',
+                'articles.models.Article',
                 'help.models.Help',
             ]
         ))

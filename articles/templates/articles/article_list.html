@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <h1>Актуальное</h1>
+    <ul class="ui list">
+{% for article in articles %}
+        <li>
+            <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+        </li>
+{% endfor %}
+    </ul>
+
+{% endblock %}

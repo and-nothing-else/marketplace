@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load catalog_tags superbanner_tags staticfiles %}
+{% load staticfiles superbanner_tags catalog_tags articles_tags %}
 
 
 {% block before_content %}
@@ -9,6 +9,7 @@
 
 {% block content %}
     {% catalog_latest_goods %}
+    {% main_articles %}
 {% endblock %}
 
 
