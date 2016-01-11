@@ -38,6 +38,7 @@ const
         },
         source: {
             script: `${dirs.src}/scripts/script.js`,
+            images: `${dirs.src}/images/**/*.*`,
             style_dir: `${dirs.src}/less/`,
             style: `${dirs.src}/less/style.less`
         },
@@ -47,6 +48,7 @@ const
             semantic: `${dirs.dest}/vendor/semantic`,
             semantic_theme: `${dirs.dest}/vendor/semantic/themes/default/`,
             scripts: `${dirs.dest}/scripts`,
+            images: `${dirs.dest}/images`,
             styles: `${dirs.dest}/styles`
         }
     };
@@ -79,6 +81,8 @@ gulp.task('copy', () => {
         .pipe(gulp.dest(files.dest.semantic));
     gulp.src(files.semantic.theme)
         .pipe(gulp.dest(files.dest.semantic_theme));
+    gulp.src(files.source.images)
+        .pipe(gulp.dest(files.dest.images));
 });
 
 
