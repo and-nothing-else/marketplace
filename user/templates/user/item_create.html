@@ -98,6 +98,9 @@
             </div>
         </div>
 {% endif %}
+{% with form.fabric as field %}
+        {% include "forms/_field.html" %}
+{% endwith %}
 
         <div class="ui icon info message">
             <i class="help circle icon"></i>

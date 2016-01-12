@@ -64,6 +64,9 @@
 {% if item.color %}
                             <div class="item"><b>Цвет:</b> {{ item.color }}</div>
 {% endif %}
+{% if item.fabric %}
+                            <div class="item"><b>Состав:</b> {{ item.fabric|safe }}</div>
+{% endif %}
 {% for property in item.itemcustomproperty_set.all %}
                             <div class="item"><b>{{ property.name }}:</b> {{ property.value|safe }}</div>
 {% endfor %}
