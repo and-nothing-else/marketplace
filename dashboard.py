@@ -94,6 +94,7 @@ class CustomIndexDashboard(Dashboard):
                     models=[
                         'dictionary.models.Region',
                         'dictionary.models.Color',
+                        'dictionary.models.SizeSet',
                     ]
                 ),
                 modules.AppList(

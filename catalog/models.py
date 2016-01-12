@@ -9,6 +9,7 @@ from sorl.thumbnail.fields import ImageField
 class Category(MP_Node):
     name = models.CharField(_('name'), max_length=64)
     slug = models.SlugField(_('slug'), unique=True)
+    size_set = models.ForeignKey('dictionary.SizeSet', verbose_name=_('size set'), blank=True, null=True)
 
     def __str__(self):
         return self.name

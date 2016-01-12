@@ -45,3 +45,29 @@ class Color(models.Model):
         verbose_name = _('color')
         verbose_name_plural = _('colors')
         ordering = ['name']
+
+
+class SizeSet(models.Model):
+    name = models.CharField(_('name'), max_length=64)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('size set')
+        verbose_name_plural = _('sizes')
+        ordering = ['name']
+
+
+class Size(models.Model):
+    size_set = models.ForeignKey(SizeSet, verbose_name=_('size set'))
+    value = models.CharField(_('value'), max_length=16)
+    description = models.TextField(_('description'), blank=True, help_text=_('html tags allowed'))
+
+    def __str__(self):
+        return self.value
+
+    class Meta:
+        verbose_name = _('size')
+        verbose_name_plural = _('sizes')
+        ordering = ['value']

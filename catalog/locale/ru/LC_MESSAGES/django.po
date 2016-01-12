@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-12 16:21+0300\n"
+"POT-Creation-Date: 2016-01-12 17:03+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,96 +32,100 @@ msgstr "название"
 msgid "slug"
 msgstr "символьный код"
 
-#: models.py:20
+#: models.py:12
+msgid "size set"
+msgstr "таблица размеров"
+
+#: models.py:21
 msgid "catalog section"
 msgstr "раздел каталога"
 
-#: models.py:21
+#: models.py:22
 msgid "catalog sections"
 msgstr "разделы каталога"
 
-#: models.py:33
+#: models.py:34
 msgid "created at"
 msgstr "время создания"
 
-#: models.py:34
+#: models.py:35
 msgid "updated at"
 msgstr "время обновления"
 
-#: models.py:35
+#: models.py:36
 msgid "category"
 msgstr "раздел"
 
-#: models.py:36
+#: models.py:37
 msgid "shop"
 msgstr "магазин"
 
-#: models.py:38
+#: models.py:39
 msgid "active"
 msgstr "активность"
 
-#: models.py:39
+#: models.py:40
 msgctxt "item name"
 msgid "name"
 msgstr "название"
 
-#: models.py:40
+#: models.py:41
 msgctxt "catalog item article"
 msgid "article"
 msgstr "артикул"
 
-#: models.py:41
+#: models.py:42
 msgid "price"
 msgstr "цена"
 
-#: models.py:42
+#: models.py:43
 msgid "old price"
 msgstr "старая цена"
 
-#: models.py:44
+#: models.py:45
 msgid "description"
 msgstr "описание"
 
-#: models.py:45
+#: models.py:46
 msgid "color"
 msgstr "цвет"
 
-#: models.py:71 models.py:76 models.py:90
+#: models.py:72 models.py:77 models.py:91
 msgid "catalog item"
 msgstr "товар"
 
-#: models.py:72
+#: models.py:73
 msgid "catalog items"
 msgstr "товары"
 
-#: models.py:77
+#: models.py:78
 msgid "image"
 msgstr "картинка"
 
-#: models.py:78 models.py:93
+#: models.py:79 models.py:94
 msgid "ordering"
 msgstr "сортировка"
 
-#: models.py:85
+#: models.py:86
 msgid "photo"
 msgstr "фото"
 
-#: models.py:86
+#: models.py:87
 msgid "photos"
 msgstr "фотографии"
 
-#: models.py:91
+#: models.py:92
 msgid "property name"
 msgstr "название свойства"
 
-#: models.py:92
+#: models.py:93
 msgid "property value"
 msgstr "значение свойства"
 
-#: models.py:100
+#: models.py:101
 msgid "property"
 msgstr "свойство"
 
-#: models.py:101
+#: models.py:102
 msgid "properties"
 msgstr "свойства"
