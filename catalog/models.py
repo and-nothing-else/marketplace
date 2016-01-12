@@ -81,3 +81,18 @@ class ItemPhoto(models.Model):
         ordering = ['ordering']
         verbose_name = _('photo')
         verbose_name_plural = _('photos')
+
+
+class ItemCustomProperty(models.Model):
+    item = models.ForeignKey(Item, verbose_name=_('catalog item'))
+    name = models.CharField(_('property name'), max_length=64)
+    value = models.CharField(_('property value'), max_length=2048)
+    ordering = models.IntegerField(_('ordering'), default=100)
+
+    def __str__(self):
+        return "{}: {}".format(self.name, self.value)
+
+    class Meta:
+        ordering = ['ordering']
+        verbose_name = _('property')
+        verbose_name_plural = _('properties')

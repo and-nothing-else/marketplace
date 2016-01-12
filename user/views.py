@@ -8,7 +8,7 @@ from extra_views import InlineFormSet, CreateWithInlinesView, UpdateWithInlinesV
 from shops.models import Shop
 from shops.forms import ShopForm
 from tariff.models import Tariff
-from catalog.models import Item, ItemPhoto
+from catalog.models import Item, ItemPhoto, ItemCustomProperty
 from catalog.forms import UserItemForm, UserItemPhotoForm
 
 
@@ -68,10 +68,15 @@ class ItemPhotoInline(InlineFormSet):
     fields = ['photo', 'ordering']
 
 
+class ItemPropertiesInline(InlineFormSet):
+    model = ItemCustomProperty
+    fields = ['name', 'value', 'ordering']
+
+
 class UserItemViewMixin(MustHaveShopMixin):
     model = Item
     form_class = UserItemForm
-    inlines = [ItemPhotoInline]
+    inlines = [ItemPhotoInline, ItemPropertiesInline]
     success_url = reverse_lazy('user:item_list')
 
     def forms_valid(self, form, inlines):
