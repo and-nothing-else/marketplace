@@ -33,3 +33,15 @@ class Region(GeoLocationFacade):
         verbose_name = _('region')
         verbose_name_plural = _('regions')
         ordering = ['-is_default', 'name']
+
+
+class Color(models.Model):
+    name = models.CharField(_('name'), max_length=64)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('color')
+        verbose_name_plural = _('colors')
+        ordering = ['name']

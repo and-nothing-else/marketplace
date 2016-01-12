@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-06 14:36+0300\n"
+"POT-Creation-Date: 2016-01-12 16:25+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,23 +20,31 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: dictionary/apps.py:7
+#: apps.py:7
 msgctxt "App name"
 msgid "Dictionaries"
 msgstr "Справочники"
 
-#: dictionary/models.py:7
+#: models.py:7 models.py:39
 msgid "name"
 msgstr "название"
 
-#: dictionary/models.py:9
+#: models.py:9
 msgid "region contains"
 msgstr "состав региона (по БД GeoIP)"
 
-#: dictionary/models.py:33
+#: models.py:33
 msgid "region"
 msgstr "регион"
 
-#: dictionary/models.py:34
+#: models.py:34
 msgid "regions"
 msgstr "регионы"
+
+#: models.py:45
+msgid "color"
+msgstr "цвет"
+
+#: models.py:46
+msgid "colors"
+msgstr "цвета"

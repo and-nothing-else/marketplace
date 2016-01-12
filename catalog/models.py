@@ -34,12 +34,15 @@ class Item(models.Model):
     updated_at = models.DateTimeField(_('updated at'), auto_now=True)
     category = models.ForeignKey(Category, verbose_name=_('category'))
     shop = models.ForeignKey('shops.Shop', verbose_name=_('shop'))
+
     active = models.BooleanField(_('active'), default=True)
-    name = models.CharField(_('name'), max_length=256)
+    name = models.CharField(pgettext_lazy('item name', 'name'), max_length=256)
     article = models.CharField(pgettext_lazy('catalog item article', 'article'), max_length=16)
     price = models.PositiveIntegerField(_('price'))
     old_price = models.PositiveIntegerField(_('old price'), blank=True, null=True)
+
     description = RichTextField(_('description'), blank=True, config_name='minimal')
+    color = models.ForeignKey('dictionary.Color', verbose_name=_('color'), blank=True, null=True)
 
     objects = ItemManager()
 

@@ -41,7 +41,7 @@
                 </div>
 {% endif %}
                 <div class="row">
-                    <div class="eight wide column">
+                    <div class="nine wide column">
                         <h1>{{ item.name }}</h1>
 {% if item.active %}
 {% if item.old_price %}
@@ -57,8 +57,16 @@
                             <i class="ruble icon"></i>
                         </div>
 {% endif %}
+                        <div class="ui list">
+{% if item.article %}
+                            <div class="item"><b>Артикул:</b> {{ item.article }}</div>
+{% endif %}
+{% if item.color %}
+                            <div class="item"><b>Цвет:</b> {{ item.color }}</div>
+{% endif %}
+                        </div>
                     </div>
-                    <div class="eight wide column">
+                    <div class="seven wide column">
                         <table class="ui very basic table">
                             <tbody>
                                 <tr>
@@ -77,23 +85,22 @@
                         </table>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="sixteen wide column">
 {% with item.itemcustomproperty_set.all as properties %}
 {% if properties.count > 0 %}
-                <div class="row">
-                    <table class="ui very basic collapsing celled table">
+                        <table class="ui very basic collapsing celled table">
 {% for property in properties %}
-                        <tr>
-                            <td>{{ property.name }}</td>
-                            <td>{{ property.value|safe }}</td>
-                        </tr>
+                            <tr>
+                                <td>{{ property.name }}</td>
+                                <td>{{ property.value|safe }}</td>
+                            </tr>
 {% endfor %}
-                    </table>
-                </div>
+                        </table>
 {% endif %}
 {% endwith %}
 {% with item.itemphoto_set.all as photos %}
 {% if photos.count > 0 %}
-                <div class="row">
                     <div class="ui small images">
 {% for photo in photos %}
 {% thumbnail photo.photo "150x150" crop="center" as im %}
@@ -104,11 +111,10 @@
 {% endthumbnail %}
 {% endfor %}
                     </div>
-                </div>
 {% endif %}
 {% endwith %}
-                <div class="row">
                     {{ item.description|safe }}
+                    </div>
                 </div>
             </div>
         </div>

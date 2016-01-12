@@ -93,6 +93,7 @@ class CustomIndexDashboard(Dashboard):
                     title="Справочники",
                     models=[
                         'dictionary.models.Region',
+                        'dictionary.models.Color',
                     ]
                 ),
                 modules.AppList(
