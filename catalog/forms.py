@@ -16,6 +16,7 @@ class UserItemForm(forms.ModelForm):
             'color',
             'size',
             'standard_size',
+            'fabric',
             'description',
         ]
 

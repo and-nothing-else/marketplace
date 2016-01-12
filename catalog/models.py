@@ -59,6 +59,7 @@ class Item(models.Model):
     color = models.ForeignKey('dictionary.Color', verbose_name=_('color'), blank=True, null=True)
     size = models.CharField(_('vendor size'), max_length=16, blank=True, null=True)
     standard_size = models.ForeignKey('dictionary.Size', verbose_name=_('standard size'), blank=True, null=True)
+    fabric = models.CharField(_('fabric structure'), max_length=1024, blank=True, null=True)
 
     objects = ItemManager()
 

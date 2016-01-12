@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-12 19:08+0300\n"
+"POT-Creation-Date: 2016-01-13 00:26+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,104 +36,108 @@ msgstr "символьный код"
 msgid "size set"
 msgstr "таблица размеров"
 
-#: models.py:21
+#: models.py:34
 msgid "catalog section"
 msgstr "раздел каталога"
 
-#: models.py:22
+#: models.py:35
 msgid "catalog sections"
 msgstr "разделы каталога"
 
-#: models.py:34
+#: models.py:47
 msgid "created at"
 msgstr "время создания"
 
-#: models.py:35
+#: models.py:48
 msgid "updated at"
 msgstr "время обновления"
 
-#: models.py:36
+#: models.py:49
 msgid "category"
 msgstr "раздел"
 
-#: models.py:37
+#: models.py:50
 msgid "shop"
 msgstr "магазин"
 
-#: models.py:39
+#: models.py:52
 msgid "active"
 msgstr "активность"
 
-#: models.py:40
+#: models.py:53
 msgctxt "item name"
 msgid "name"
 msgstr "название"
 
-#: models.py:41
+#: models.py:54
 msgctxt "catalog item article"
 msgid "article"
 msgstr "артикул"
 
-#: models.py:42
+#: models.py:55
 msgid "price"
 msgstr "цена"
 
-#: models.py:43
+#: models.py:56
 msgid "old price"
 msgstr "старая цена"
 
-#: models.py:45
+#: models.py:58
 msgid "description"
 msgstr "описание"
 
-#: models.py:46
+#: models.py:59
 msgid "color"
 msgstr "цвет"
 
-#: models.py:47
+#: models.py:60
 msgid "vendor size"
 msgstr "размер производителя"
 
-#: models.py:48
+#: models.py:61
 msgid "standard size"
 msgstr "российский размер"
 
-#: models.py:74 models.py:79 models.py:93
+#: models.py:62
+msgid "fabric structure"
+msgstr "состав"
+
+#: models.py:91 models.py:96 models.py:110
 msgid "catalog item"
 msgstr "товар"
 
-#: models.py:75
+#: models.py:92
 msgid "catalog items"
 msgstr "товары"
 
-#: models.py:80
+#: models.py:97
 msgid "image"
 msgstr "картинка"
 
-#: models.py:81 models.py:96
+#: models.py:98 models.py:113
 msgid "ordering"
 msgstr "сортировка"
 
-#: models.py:88
+#: models.py:105
 msgid "photo"
 msgstr "фото"
 
-#: models.py:89
+#: models.py:106
 msgid "photos"
 msgstr "фотографии"
 
-#: models.py:94
+#: models.py:111
 msgid "property name"
 msgstr "название свойства"
 
-#: models.py:95
+#: models.py:112
 msgid "property value"
 msgstr "значение свойства"
 
-#: models.py:103
+#: models.py:120
 msgid "property"
 msgstr "свойство"
 
-#: models.py:104
+#: models.py:121
 msgid "properties"
 msgstr "свойства"
