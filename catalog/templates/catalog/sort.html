@@ -1,8 +1,8 @@
 <div class="ui text right floated menu">
     <a class="item" href="?{{ date_link }}">
-{% if current_ordering == 'created_at' %}
+{% if current_ordering == 'updated_at' %}
         <i class="sort content ascending icon"></i>
-{% elif current_ordering == '-created_at' %}
+{% elif current_ordering == '-updated_at' %}
         <i class="sort content descending icon"></i>
 {% endif %}
         по дате

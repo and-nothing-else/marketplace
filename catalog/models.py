@@ -31,6 +31,7 @@ class ItemManager(models.Manager):
 
 class Item(models.Model):
     created_at = models.DateTimeField(_('created at'), auto_now_add=True)
+    updated_at = models.DateTimeField(_('updated at'), auto_now=True)
     category = models.ForeignKey(Category, verbose_name=_('category'))
     shop = models.ForeignKey('shops.Shop', verbose_name=_('shop'))
     active = models.BooleanField(_('active'), default=True)
@@ -63,7 +64,7 @@ class Item(models.Model):
         super().save(*args, **kwargs)
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['-updated_at']
         verbose_name = _('catalog item')
         verbose_name_plural = _('catalog items')
 

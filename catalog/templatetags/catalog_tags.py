@@ -32,8 +32,8 @@ def catalog_shop_goods(context, shop_id, number=4):
 def catalog_sort(context):
     params_for_date = context['request'].GET.copy()
     params_for_price = context['request'].GET.copy()
-    current_ordering = context['request'].GET.get('o', '-created_at')
-    params_for_date['o'] = 'created_at' if context['request'].GET.get('o') == '-created_at' else '-created_at'
+    current_ordering = context['request'].GET.get('o', '-updated_at')
+    params_for_date['o'] = 'updated_at' if context['request'].GET.get('o') == '-updated_at' else '-updated_at'
     params_for_price['o'] = '-price' if context['request'].GET.get('o') == 'price' else 'price'
     return {
         'current_ordering': current_ordering,
