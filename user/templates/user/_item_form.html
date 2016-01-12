@@ -4,14 +4,20 @@
 {% for field in form %}
         {% include "forms/_field.html" %}
 {% endfor %}
+        <h4 class="ui dividing header">Фотографии</h4>
 {% for formset in inlines %}
-        <div id="{{ formset.prefix }}">
-        {% for subform in formset.forms %}
-            <table>
-            {{ subform.as_table }}
-            </table>
-        {% endfor %}
-        {{ formset.management_form }}
+        <div id="{{ formset.prefix }}" class="ui stackable grid">
+{% for subform in formset.forms %}
+            <div class="four wide column">
+{% for field in subform.visible_fields %}
+                {% include "forms/_field.html" %}
+{% endfor %}
+{% for field in subform.hidden_fields %}
+    {{ field }}
+{% endfor %}
+            </div>
+{% endfor %}
+            {{ formset.management_form }}
         </div>
 {% endfor %}
         <button type="submit" class="ui primary button">Сохранить</button>

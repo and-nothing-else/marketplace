@@ -9,7 +9,7 @@ from shops.models import Shop
 from shops.forms import ShopForm
 from tariff.models import Tariff
 from catalog.models import Item, ItemPhoto
-from catalog.forms import UserItemForm
+from catalog.forms import UserItemForm, UserItemPhotoForm
 
 
 class ShopUpdateView(LoginRequiredMixin, UpdateView):
@@ -64,7 +64,8 @@ class UserItemListView(MustHaveShopMixin, ListView):
 
 class ItemPhotoInline(InlineFormSet):
     model = ItemPhoto
-    fields = ['photo']
+    form_class = UserItemPhotoForm
+    fields = ['photo', 'ordering']
 
 
 class UserItemViewMixin(MustHaveShopMixin):
