@@ -8,4 +8,4 @@ class ItemFilter(django_filters.FilterSet):
     class Meta:
         model = Item
         fields = ['price']
-        order_by = ['created_at', '-created_at', 'price', '-price']
+        order_by = ['-created_at', 'created_at', 'price', '-price']
