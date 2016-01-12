@@ -1,6 +1,6 @@
 from django import forms
 from sorl.thumbnail.admin.current import AdminImageWidget
-from .models import Item, ItemPhoto
+from .models import *
 
 
 class UserItemForm(forms.ModelForm):
@@ -8,15 +8,23 @@ class UserItemForm(forms.ModelForm):
     class Meta:
         model = Item
         fields = [
-            'category',
             'active',
             'name',
             'article',
             'price',
             'old_price',
             'color',
+            'size',
+            'standard_size',
             'description',
         ]
+
+
+class UserItemCustomPropertyForm(forms.ModelForm):
+
+    class Meta:
+        model = ItemCustomProperty
+        fields = ['name', 'value', 'ordering']
 
 
 class UserItemPhotoForm(forms.ModelForm):

@@ -1,0 +1,72 @@
+{% extends "user/base.html" %}
+
+
+{% block content %}
+    <h1>Новый товар</h1>
+    <div class="ui fluid ordered steps">
+        <div class="active step">
+            <div class="content">
+                <div class="title">Выбор раздела</div>
+                <div class="description">только при создании товара</div>
+            </div>
+        </div>
+        <div class="step">
+            <div class="content">
+                <div class="title">Информация о товаре</div>
+                <div class="description">основное</div>
+            </div>
+        </div>
+        <div class="step">
+            <div class="content">
+                <div class="title">Фотографии товара</div>
+                <div class="description">покажите товар лицом</div>
+            </div>
+        </div>
+        <div class="step">
+            <div class="content">
+                <div class="title">Торговые предложения</div>
+                <div class="description">опционально</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui icon warning message">
+        <i class="warning sign icon"></i>
+        <div class="content">
+            Выбрать раздел можно только при создании нового товара.<br>
+            Впоследствии изменить раздел размещения будет нельзя.
+        </div>
+    </div>
+
+    <div class="ui labeled icon top left pointing left floated dropdown primary button" id="user_select_item_category">
+        <i class="filter icon"></i>
+        <span class="text">Выберите раздел</span>
+        <div class="menu">
+            <div class="ui search icon input">
+                <i class="search icon"></i>
+                <input type="text" name="search" placeholder="Найти">
+            </div>
+            <div class="scrolling menu">
+{% for category, info in categories %}
+{% if info.level == 0 %}
+                <div class="header">
+                    <i class="folder icon"></i>
+                    {{ category.name }}
+                </div>
+{% else %}
+                <div class="item" data-next-url="{% url "user:item_create_step2" category.id %}">
+                    <i class="icon"></i>
+                    {{ category.name }}
+                </div>
+{% endif %}
+{% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <a href="" class="ui right labeled icon right floated disabled positive button" id="button_next">
+        Далее
+        <i class="arrow right icon"></i>
+    </a>
+
+{% endblock %}

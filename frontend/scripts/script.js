@@ -9,5 +9,13 @@ $("#region_switcher").dropdown({
 }});
 
 
+$("#user_select_item_category").dropdown({
+    onChange: function(value, text, $selectedItem) {
+        $('#button_next')
+            .attr("href", $selectedItem.data("next-url"))
+            .removeClass('disabled');
+}});
+
+
 $('.fancybox').fancybox();
 $('table.sortable').tablesort();

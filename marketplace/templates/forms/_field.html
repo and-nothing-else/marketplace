@@ -4,13 +4,19 @@
 {% if field|widget_type == 'checkboxinput' %}
         <div class="ui checkbox">
             {{ field }}
+{% if field.label %}
             <label>{{ field.label }}</label>
+{% endif %}
         </div>
 {% elif field|widget_type == 'select' %}
+{% if field.label %}
         <label>{{ field.label }}</label>
+{% endif %}
         {{ field|add_class:"ui dropdown" }}
 {% else %}
+{% if field.label %}
         <label>{{ field.label }}</label>
+{% endif %}
         {{ field }}
 {% endif %}
 {% if field.errors %}

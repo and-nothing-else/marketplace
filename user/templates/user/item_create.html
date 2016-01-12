@@ -1,9 +1,164 @@
 {% extends "user/base.html" %}
+{% load widget_tweaks %}
 
 
-{% block profile_content %}
-    <h1>Добавление товара</h1>
-    {% include "user/_item_form.html" %}
+{% block content %}
+    <h1>Новый товар в разделе «{{ category }}»</h1>
+    <div class="ui fluid ordered steps">
+        <a href="{% url "user:item_create" %}" class="completed step">
+            <div class="content">
+                <div class="title">Выбор раздела</div>
+                <div class="description">только при создании товара</div>
+            </div>
+        </a>
+        <div class="active step">
+            <div class="content">
+                <div class="title">Информация о товаре</div>
+                <div class="description">основное</div>
+            </div>
+        </div>
+        <div class="step">
+            <div class="content">
+                <div class="title">Фотографии товара</div>
+                <div class="description">покажите товар лицом</div>
+            </div>
+        </div>
+        <div class="step">
+            <div class="content">
+                <div class="title">Торговые предложения</div>
+                <div class="description">опционально</div>
+            </div>
+        </div>
+    </div>
+
+
+    <form class="ui clearing form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <h2 class="ui dividing header">Основная информация</h2>
+{% with form.name as field %}
+        {% include "forms/_field.html" %}
+{% endwith %}
+{% with form.article as field %}
+        {% include "forms/_field.html" %}
+{% endwith %}
+        <div class="field">
+            <div class="ui stacked clearing two columns grid">
+                <div class="column">
+                    <div class="field required{% if form.price.errors %} error{% endif %}">
+                        <label>{{ form.price.label }}</label>
+                        <div class="ui right labeled input">
+                            {{ form.price }}
+                            <div class="ui label"><i class="rouble icon"></i></div>
+                        </div>
+{% if form.price.errors %}
+                        {{ form.price.errors }}
+{% endif %}
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="field {% if form.old_price.errors %} error{% endif %}">
+                        <label>{{ form.old_price.label }}</label>
+                        <div class="ui right labeled input">
+                            {{ form.old_price }}
+                            <div class="ui label"><i class="rouble icon"></i></div>
+                        </div>
+{% if form.old_price.errors %}
+                        {{ form.old_price.errors }}
+{% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+{% with form.active as field %}
+        {% include "forms/_field.html" %}
+{% endwith %}
+
+
+        <h2 class="ui dividing header">Дополнительная информация</h2>
+{% with form.color as field %}
+        {% include "forms/_field.html" %}
+{% endwith %}
+
+{% if form.size and form.standard_size %}
+        <div class="field">
+            <div class="ui icon info message">
+                <i class="info circle icon"></i>
+                <div class="content">
+                    <div class="header">Замечание о размерах</div>
+                    Размер производителя не всегда совпадает со стандартным российским размером.<br>
+                    Если вы указываете размер произодителя, укажите также и стандартный размер, которому он соответствует.
+                </div>
+            </div>
+            <div class="ui stacked clearing two columns grid">
+                <div class="column">
+{% with form.size as field %}
+        {% include "forms/_field.html" %}
+{% endwith %}
+                </div>
+                <div class="column">
+{% with form.standard_size as field %}
+        {% include "forms/_field.html" %}
+{% endwith %}
+                </div>
+            </div>
+        </div>
+{% endif %}
+
+        <div class="ui icon info message">
+            <i class="help circle icon"></i>
+            <div class="content">
+                <div class="header">Не хватило полей?</div>
+                Ваш товар обладает свойствами, которые обязательно нужно указать, но в нашей форме нет полей под эти свойства?
+                Не беда! Добавьте в следующие поля произвольные свойства парами «название: значение».
+            </div>
+        </div>
+
+        <table id="{{ formset.prefix }}" class="ui very basic table">
+            <thead><tr>
+                <th>Название свойства</th>
+                <th>Значение свойства</th>
+                <th>Сортировка</th>
+            </tr></thead>
+            <tbody>
+{% for subform in item_property_inline %}
+            <tr>
+                <td>
+{% for field in subform.hidden_fields %}{{ field }}{% endfor %}
+                    {{ subform.name }}
+{% if subform.name.errors %}{{ subform.name.errors }}{% endif %}
+                </td>
+                <td>
+                    {{ subform.value }}
+{% if subform.value.errors %}{{ subform.value.errors }}{% endif %}
+                </td>
+                <td class="right aligned collapsing">
+                    {{ subform.ordering }}
+{% if subform.ordering.errors %}{{ subform.ordering.errors }}{% endif %}
+                </td>
+            </tr>
+{% endfor %}
+            </tbody>
+        </table>
+        {{ item_property_inline.management_form }}
+
+
+        <h2 class="ui dividing header">Подробное описание</h2>
+{% with form.description as field %}
+        {% include "forms/_field.html" %}
+{% endwith %}
+        <div class="ui one column grid">
+            <div class="row">
+                <div class="column">
+                    <button type="submit" class="ui right labeled icon right floated positive button" id="button_next">
+                        Далее
+                        <i class="arrow right icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
 {% endblock %}
 
 

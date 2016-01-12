@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-09 14:27+0300\n"
+"POT-Creation-Date: 2016-01-12 19:04+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,6 +96,27 @@ msgstr ""
 msgid "users"
 msgstr ""
 
-#: views.py:28
+#: views.py:39
 msgid "Your shop info has been updated successfully"
 msgstr "Информация о вашем магазине успешно обновлена"
+
+#: views.py:90
+#, python-format
+msgid ""
+"\n"
+"            <p>You have reached the maximum number of goods.</p>\n"
+"            <p>Please <a href=\"%s\">upgrade you tariff</a> to place more "
+"goods.\n"
+"            "
+msgstr ""
+"\n"
+"            <p>Вы достигли максимального количества товаров.</p>\n"
+"            <p><a href=\"%s\">Улучшите свой тариф</a>, чтобы разместить больше товаров. "
+
+#: views.py:117
+msgid "%s has been added successfully"
+msgstr "Товар «%s» успешно добавлен"
+
+#: views.py:133
+msgid "%s has been updated successfully"
+msgstr "Товар «%s» успешно обновлён"

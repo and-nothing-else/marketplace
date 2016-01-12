@@ -1,15 +1,15 @@
-from django.views.generic import UpdateView, ListView
+from django.views.generic import UpdateView, ListView, TemplateView
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.shortcuts import redirect
-from extra_views import InlineFormSet, CreateWithInlinesView, UpdateWithInlinesView
+from extra_views import InlineFormSet, NamedFormsetsMixin, CreateWithInlinesView, UpdateWithInlinesView
 from shops.models import Shop
 from shops.forms import ShopForm
 from tariff.models import Tariff
-from catalog.models import Item, ItemPhoto, ItemCustomProperty
-from catalog.forms import UserItemForm, UserItemPhotoForm
+from catalog.models import Category, Item, ItemPhoto, ItemCustomProperty
+from catalog.forms import UserItemForm, UserItemPhotoForm, UserItemCustomPropertyForm
 
 
 class ShopUpdateView(LoginRequiredMixin, UpdateView):
@@ -70,13 +70,15 @@ class ItemPhotoInline(InlineFormSet):
 
 class ItemPropertiesInline(InlineFormSet):
     model = ItemCustomProperty
+    form_class = UserItemCustomPropertyForm
     fields = ['name', 'value', 'ordering']
 
 
-class UserItemViewMixin(MustHaveShopMixin):
+class UserItemViewMixin(MustHaveShopMixin, NamedFormsetsMixin):
     model = Item
     form_class = UserItemForm
     inlines = [ItemPhotoInline, ItemPropertiesInline]
+    inlines_names = ['item_photo_inline', 'item_property_inline']
     success_url = reverse_lazy('user:item_list')
 
     def forms_valid(self, form, inlines):
@@ -95,13 +97,42 @@ class UserItemViewMixin(MustHaveShopMixin):
         return super().forms_valid(form, inlines)
 
 
+class UserItemSelectCategoryView(MustHaveShopMixin, TemplateView):
+    template_name = 'user/item_create_category_select.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.get_annotated_list(max_depth=2)
+        return context
+
+
 class UserItemCreateView(UserItemViewMixin, CreateWithInlinesView):
     template_name = 'user/item_create.html'
+    category = None
+
+    def dispatch(self, request, *args, **kwargs):
+        self.category = Category.objects.get(pk=kwargs.get('category_id'))
+        return super().dispatch(request, *args, **kwargs)
 
     def get_initial(self):
         initial = super().get_initial()
         initial['active'] = self.request.user.can_increase_active_items()
         return initial
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        sizes = self.category.get_sizes()
+        if sizes:
+            form.fields['standard_size'].queryset = sizes
+        else:
+            del form.fields['standard_size']
+            del form.fields['size']
+        return form
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = self.category
+        return context
 
     def forms_valid(self, form, inlines):
         messages.add_message(self.request, messages.SUCCESS,

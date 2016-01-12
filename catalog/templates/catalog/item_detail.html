@@ -64,6 +64,9 @@
 {% if item.color %}
                             <div class="item"><b>Цвет:</b> {{ item.color }}</div>
 {% endif %}
+{% for property in item.itemcustomproperty_set.all %}
+                            <div class="item"><b>{{ property.name }}:</b> {{ property.value|safe }}</div>
+{% endfor %}
                         </div>
                     </div>
                     <div class="seven wide column">
@@ -87,33 +90,21 @@
                 </div>
                 <div class="row">
                     <div class="sixteen wide column">
-{% with item.itemcustomproperty_set.all as properties %}
-{% if properties.count > 0 %}
-                        <table class="ui very basic collapsing celled table">
-{% for property in properties %}
-                            <tr>
-                                <td>{{ property.name }}</td>
-                                <td>{{ property.value|safe }}</td>
-                            </tr>
-{% endfor %}
-                        </table>
-{% endif %}
-{% endwith %}
 {% with item.itemphoto_set.all as photos %}
 {% if photos.count > 0 %}
-                    <div class="ui small images">
+                        <div class="ui small images">
 {% for photo in photos %}
 {% thumbnail photo.photo "150x150" crop="center" as im %}
-                        <a href="{{ photo.photo.url }}" class="fancybox" rel="gallery">
-                            <img src="{{ im.url }}">
-                        </a>
+                            <a href="{{ photo.photo.url }}" class="fancybox" rel="gallery">
+                                <img src="{{ im.url }}">
+                            </a>
 {% empty %}
 {% endthumbnail %}
 {% endfor %}
-                    </div>
+                        </div>
 {% endif %}
 {% endwith %}
-                    {{ item.description|safe }}
+                        {{ item.description|safe }}
                     </div>
                 </div>
             </div>

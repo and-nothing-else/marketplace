@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-12 17:03+0300\n"
+"POT-Creation-Date: 2016-01-12 19:08+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,42 +90,50 @@ msgstr "описание"
 msgid "color"
 msgstr "цвет"
 
-#: models.py:72 models.py:77 models.py:91
+#: models.py:47
+msgid "vendor size"
+msgstr "размер производителя"
+
+#: models.py:48
+msgid "standard size"
+msgstr "российский размер"
+
+#: models.py:74 models.py:79 models.py:93
 msgid "catalog item"
 msgstr "товар"
 
-#: models.py:73
+#: models.py:75
 msgid "catalog items"
 msgstr "товары"
 
-#: models.py:78
+#: models.py:80
 msgid "image"
 msgstr "картинка"
 
-#: models.py:79 models.py:94
+#: models.py:81 models.py:96
 msgid "ordering"
 msgstr "сортировка"
 
-#: models.py:86
+#: models.py:88
 msgid "photo"
 msgstr "фото"
 
-#: models.py:87
+#: models.py:89
 msgid "photos"
 msgstr "фотографии"
 
-#: models.py:92
+#: models.py:94
 msgid "property name"
 msgstr "название свойства"
 
-#: models.py:93
+#: models.py:95
 msgid "property value"
 msgstr "значение свойства"
 
-#: models.py:101
+#: models.py:103
 msgid "property"
 msgstr "свойство"
 
-#: models.py:102
+#: models.py:104
 msgid "properties"
 msgstr "свойства"

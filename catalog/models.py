@@ -17,6 +17,19 @@ class Category(MP_Node):
     def get_absolute_url(self):
         return reverse_lazy('catalog:category_detail', args=[str(self.slug)])
 
+    def get_size_set(self):
+        if self.size_set:
+            return self.size_set
+        else:
+            return self.get_parent().get_size_set() or None
+
+    def get_sizes(self):
+        size_set = self.get_size_set()
+        if size_set:
+            return size_set.size_set.all()
+        else:
+            return None
+
     class Meta:
         verbose_name = _('catalog section')
         verbose_name_plural = _('catalog sections')
@@ -44,6 +57,8 @@ class Item(models.Model):
 
     description = RichTextField(_('description'), blank=True, config_name='minimal')
     color = models.ForeignKey('dictionary.Color', verbose_name=_('color'), blank=True, null=True)
+    size = models.CharField(_('vendor size'), max_length=16, blank=True, null=True)
+    standard_size = models.ForeignKey('dictionary.Size', verbose_name=_('standard size'), blank=True, null=True)
 
     objects = ItemManager()
 
