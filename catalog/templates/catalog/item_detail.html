@@ -16,8 +16,13 @@
 {% endif %}
         <div class="six wide column">
 {% thumbnail item.get_image "405" as im %}
-            <a href="{{ item.get_image.url }}" class="fancybox" rel="gallery">
-                <img src="{{ im.url }}" class="ui fluid image">
+            <a href="{{ item.get_image.url }}" class="fancybox ui fluid image" rel="gallery">
+{% if item.old_price %}
+                <div class="ui green ribbon label">
+                    <i class="gift icon"></i> Акция!
+                </div>
+{% endif %}
+                <img src="{{ im.url }}">
             </a>
 {% empty %}
             <div class="no_photo"><div class="no_photo__content">
@@ -39,6 +44,14 @@
                     <div class="eight wide column">
                         <h1>{{ item.name }}</h1>
 {% if item.active %}
+{% if item.old_price %}
+                        <div>
+                            <del>
+                                {{ item.old_price|intcomma }}
+                                <i class="ruble icon"></i>
+                            </del>
+                        </div>
+{% endif %}
                         <div class="ui massive tag label">
                             {{ item.price|intcomma }}
                             <i class="ruble icon"></i>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-11 14:45+0300\n"
+"POT-Creation-Date: 2016-01-12 12:06+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,29 +66,33 @@ msgid "price"
 msgstr "цена"
 
 #: models.py:40
+msgid "old price"
+msgstr "старая цена"
+
+#: models.py:41
 msgid "description"
 msgstr "описание"
 
-#: models.py:66 models.py:71
+#: models.py:67 models.py:72
 msgid "catalog item"
 msgstr "товар"
 
-#: models.py:67
+#: models.py:68
 msgid "catalog items"
 msgstr "товары"
 
-#: models.py:72
+#: models.py:73
 msgid "image"
 msgstr "картинка"
 
-#: models.py:73
+#: models.py:74
 msgid "ordering"
 msgstr "сортировка"
 
-#: models.py:80
+#: models.py:81
 msgid "photo"
 msgstr "фото"
 
-#: models.py:81
+#: models.py:82
 msgid "photos"
 msgstr "фотографии"

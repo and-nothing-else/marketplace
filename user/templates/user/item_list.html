@@ -1,4 +1,5 @@
 {% extends "user/base.html" %}
+{% load humanize %}
 
 
 {% block profile_content %}
@@ -12,20 +13,31 @@
         <th>Артикул</th>
         <th>Цена</th>
         <th>Активность</th>
+        <th></th>
     </tr></thead>
     <tbody>
     {% for item in items %}
         <tr>
             <td><a href="{% url "user:item_update" item.id %}">{{ item.name }}</a></td>
             <td>{{ item.article }}</td>
-            <td>{{ item.price }}</td>
+            <td data-sort-value="{{ item.price }}">
+{% if item.old_price %}
+                (<del>{{ item.old_price|intcomma }}</del>)
+{% endif %}
+                {{ item.price|intcomma }}
+            </td>
             <td>{% if item.active %}<i class="large green checkmark icon"></i>{% endif %}</td>
+            <td>
+                <a href="{{ item.get_absolute_url }}">
+                    <i class="external icon"></i>
+                </a>
+            </td>
         </tr>
     {% endfor %}
     </tbody>
-    <tfoot><tr><th colspan="4">
+    <tfoot><tr><th colspan="5">
         <a class="ui right floated small primary labeled icon button" href="{% url "user:item_create" %}">
-            <i class="plus icon"></i> Создать товар
+            <i class="plus icon"></i> Добавить товар
         </a>
     </th></tr></tfoot>
     </table>

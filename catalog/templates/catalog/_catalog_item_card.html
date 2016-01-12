@@ -1,6 +1,11 @@
 {% load thumbnail humanize %}
 <a href="{{ item.get_absolute_url }}" class="ui fluid card">
-    <div class="image">
+    <div class="ui fluid image">
+{% if item.old_price %}
+        <div class="ui green ribbon label">
+            <i class="gift icon"></i> Акция!
+        </div>
+{% endif %}
 {% thumbnail item.get_image "290x290" crop="center" as im %}
         <img src="{{ im.url }}">
 {% empty %}
@@ -11,6 +16,12 @@
     </div>
     <div class="content">
         <h4 class="header">{{ item.name }}</h4>
+{% if item.old_price %}
+        <p class="ui left floated">
+            <del>{{ item.old_price|intcomma }}
+            <i class="ruble icon"></i></del>
+        </p>
+{% endif %}
         <p class="ui right floated large tag label">
             {{ item.price|intcomma }}
             <i class="ruble icon"></i>

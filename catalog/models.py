@@ -37,6 +37,7 @@ class Item(models.Model):
     name = models.CharField(_('name'), max_length=256)
     article = models.CharField(pgettext_lazy('catalog item article', 'article'), max_length=16)
     price = models.PositiveIntegerField(_('price'))
+    old_price = models.PositiveIntegerField(_('old price'), blank=True, null=True)
     description = RichTextField(_('description'), blank=True, config_name='minimal')
 
     objects = ItemManager()
