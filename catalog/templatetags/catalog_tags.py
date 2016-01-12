@@ -8,7 +8,8 @@ register = template.Library()
 def catalog_menu(context):
     category_list = Category.get_annotated_list(max_depth=2)
     return {
-        'category_list': category_list
+        'category_list': category_list,
+        'user': context['request'].user
     }
 
 

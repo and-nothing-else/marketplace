@@ -18,4 +18,10 @@
     {% endif %}
 {% endif %}
 {% endfor %}
+{% if user.can_add_items %}
+    <a href="{% url "user:item_create" %}" class="active green item">
+        <i class="plus icon"></i>
+        Добавить товар
+    </a>
+{% endif %}
 </div>
