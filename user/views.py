@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from django.shortcuts import redirect
 from extra_views import InlineFormSet, CreateWithInlinesView, UpdateWithInlinesView
 from shops.models import Shop
 from shops.forms import ShopForm
@@ -17,7 +18,14 @@ class ShopUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('user:shop_update')
 
     def get_object(self, queryset=None):
-        shop, created = Shop.objects.get_or_create(owner=self.request.user)
+        try:
+            shop = Shop.objects.get(owner=self.request.user)
+        except Shop.DoesNotExist:
+            shop = Shop(
+                owner=self.request.user,
+                slug=self.request.user.username
+            )
+            shop.save()
         return shop
 
     def get_initial(self):
@@ -32,13 +40,20 @@ class ShopUpdateView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
 
-class TariffList(LoginRequiredMixin, ListView):
+class MustHaveShopMixin(LoginRequiredMixin):
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.shop:
+            return redirect('user:shop_update')
+        return super().dispatch(request, *args, **kwargs)
+
+
+class TariffList(MustHaveShopMixin, ListView):
     model = Tariff
     template_name = 'user/tariff_select.html'
     context_object_name = 'tariffs'
 
 
-class UserItemListView(LoginRequiredMixin, ListView):
+class UserItemListView(MustHaveShopMixin, ListView):
     model = Item
     template_name = 'user/item_list.html'
     context_object_name = 'items'
@@ -52,7 +67,7 @@ class ItemPhotoInline(InlineFormSet):
     fields = ['photo']
 
 
-class UserItemViewMixin(LoginRequiredMixin):
+class UserItemViewMixin(MustHaveShopMixin):
     model = Item
     form_class = UserItemForm
     inlines = [ItemPhotoInline]
