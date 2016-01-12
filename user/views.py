@@ -66,6 +66,7 @@ class ItemPhotoInline(InlineFormSet):
     model = ItemPhoto
     form_class = UserItemPhotoForm
     fields = ['photo', 'ordering']
+    extra = 5
 
 
 class ItemPropertiesInline(InlineFormSet):
@@ -135,6 +136,10 @@ class UserItemCreateView(UserItemViewMixin, CreateWithInlinesView):
         return context
 
     def forms_valid(self, form, inlines):
+        instance = form.save(commit=False)
+        instance.category = self.category
+        instance.shop = self.request.user.shop
+        instance.save()
         messages.add_message(self.request, messages.SUCCESS,
                              _('%s has been added successfully' % form.instance.name)
                              )

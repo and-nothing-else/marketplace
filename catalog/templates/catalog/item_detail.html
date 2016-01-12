@@ -90,12 +90,12 @@
                 </div>
                 <div class="row">
                     <div class="sixteen wide column">
-{% with item.itemphoto_set.all as photos %}
-{% if photos.count > 0 %}
+{% with item.get_more_photos as photos %}
+{% if photos %}
                         <div class="ui small images">
 {% for photo in photos %}
-{% thumbnail photo.photo "150x150" crop="center" as im %}
-                            <a href="{{ photo.photo.url }}" class="fancybox" rel="gallery">
+{% thumbnail photo "150x150" crop="center" as im %}
+                            <a href="{{ photo.url }}" class="fancybox" rel="gallery">
                                 <img src="{{ im.url }}">
                             </a>
 {% empty %}

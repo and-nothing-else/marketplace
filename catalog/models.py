@@ -74,6 +74,9 @@ class Item(models.Model):
         except (ItemPhoto.DoesNotExist, AttributeError):
             return None
 
+    def get_more_photos(self):
+        return [photo.photo for photo in self.itemphoto_set.all()][1:]
+
     def save(self, *args, **kwargs):
         user_items = self.shop.item_set.active()
         if self.pk:

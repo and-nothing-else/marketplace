@@ -4,7 +4,7 @@
 
 {% block content %}
     <h1>Новый товар в разделе «{{ category }}»</h1>
-    <div class="ui fluid ordered steps">
+    <div class="ui ordered steps">
         <a href="{% url "user:item_create" %}" class="completed step">
             <div class="content">
                 <div class="title">Выбор раздела</div>
@@ -15,12 +15,6 @@
             <div class="content">
                 <div class="title">Информация о товаре</div>
                 <div class="description">основное</div>
-            </div>
-        </div>
-        <div class="step">
-            <div class="content">
-                <div class="title">Фотографии товара</div>
-                <div class="description">покажите товар лицом</div>
             </div>
         </div>
         <div class="step">
@@ -114,7 +108,7 @@
             </div>
         </div>
 
-        <table id="{{ formset.prefix }}" class="ui very basic table">
+        <table id="{{ item_property_inline.prefix }}" class="ui very basic table">
             <thead><tr>
                 <th>Название свойства</th>
                 <th>Значение свойства</th>
@@ -140,13 +134,40 @@
 {% endfor %}
             </tbody>
         </table>
-        {{ item_property_inline.management_form }}
+{{ item_property_inline.management_form }}
 
 
         <h2 class="ui dividing header">Подробное описание</h2>
 {% with form.description as field %}
         {% include "forms/_field.html" %}
 {% endwith %}
+
+
+        <h2 class="ui dividing header">Фотографии</h2>
+        <table id="{{ item_photo_inline.prefix }}" class="ui very basic table">
+            <thead><tr>
+                <th>Файл</th>
+                <th>Сортировка</th>
+            </tr></thead>
+            <tbody>
+{% for subform in item_photo_inline %}
+            <tr>
+                <td>
+{% for field in subform.hidden_fields %}{{ field }}{% endfor %}
+                    {{ subform.photo }}
+{% if subform.photo.errors %}{{ subform.photo.errors }}{% endif %}
+                </td>
+                <td class="right aligned collapsing">
+                    {{ subform.ordering }}
+{% if subform.ordering.errors %}{{ subform.ordering.errors }}{% endif %}
+                </td>
+            </tr>
+{% endfor %}
+            </tbody>
+        </table>
+{{ item_photo_inline.management_form }}
+
+
         <div class="ui one column grid">
             <div class="row">
                 <div class="column">
