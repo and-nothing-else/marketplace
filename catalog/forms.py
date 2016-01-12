@@ -36,3 +36,14 @@ class UserItemPhotoForm(forms.ModelForm):
         widgets = {
             'photo': AdminImageWidget
         }
+
+
+class UserItemSKUForm(forms.ModelForm):
+
+    class Meta:
+        model = ItemSKU
+        fields = [
+            'color',
+            'size',
+            'standard_size',
+        ]

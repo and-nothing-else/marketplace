@@ -119,3 +119,17 @@ class ItemCustomProperty(models.Model):
         ordering = ['ordering']
         verbose_name = _('property')
         verbose_name_plural = _('properties')
+
+
+class ItemSKU(models.Model):
+    item = models.ForeignKey(Item, verbose_name=_('catalog item'))
+    color = models.ForeignKey('dictionary.Color', verbose_name=_('color'), blank=True, null=True)
+    size = models.CharField(_('vendor size'), max_length=16, blank=True, null=True)
+    standard_size = models.ForeignKey('dictionary.Size', verbose_name=_('standard size'), blank=True, null=True)
+
+    def __str__(self):
+        return self.item.name
+
+    class Meta:
+        ordering = ['color', 'size']
+        verbose_name = 'SKU'

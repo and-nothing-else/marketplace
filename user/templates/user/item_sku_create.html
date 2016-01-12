@@ -1,0 +1,41 @@
+{% extends "user/base.html" %}
+
+
+{% block content %}
+    <h1>Новое торговое предложение для товара «{{ item }}»</h1>
+    <form class="ui clearing form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+{% with form.color as field %}
+        {% include "forms/_field.html" %}
+{% endwith %}
+        <div class="field">
+            <div class="ui stacked clearing two columns grid">
+                <div class="column">
+{% with form.size as field %}
+        {% include "forms/_field.html" %}
+{% endwith %}
+                </div>
+                <div class="column">
+{% with form.standard_size as field %}
+        {% include "forms/_field.html" %}
+{% endwith %}
+                </div>
+            </div>
+        </div>
+        <div class="ui one column grid">
+            <div class="row">
+                <div class="column">
+                    <button type="submit" class="ui right labeled icon right floated positive button" name="next" value="sku">
+                        Сохранить и добавить ещё одно торговое предложение
+                        <i class="arrow right icon"></i>
+                    </button>
+                    <button type="submit" class="ui left labeled icon right floated green basic button">
+                        <i class="checkmark icon"></i>
+                        Сохранить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}

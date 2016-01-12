@@ -9,7 +9,7 @@ from shops.models import Shop
 from shops.forms import ShopForm
 from tariff.models import Tariff
 from catalog.models import Category, Item, ItemPhoto, ItemCustomProperty
-from catalog.forms import UserItemForm, UserItemPhotoForm, UserItemCustomPropertyForm
+from catalog.forms import UserItemForm, UserItemPhotoForm, UserItemCustomPropertyForm, UserItemSKUForm
 
 
 class ShopUpdateView(LoginRequiredMixin, UpdateView):
@@ -140,8 +140,47 @@ class UserItemCreateView(UserItemViewMixin, CreateWithInlinesView):
         instance.category = self.category
         instance.shop = self.request.user.shop
         instance.save()
+        if self.request.POST.get('next') == 'sku':
+            self.success_url = reverse_lazy('user:item_create_sku', args=[instance.pk])
         messages.add_message(self.request, messages.SUCCESS,
                              _('%s has been added successfully' % form.instance.name)
+                             )
+        return super().forms_valid(form, inlines)
+
+
+class UserItemSKUCreateView(MustHaveShopMixin, CreateWithInlinesView):
+    template_name = 'user/item_sku_create.html'
+    item = None
+    form_class = UserItemSKUForm
+    success_url = reverse_lazy('user:item_list')
+
+    def dispatch(self, request, *args, **kwargs):
+        self.item = Item.objects.get(pk=kwargs.get('item_id'))
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        sizes = self.item.category.get_sizes()
+        if sizes:
+            form.fields['standard_size'].queryset = sizes
+        else:
+            del form.fields['standard_size']
+            del form.fields['size']
+        return form
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['item'] = self.item
+        return context
+
+    def forms_valid(self, form, inlines):
+        instance = form.save(commit=False)
+        instance.item = self.item
+        instance.save()
+        if self.request.POST.get('next') == 'sku':
+            self.success_url = reverse_lazy('user:item_create_sku', args=[self.item.id])
+        messages.add_message(self.request, messages.SUCCESS,
+                             _('SKU for %s has been added successfully' % self.item.name)
                              )
         return super().forms_valid(form, inlines)
 

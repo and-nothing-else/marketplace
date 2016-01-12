@@ -41,7 +41,7 @@
                 </div>
 {% endif %}
                 <div class="row">
-                    <div class="nine wide column">
+                    <div class="ten wide column">
                         <h1>{{ item.name }}</h1>
 {% if item.active %}
 {% if item.old_price %}
@@ -72,7 +72,7 @@
 {% endfor %}
                         </div>
                     </div>
-                    <div class="seven wide column">
+                    <div class="six wide column">
                         <table class="ui very basic table">
                             <tbody>
                                 <tr>
@@ -93,6 +93,7 @@
                 </div>
                 <div class="row">
                     <div class="sixteen wide column">
+                        {{ item.description|safe }}
 {% with item.get_more_photos as photos %}
 {% if photos %}
                         <div class="ui small images">
@@ -107,7 +108,6 @@
                         </div>
 {% endif %}
 {% endwith %}
-                        {{ item.description|safe }}
                     </div>
                 </div>
             </div>
