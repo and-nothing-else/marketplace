@@ -78,6 +78,10 @@ class Item(models.Model):
     def get_more_photos(self):
         return [photo.photo for photo in self.itemphoto_set.all()][1:]
 
+    def get_sku_data(self):
+        sku_list = self.itemsku_set.active()
+        return sku_list
+
     def save(self, *args, **kwargs):
         user_items = self.shop.item_set.active()
         if self.pk:
@@ -92,8 +96,7 @@ class Item(models.Model):
         verbose_name_plural = _('catalog items')
 
 
-class ItemPhoto(models.Model):
-    item = models.ForeignKey(Item, verbose_name=_('catalog item'))
+class Photo(models.Model):
     photo = ImageField(_('image'), upload_to='catalog')
     ordering = models.IntegerField(_('ordering'), default=100)
 
@@ -101,9 +104,14 @@ class ItemPhoto(models.Model):
         return self.photo.url
 
     class Meta:
+        abstract = True
         ordering = ['ordering']
         verbose_name = _('photo')
         verbose_name_plural = _('photos')
+
+
+class ItemPhoto(Photo):
+    item = models.ForeignKey(Item, verbose_name=_('catalog item'))
 
 
 class ItemCustomProperty(models.Model):
@@ -121,15 +129,44 @@ class ItemCustomProperty(models.Model):
         verbose_name_plural = _('properties')
 
 
+class ItemSKUManager(models.Manager):
+    def active(self):
+        return self.get_queryset().filter(active=True)
+
+
 class ItemSKU(models.Model):
     item = models.ForeignKey(Item, verbose_name=_('catalog item'))
     color = models.ForeignKey('dictionary.Color', verbose_name=_('color'), blank=True, null=True)
-    size = models.CharField(_('vendor size'), max_length=16, blank=True, null=True)
-    standard_size = models.ForeignKey('dictionary.Size', verbose_name=_('standard size'), blank=True, null=True)
+    active = models.BooleanField(_('active'), default=True)
+
+    objects = ItemSKUManager()
 
     def __str__(self):
-        return self.item.name
+        return "{name} ({color_label}: {color_value}, {size_label}: {size_value})".format(
+            name=self.item.name,
+            color_label=_('color'),
+            color_value=self.color,
+            size_label=_('sizes'),
+            size_value=', '.join([size.size for size in self.itemskusize_set.all()])
+        )
 
     class Meta:
-        ordering = ['color', 'size']
+        ordering = ['color']
         verbose_name = 'SKU'
+
+
+class ItemSKUSize(models.Model):
+    sku = models.ForeignKey(ItemSKU)
+    size = models.CharField(_('vendor size'), max_length=16)
+    standard_size = models.ForeignKey('dictionary.Size', verbose_name=_('standard size'))
+
+    def __str__(self):
+        return self.size
+
+    class Meta:
+        ordering = ['size']
+        verbose_name = _('SKU size')
+
+
+class ItemSKUPhoto(Photo):
+    sku = models.ForeignKey(ItemSKU)

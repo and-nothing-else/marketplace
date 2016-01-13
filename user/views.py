@@ -8,8 +8,9 @@ from extra_views import InlineFormSet, NamedFormsetsMixin, CreateWithInlinesView
 from shops.models import Shop
 from shops.forms import ShopForm
 from tariff.models import Tariff
-from catalog.models import Category, Item, ItemPhoto, ItemCustomProperty
-from catalog.forms import UserItemForm, UserItemPhotoForm, UserItemCustomPropertyForm, UserItemSKUForm
+from catalog.models import Category, Item, ItemPhoto, ItemCustomProperty, ItemSKU, ItemSKUSize, ItemSKUPhoto
+from catalog.forms import UserItemForm, UserItemPhotoForm, UserItemCustomPropertyForm, \
+    UserItemSKUForm, UserItemSKUSizeForm, UserItemSKUPhotoForm
 
 
 class ShopUpdateView(LoginRequiredMixin, UpdateView):
@@ -148,25 +149,45 @@ class UserItemCreateView(UserItemViewMixin, CreateWithInlinesView):
         return super().forms_valid(form, inlines)
 
 
-class UserItemSKUCreateView(MustHaveShopMixin, CreateWithInlinesView):
+class ItemSKUSizeInline(InlineFormSet):
+    model = ItemSKUSize
+    form_class = UserItemSKUSizeForm
+    fields = ['size', 'standard_size']
+    extra = 5
+
+
+class ItemSKUPhotoInline(InlineFormSet):
+    model = ItemSKUPhoto
+    form_class = UserItemSKUPhotoForm
+    extra = 5
+
+
+class UserItemSKUCreateView(MustHaveShopMixin, NamedFormsetsMixin, CreateWithInlinesView):
     template_name = 'user/item_sku_create.html'
     item = None
+    model = ItemSKU
     form_class = UserItemSKUForm
+    inlines = [ItemSKUSizeInline, ItemSKUPhotoInline]
+    inlines_names = ['sku_size_inline', 'sku_photo_inline']
     success_url = reverse_lazy('user:item_list')
 
     def dispatch(self, request, *args, **kwargs):
         self.item = Item.objects.get(pk=kwargs.get('item_id'))
         return super().dispatch(request, *args, **kwargs)
 
-    def get_form(self, form_class=None):
-        form = super().get_form(form_class)
+    def construct_inlines(self):
         sizes = self.item.category.get_sizes()
-        if sizes:
-            form.fields['standard_size'].queryset = sizes
-        else:
-            del form.fields['standard_size']
-            del form.fields['size']
-        return form
+        inline_formsets = []
+        for inline_class in self.get_inlines():
+            inline_instance = inline_class(self.model, self.request, self.object, self.kwargs, self)
+            inline_formset = inline_instance.construct_formset()
+            for f in inline_formset:
+                try:
+                    f.fields['standard_size'].queryset = sizes
+                except KeyError:
+                    pass
+            inline_formsets.append(inline_formset)
+        return inline_formsets
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

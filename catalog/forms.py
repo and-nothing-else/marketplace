@@ -40,10 +40,31 @@ class UserItemPhotoForm(forms.ModelForm):
 
 class UserItemSKUForm(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
     class Meta:
         model = ItemSKU
         fields = [
             'color',
+        ]
+
+
+class UserItemSKUSizeForm(forms.ModelForm):
+
+    class Meta:
+        model = ItemSKUSize
+        fields = [
             'size',
             'standard_size',
         ]
+
+
+class UserItemSKUPhotoForm(forms.ModelForm):
+
+    class Meta:
+        model = ItemSKUPhoto
+        fields = ['photo', 'ordering']
+        widgets = {
+            'photo': AdminImageWidget
+        }
