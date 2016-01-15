@@ -95,8 +95,6 @@
                     <div class="sixteen wide column">
                         {{ item.description|safe }}
 
-                        {{ item.get_sku_data }}
-
 
 {% with item.get_more_photos as photos %}
 {% if photos %}
@@ -118,4 +116,13 @@
         </div>
     </div>
     {% catalog_shop_goods item.shop.id %}
+{% endblock %}
+
+
+{% block extra_scripts %}
+    {{ block.super }}
+    <script>
+    var item_sku_data = {{ item.get_sku_data|safe }};
+    console.log(item_sku_data);
+    </script>
 {% endblock %}

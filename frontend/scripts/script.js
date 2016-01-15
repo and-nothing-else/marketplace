@@ -19,3 +19,5 @@ $("#user_select_item_category").dropdown({
 
 $('.fancybox').fancybox();
 $('table.sortable').tablesort();
+
+

@@ -3,7 +3,9 @@ from django.utils.translation import pgettext_lazy, ugettext_lazy as _
 from django.core.urlresolvers import reverse_lazy
 from treebeard.mp_tree import MP_Node
 from ckeditor.fields import RichTextField
+from sorl.thumbnail import get_thumbnail
 from sorl.thumbnail.fields import ImageField
+import json
 
 
 class Category(MP_Node):
@@ -79,8 +81,23 @@ class Item(models.Model):
         return [photo.photo for photo in self.itemphoto_set.all()][1:]
 
     def get_sku_data(self):
-        sku_list = self.itemsku_set.active()
-        return sku_list
+        sku_list = {}
+        for sku in self.itemsku_set.active():
+            if sku.color.name not in sku_list:
+                sku_list[sku.color.name] = []
+            sku_list[sku.color.name].append({
+                'id': sku.id,
+                'photos': [{
+                    'preview': photo.get_thumbnail().url,
+                    'large': photo.photo.url
+                           } for photo in sku.itemskuphoto_set.all()],
+                'sizes': [{
+                    'vendor': size.size,
+                    'standard': size.standard_size.value,
+                    'description': size.standard_size.description,
+                } for size in sku.itemskusize_set.all()]
+            })
+        return json.dumps(sku_list)
 
     def save(self, *args, **kwargs):
         user_items = self.shop.item_set.active()
@@ -102,6 +119,9 @@ class Photo(models.Model):
 
     def __str__(self):
         return self.photo.url
+
+    def get_thumbnail(self, size='150x150'):
+        return get_thumbnail(self.photo, size, crop='center', quality=81)
 
     class Meta:
         abstract = True
