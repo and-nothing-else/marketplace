@@ -162,8 +162,7 @@ class ItemSKUPhotoInline(InlineFormSet):
     extra = 5
 
 
-class UserItemSKUCreateView(MustHaveShopMixin, NamedFormsetsMixin, CreateWithInlinesView):
-    template_name = 'user/item_sku_create.html'
+class SKUMixin(MustHaveShopMixin, NamedFormsetsMixin):
     item = None
     model = ItemSKU
     form_class = UserItemSKUForm
@@ -204,6 +203,14 @@ class UserItemSKUCreateView(MustHaveShopMixin, NamedFormsetsMixin, CreateWithInl
                              _('SKU for %s has been added successfully' % self.item.name)
                              )
         return super().forms_valid(form, inlines)
+
+
+class UserItemSKUCreateView(SKUMixin, CreateWithInlinesView):
+    template_name = 'user/item_sku_create.html'
+
+
+class UserItemSKUUpdateView(SKUMixin, UpdateWithInlinesView):
+    template_name = 'user/item_sku_update.html'
 
 
 class UserItemUpdateView(UserItemViewMixin, UpdateWithInlinesView):

@@ -1,0 +1,71 @@
+{% load widget_tweaks %}
+
+
+    <form class="ui clearing form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+{% with form.color as field %}
+        {% include "forms/_field.html" %}
+{% endwith %}
+        <div class="field">
+            <table id="{{ sku_size_inline.prefix }}" class="ui very basic table">
+                <thead><tr>
+                    <th>Размер производителя</th>
+                    <th class="right aligned collapsing">Российский размер</th>
+                </tr></thead>
+                <tbody>
+{% for subform in sku_size_inline %}
+                    <tr>
+                        <td>
+{% for field in subform.hidden_fields %}{{ field }}{% endfor %}
+                            {{ subform.size }}
+{% if subform.size.errors %}{{ subform.size.errors }}{% endif %}
+                        </td>
+                        <td class="right aligned collapsing">
+                            {{ subform.standard_size|add_class:"ui dropdown" }}
+{% if subform.standard_size.errors %}{{ subform.standard_size.errors }}{% endif %}
+                        </td>
+                    </tr>
+{% endfor %}
+                </tbody>
+            </table>
+{{ sku_size_inline.management_form }}
+        </div>
+        <div class="field">
+            <table id="{{ sku_photo_inline.prefix }}" class="ui very basic table">
+                <thead><tr>
+                    <th>Фото</th>
+                    <th class="right aligned collapsing">Сортировка</th>
+                </tr></thead>
+                <tbody>
+{% for subform in sku_photo_inline %}
+                    <tr>
+                        <td>
+{% for field in subform.hidden_fields %}{{ field }}{% endfor %}
+                            {{ subform.photo }}
+{% if subform.photo.errors %}{{ subform.photo.errors }}{% endif %}
+                        </td>
+                        <td class="right aligned collapsing">
+                            {{ subform.ordering }}
+{% if subform.ordering.errors %}{{ subform.ordering.errors }}{% endif %}
+                        </td>
+                    </tr>
+{% endfor %}
+                </tbody>
+            </table>
+{{ sku_photo_inline.management_form }}
+        </div>
+        <div class="ui one column grid">
+            <div class="row">
+                <div class="column">
+                    <button type="submit" class="ui right labeled icon right floated positive button" name="next" value="sku">
+                        Сохранить и добавить ещё одно торговое предложение
+                        <i class="arrow right icon"></i>
+                    </button>
+                    <button type="submit" class="ui left labeled icon right floated green basic button">
+                        <i class="checkmark icon"></i>
+                        Сохранить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>

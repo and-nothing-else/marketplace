@@ -1,0 +1,7 @@
+{% extends "user/base.html" %}
+
+
+{% block content %}
+    <h1>Торговое предложение для товара «<a href="{{ item.get_edit_url }}">{{ item }}</a>»</h1>
+    {% include "user/_item_sku_form.html" %}
+{% endblock %}

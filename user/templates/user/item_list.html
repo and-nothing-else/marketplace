@@ -35,9 +35,9 @@
             <td>
                 <div class="ui list">
 {% for sku in item.itemsku_set.active %}
-                    <a class="item">{{ sku.color }}</a>
+                    <a class="item" href="{% url "user:item_update_sku" item.id sku.id %}">{{ sku.color }}</a>
 {% endfor %}
-                    <a class="item" href="">
+                    <a class="item" href="{% url "user:item_create_sku" item.id %}">
                         <i class="plus icon"></i>
                         добавить цвет
                     </a>
