@@ -1,5 +1,5 @@
 {% extends "user/base.html" %}
-{% load humanize %}
+{% load humanize thumbnail %}
 
 
 {% block profile_content %}
@@ -9,17 +9,46 @@
     </div>
     <table class="ui sortable celled table">
     <thead><tr>
-        <th>Название</th>
-        <th>Артикул</th>
+        <th>Название / артикул</th>
+        <th>Цвета</th>
+        <th>Размеры</th>
         <th>Цена</th>
         <th>Активность</th>
-        <th></th>
     </tr></thead>
     <tbody>
     {% for item in items %}
         <tr>
-            <td><a href="{% url "user:item_update" item.id %}">{{ item.name }}</a></td>
-            <td>{{ item.article }}</td>
+            <td>
+                <h4 class="ui image header">
+                    <a href="{% url "user:item_update" item.id %}" class="ui mini rounded image">
+{% thumbnail item.get_image "35x35" crop="center" as im %}
+                        <img src="{{ im.url }}">
+{% endthumbnail %}
+                    </a>
+                    <div class="content">
+                        <a href="{% url "user:item_update" item.id %}">{{ item.name }}</a>
+                        <a href="{{ item.get_absolute_url }}"><i class="external icon"></i></a>
+                        <div class="sub header">{{ item.article }}</div>
+                    </div>
+                </h4>
+            </td>
+            <td>
+                <div class="ui list">
+{% for sku in item.itemsku_set.active %}
+                    <a class="item">{{ sku.color }}</a>
+{% endfor %}
+                    <a class="item" href="">
+                        <i class="plus icon"></i>
+                        добавить цвет
+                    </a>
+                </div>
+            </td>
+            <td>
+{% for size in item.get_sizes %}
+                {{ size }}{% if not forloop.last %},{% endif %}
+{% endfor %}
+
+            </td>
             <td data-sort-value="{{ item.price }}">
 {% if item.old_price %}
                 (<del>{{ item.old_price|intcomma }}</del>)
@@ -27,11 +56,6 @@
                 {{ item.price|intcomma }}
             </td>
             <td>{% if item.active %}<i class="large green checkmark icon"></i>{% endif %}</td>
-            <td>
-                <a href="{{ item.get_absolute_url }}">
-                    <i class="external icon"></i>
-                </a>
-            </td>
         </tr>
     {% endfor %}
     </tbody>

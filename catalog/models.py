@@ -99,6 +99,9 @@ class Item(models.Model):
             })
         return json.dumps(sku_list)
 
+    def get_sizes(self):
+        return ItemSKUSize.objects.filter(sku__item=self).order_by('standard_size__value')
+
     def save(self, *args, **kwargs):
         user_items = self.shop.item_set.active()
         if self.pk:
