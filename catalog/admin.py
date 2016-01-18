@@ -8,8 +8,8 @@ from .models import Category, Item, ItemPhoto
 @admin.register(Category)
 class CategoryAdmin(TreeAdmin):
     form = movenodeform_factory(Category)
-    list_display = ['name', 'slug']
-    list_editable = ['slug']
+    list_display = ['name', 'slug', 'sku_allowed']
+    list_editable = ['slug', 'sku_allowed']
 
 
 class ItemPhotoInline(AdminImageMixin, admin.TabularInline):
