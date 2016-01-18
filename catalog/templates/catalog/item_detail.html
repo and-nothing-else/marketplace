@@ -122,7 +122,7 @@
                 <div class="row">
                     <div class="sixteen wide column">
 {% with item.get_more_photos as photos %}
-{% if photos %}
+{#{% if photos %}#}
                         <div class="ui small images item_gallery" id="item_gallery">
 {% for photo in photos %}
 {% thumbnail photo "150x150" crop="center" as im %}
@@ -133,7 +133,7 @@
 {% endthumbnail %}
 {% endfor %}
                         </div>
-{% endif %}
+{#{% endif %}#}
 {% endwith %}
                         {{ item.description|safe }}
                     </div>
@@ -149,7 +149,6 @@
     {{ block.super }}
     <script>
     var item_sku_data = {{ item.get_sku_data|safe }};
-    console.log(item_sku_data);
 
     function select_sku(id){
         var $colorPhoto = $("#color_select").find(".image[data-id="+id+"]"),

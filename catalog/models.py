@@ -78,7 +78,10 @@ class Item(models.Model):
         try:
             return self.itemphoto_set.first().photo
         except (ItemPhoto.DoesNotExist, AttributeError):
-            return None
+            try:
+                return self.itemsku_set.first().itemskuphoto_set.first().photo
+            except:
+                return None
 
     def get_more_photos(self):
         return [photo.photo for photo in self.itemphoto_set.all()][1:]
@@ -105,7 +108,10 @@ class Item(models.Model):
         return self.itemsku_set.active()
 
     def get_color(self):
-        return self.color or self.get_colors().first().color.name
+        try:
+            return self.color or self.get_colors().first().color.name
+        except AttributeError:
+            return None
 
     def get_sizes(self):
         output = []
