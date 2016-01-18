@@ -86,10 +86,9 @@ class Item(models.Model):
     def get_sku_data(self):
         sku_list = {}
         for sku in self.itemsku_set.active():
-            if sku.color.name not in sku_list:
-                sku_list[sku.color.name] = []
-            sku_list[sku.color.name].append({
-                'id': sku.id,
+            sku_list[sku.id] = {
+                'sku_id': sku.id,
+                'name': sku.color.name,
                 'photos': [{
                     'preview': photo.get_thumbnail().url,
                     'large': photo.photo.url
@@ -99,8 +98,14 @@ class Item(models.Model):
                     'standard': size.standard_size.value,
                     'description': size.standard_size.description,
                 } for size in sku.itemskusize_set.all()]
-            })
+            }
         return json.dumps(sku_list)
+
+    def get_colors(self):
+        return self.itemsku_set.active()
+
+    def get_color(self):
+        return self.color or self.get_colors().first().color.name
 
     def get_sizes(self):
         return ItemSKUSize.objects.filter(sku__item=self).order_by('standard_size__value')
@@ -175,6 +180,9 @@ class ItemSKU(models.Model):
             size_label=_('sizes'),
             size_value=', '.join([size.size for size in self.itemskusize_set.all()])
         )
+
+    def get_preview(self):
+        return self.itemskuphoto_set.first().get_thumbnail('80x80')
 
     class Meta:
         ordering = ['color']

@@ -3,7 +3,7 @@
 
 
 {% block content %}
-    <div class="ui stackable grid">
+    <div class="ui stackable grid catalog_item_detail">
 {% if not item.active %}
     <div class="row">
     <div class="sixteen wide column">
@@ -61,15 +61,43 @@
 {% if item.article %}
                             <div class="item"><b>Артикул:</b> {{ item.article }}</div>
 {% endif %}
-{% if item.color %}
-                            <div class="item"><b>Цвет:</b> {{ item.color }}</div>
-{% endif %}
+{#{% if item.color %}#}
+                            <div class="item"><b>Цвет:</b> <span id="color_label">{{ item.get_color }}</span></div>
+{#{% endif %}#}
 {% if item.fabric %}
                             <div class="item"><b>Состав:</b> {{ item.fabric|safe }}</div>
 {% endif %}
 {% for property in item.itemcustomproperty_set.all %}
                             <div class="item"><b>{{ property.name }}:</b> {{ property.value|safe }}</div>
 {% endfor %}
+                        </div>
+                        <div class="ui list">
+                            <div class="item">
+                                <b>Выберите цвет:</b>
+                                <div class="ui tiny images color_select" id="color_select">
+{% for sku in item.get_colors %}
+                                    <img
+                                            class="ui image{% if forloop.first %} selected{% endif %}"
+                                            src="{{ sku.get_preview.url }}"
+                                            data-id="{{ sku.id }}"
+                                    >
+{% endfor %}
+                                </div>
+                            </div>
+                            <div class="item">
+                                <b>Размер производителя:</b>
+                                <div id="size_select">
+{% for size in item.get_sizes %}
+                                    <div class="ui basic label item_size"
+                                         data-size="{{ size.standard_size.value }}"
+                                         data-html="<h4>Российский размер: {{ size.standard_size.value }}</h4>{{ size.standard_size.description|safe }}"
+                                         data-position="bottom left"
+                                    >
+                                        {{ size.size }}
+                                    </div>
+{% endfor %}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="six wide column">
@@ -93,12 +121,9 @@
                 </div>
                 <div class="row">
                     <div class="sixteen wide column">
-                        {{ item.description|safe }}
-
-
 {% with item.get_more_photos as photos %}
 {% if photos %}
-                        <div class="ui small images">
+                        <div class="ui small images item_gallery" id="item_gallery">
 {% for photo in photos %}
 {% thumbnail photo "150x150" crop="center" as im %}
                             <a href="{{ photo.url }}" class="fancybox" rel="gallery">
@@ -110,6 +135,7 @@
                         </div>
 {% endif %}
 {% endwith %}
+                        {{ item.description|safe }}
                     </div>
                 </div>
             </div>
@@ -123,6 +149,30 @@
     {{ block.super }}
     <script>
     var item_sku_data = {{ item.get_sku_data|safe }};
-    console.log(item_sku_data);
+
+    function select_sku(id){
+        var $colorPhoto = $("#color_select").find(".image[data-id="+id+"]"),
+                $colorLabel = $("#color_label"),
+                $sizeLabels = $("#size_select").find(".item_size"),
+                $gallery = $("#item_gallery");
+        $colorPhoto.addClass("selected").siblings().removeClass("selected");
+        $colorLabel.text(item_sku_data[id].name);
+        $sizeLabels.addClass("disabled");
+        for(var i in item_sku_data[id]['sizes']) {
+            $sizeLabels.filter("[data-size="+item_sku_data[id].sizes[i]['standard']+"]").removeClass("disabled");
+        }
+        $gallery.empty();
+        for(i in item_sku_data[id]['photos']) {
+            var photo = item_sku_data[id]['photos'][i],
+                    $photo = $("<a href='"+photo['large']+"' class='fancybox' rel='gallery'><img src='"+photo['preview']+"'></a>");
+            $gallery.append($photo);
+        }
+
+    }
+
+    $("#color_select").on("click", ".image", function(){
+        select_sku($(this).data("id"));
+    });
+    select_sku($("#color_select .image").first().data("id"));
     </script>
 {% endblock %}
