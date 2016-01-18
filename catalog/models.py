@@ -108,7 +108,18 @@ class Item(models.Model):
         return self.color or self.get_colors().first().color.name
 
     def get_sizes(self):
-        return ItemSKUSize.objects.filter(sku__item=self).order_by('standard_size__value')
+        output = []
+
+        def in_output(s):
+            for r in output:
+                if r.size == s.size:
+                    return True
+            return False
+
+        for item_size in ItemSKUSize.objects.filter(sku__item=self).order_by('standard_size__value'):
+            if not in_output(item_size):
+                output.append(item_size)
+        return output
 
     def save(self, *args, **kwargs):
         user_items = self.shop.item_set.active()

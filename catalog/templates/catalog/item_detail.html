@@ -22,7 +22,7 @@
                     <i class="gift icon"></i> Акция!
                 </div>
 {% endif %}
-                <img src="{{ im.url }}">
+                <img src="{{ im.url }}" id="main_image">
             </a>
 {% empty %}
             <div class="no_photo"><div class="no_photo__content">
@@ -149,11 +149,13 @@
     {{ block.super }}
     <script>
     var item_sku_data = {{ item.get_sku_data|safe }};
+    console.log(item_sku_data);
 
     function select_sku(id){
         var $colorPhoto = $("#color_select").find(".image[data-id="+id+"]"),
                 $colorLabel = $("#color_label"),
                 $sizeLabels = $("#size_select").find(".item_size"),
+                $mainImage = $("#main_image"),
                 $gallery = $("#item_gallery");
         $colorPhoto.addClass("selected").siblings().removeClass("selected");
         $colorLabel.text(item_sku_data[id].name);
@@ -167,7 +169,7 @@
                     $photo = $("<a href='"+photo['large']+"' class='fancybox' rel='gallery'><img src='"+photo['preview']+"'></a>");
             $gallery.append($photo);
         }
-
+        $mainImage.attr("src", item_sku_data[id]['photos'][0]['large'])
     }
 
     $("#color_select").on("click", ".image", function(){
