@@ -1,0 +1,20 @@
+ <div class="ui ordered steps">
+{% for step in steps %}
+{% if forloop.counter < 3 or sku_allowed %}
+{% if forloop.counter == 1 and active_step == 2 %}
+    <a href="{% url "user:item_create" %}" class="completed step">
+{% else %}
+    <div class="{% if forloop.counter == active_step %}active {% elif forloop.counter < active_step %}completed {% endif %}step">
+{% endif %}
+        <div class="content">
+            <div class="title">{{ step.0 }}</div>
+            <div class="description">{{ step.1 }}</div>
+        </div>
+{% if forloop.counter == 1 and active_step == 2 %}
+    </a>
+{% else %}
+    </div>
+{% endif %}
+{% endif %}
+{% endfor %}
+</div>

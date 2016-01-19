@@ -1,28 +1,10 @@
 {% extends "user/base.html" %}
+{% load user_tags %}
 
 
 {% block content %}
     <h1>Новый товар</h1>
-    <div class="ui ordered steps">
-        <div class="active step">
-            <div class="content">
-                <div class="title">Выбор раздела</div>
-                <div class="description">только при создании товара</div>
-            </div>
-        </div>
-        <div class="step">
-            <div class="content">
-                <div class="title">Информация о товаре</div>
-                <div class="description">основное</div>
-            </div>
-        </div>
-        <div class="step">
-            <div class="content">
-                <div class="title">Торговые предложения</div>
-                <div class="description">опционально</div>
-            </div>
-        </div>
-    </div>
+    {% item_create_steps %}
 
     <div class="ui icon warning message">
         <i class="warning sign icon"></i>

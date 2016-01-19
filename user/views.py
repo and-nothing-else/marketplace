@@ -149,7 +149,7 @@ class UserItemCreateView(UserItemViewMixin, CreateWithInlinesView):
         instance.shop = self.request.user.shop
         instance.save()
         if self.request.POST.get('next') == 'sku':
-            self.success_url = reverse_lazy('user:item_create_sku', args=[instance.pk])
+            self.success_url = reverse_lazy('user:item_create_step3', args=[instance.pk])
         messages.add_message(self.request, messages.SUCCESS,
                              _('%s has been added successfully' % form.instance.name)
                              )
@@ -234,6 +234,10 @@ class SKUMixin(MustHaveShopMixin, NamedFormsetsMixin):
 
 class UserItemSKUCreateView(SKUMixin, CreateWithInlinesView):
     template_name = 'user/item_sku_create.html'
+
+
+class UserItemCreateAddSKUView(SKUMixin, CreateWithInlinesView):
+    template_name = 'user/item_create_add_sku.html'
 
 
 class UserItemSKUUpdateView(SKUMixin, UpdateWithInlinesView):

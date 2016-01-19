@@ -1,0 +1,9 @@
+{% extends "user/base.html" %}
+{% load user_tags %}
+
+
+{% block content %}
+    <h1>Новое торговое предложение для товара «<a href="{{ item.get_edit_url }}">{{ item }}</a>»</h1>
+    {% item_create_steps 3 item.category.sku_allowed %}
+    {% include "user/_item_sku_form.html" %}
+{% endblock %}

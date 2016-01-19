@@ -25,3 +25,15 @@ def messages(context):
         'messages': get_messages(context['request'])
     }
 
+
+@register.inclusion_tag('user/item_create_steps.html', takes_context=True)
+def item_create_steps(context, active_step=1, sku_allowed=True):
+    return {
+        'active_step': active_step,
+        'sku_allowed': sku_allowed,
+        'steps': [
+            ['Выбор раздела', 'только при создании товара'],
+            ['Информация о товаре', 'основное'],
+            ['Торговые предложения', 'цвет и размеры'],
+        ]
+    }
