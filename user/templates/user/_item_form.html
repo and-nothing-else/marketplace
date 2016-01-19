@@ -118,7 +118,7 @@
         {% include "forms/_field.html" %}
 {% endwith %}
 
-
+{% if item_photo_inline %}
         <h2 class="ui dividing header">Фотографии</h2>
         <table id="{{ item_photo_inline.prefix }}" class="ui very basic table">
             <thead><tr>
@@ -142,6 +142,7 @@
             </tbody>
         </table>
 {{ item_photo_inline.management_form }}
+{% endif %}
 
 
         <div class="ui one column grid">
@@ -159,29 +160,3 @@
             </div>
         </div>
     </form>
-
-
-
-{#    <form class="ui form" method="post" enctype="multipart/form-data">#}
-{#        {% csrf_token %}#}
-{#{% for field in form %}#}
-{#        {% include "forms/_field.html" %}#}
-{#{% endfor %}#}
-{#        <h4 class="ui dividing header">Фотографии</h4>#}
-{#{% for formset in inlines %}#}
-{#        <div id="{{ formset.prefix }}" class="ui stackable grid">#}
-{#{% for subform in formset.forms %}#}
-{#            <div class="four wide column">#}
-{#{% for field in subform.visible_fields %}#}
-{#                {% include "forms/_field.html" %}#}
-{#{% endfor %}#}
-{#{% for field in subform.hidden_fields %}#}
-{#    {{ field }}#}
-{#{% endfor %}#}
-{#            </div>#}
-{#{% endfor %}#}
-{#            {{ formset.management_form }}#}
-{#        </div>#}
-{#{% endfor %}#}
-{#        <button type="submit" class="ui primary button">Сохранить</button>#}
-{#    </form>#}

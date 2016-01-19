@@ -24,7 +24,10 @@ class Category(MP_Node):
         if self.size_set:
             return self.size_set
         else:
-            return self.get_parent().get_size_set() or None
+            try:
+                return self.get_parent().get_size_set()
+            except AttributeError:
+                return None
 
     def get_sizes(self):
         size_set = self.get_size_set()

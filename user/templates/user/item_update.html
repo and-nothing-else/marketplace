@@ -4,6 +4,16 @@
 {% block profile_content %}
     <h1>Редактирование: {{ item.name }}</h1>
     {% include "user/_item_form.html" %}
+{% with item.itemsku_set.active as sku_set %}
+{% if sku_set %}
+    <h2 class="ui dividing header">Торговые предложения</h2>
+    <div class="ui list">
+{% for sku in sku_set %}
+        <a href="{% url "user:item_update_sku" item.id sku.id %}" class="item">{{ sku }}</a>
+{% endfor %}
+    </div>
+{% endif %}
+{% endwith %}
 {% endblock %}
 
 

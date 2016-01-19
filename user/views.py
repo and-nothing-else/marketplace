@@ -79,9 +79,26 @@ class ItemPropertiesInline(InlineFormSet):
 class UserItemViewMixin(MustHaveShopMixin, NamedFormsetsMixin):
     model = Item
     form_class = UserItemForm
-    inlines = [ItemPhotoInline, ItemPropertiesInline]
-    inlines_names = ['item_photo_inline', 'item_property_inline']
+    inlines = [ItemPropertiesInline]
+    inlines_names = ['item_property_inline']
     success_url = reverse_lazy('user:item_list')
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        if self.category.sku_allowed:
+            del form.fields['color']
+            del form.fields['standard_size']
+            del form.fields['size']
+        else:
+            self.inlines.append(ItemPhotoInline)
+            self.inlines_names.append('item_photo_inline')
+            sizes = self.category.get_sizes()
+            if sizes:
+                form.fields['standard_size'].queryset = sizes
+            else:
+                del form.fields['standard_size']
+                del form.fields['size']
+        return form
 
     def forms_valid(self, form, inlines):
         instance = form.save(commit=False)
@@ -121,16 +138,6 @@ class UserItemCreateView(UserItemViewMixin, CreateWithInlinesView):
         initial['active'] = self.request.user.can_increase_active_items()
         return initial
 
-    def get_form(self, form_class=None):
-        form = super().get_form(form_class)
-        sizes = self.category.get_sizes()
-        if sizes:
-            form.fields['standard_size'].queryset = sizes
-        else:
-            del form.fields['standard_size']
-            del form.fields['size']
-        return form
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['category'] = self.category
@@ -145,6 +152,26 @@ class UserItemCreateView(UserItemViewMixin, CreateWithInlinesView):
             self.success_url = reverse_lazy('user:item_create_sku', args=[instance.pk])
         messages.add_message(self.request, messages.SUCCESS,
                              _('%s has been added successfully' % form.instance.name)
+                             )
+        return super().forms_valid(form, inlines)
+
+
+class UserItemUpdateView(UserItemViewMixin, UpdateWithInlinesView):
+    template_name = 'user/item_update.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.category = self.get_object().category
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_initial(self):
+        initial = super().get_initial()
+        if not self.request.user.can_increase_active_items() and not self.object.active:
+            initial['active'] = False
+        return initial
+
+    def forms_valid(self, form, inlines):
+        messages.add_message(self.request, messages.SUCCESS,
+                             _('%s has been updated successfully' % form.instance.name)
                              )
         return super().forms_valid(form, inlines)
 
@@ -211,19 +238,3 @@ class UserItemSKUCreateView(SKUMixin, CreateWithInlinesView):
 
 class UserItemSKUUpdateView(SKUMixin, UpdateWithInlinesView):
     template_name = 'user/item_sku_update.html'
-
-
-class UserItemUpdateView(UserItemViewMixin, UpdateWithInlinesView):
-    template_name = 'user/item_update.html'
-
-    def get_initial(self):
-        initial = super().get_initial()
-        if not self.request.user.can_increase_active_items() and not self.object.active:
-            initial['active'] = False
-        return initial
-
-    def forms_valid(self, form, inlines):
-        messages.add_message(self.request, messages.SUCCESS,
-                             _('%s has been updated successfully' % form.instance.name)
-                             )
-        return super().forms_valid(form, inlines)
