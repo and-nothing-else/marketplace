@@ -3,7 +3,13 @@
 
 
 {% block profile_content %}
-    <h1>Мои товары</h1>
+
+    <h1>
+        <a class="ui right floated small primary labeled icon button" href="{% url "user:item_create" %}">
+            <i class="plus icon"></i> Добавить товар
+        </a>
+        Мои товары
+    </h1>
     <div class="ui info message">
         Размещено в каталоге: <b>{{ request.user.get_catalog_active_items_count }}</b> из <b>{{ request.user.get_tariff.goods }}</b>
     </div>
