@@ -203,7 +203,10 @@ class ItemSKU(models.Model):
         )
 
     def get_preview(self):
-        return self.itemskuphoto_set.first().get_thumbnail('80x80')
+        try:
+            return self.itemskuphoto_set.first().get_thumbnail('80x80')
+        except AttributeError:
+            return None
 
     class Meta:
         ordering = ['color']
