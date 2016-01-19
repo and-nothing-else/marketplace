@@ -148,10 +148,12 @@
         <div class="ui one column grid">
             <div class="row">
                 <div class="column">
+{% if category.sku_allowed %}
                     <button type="submit" class="ui right labeled icon right floated positive button" name="next" value="sku">
                         Сохранить и добавить торговое предложение
                         <i class="arrow right icon"></i>
                     </button>
+{% endif %}
                     <button type="submit" class="ui left labeled icon right floated green basic button">
                         <i class="checkmark icon"></i>
                         Сохранить

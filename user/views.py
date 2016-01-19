@@ -63,11 +63,22 @@ class UserItemListView(MustHaveShopMixin, ListView):
         return super().get_queryset().filter(shop__owner=self.request.user)
 
 
-class ItemPhotoInline(InlineFormSet):
+class PhotoInlineBase(InlineFormSet):
+    extra = 4
+
+    def get_factory_kwargs(self):
+        kwargs = super().get_factory_kwargs()
+        kwargs.update({
+            'min_num': 1,
+            'validate_min': True
+        })
+        return kwargs
+
+
+class ItemPhotoInline(PhotoInlineBase):
     model = ItemPhoto
     form_class = UserItemPhotoForm
     fields = ['photo', 'ordering']
-    extra = 5
 
 
 class ItemPropertiesInline(InlineFormSet):
@@ -115,6 +126,11 @@ class UserItemViewMixin(MustHaveShopMixin, NamedFormsetsMixin):
         instance.save()
         return super().forms_valid(form, inlines)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = self.category
+        return context
+
 
 class UserItemSelectCategoryView(MustHaveShopMixin, TemplateView):
     template_name = 'user/item_create_category_select.html'
@@ -137,11 +153,6 @@ class UserItemCreateView(UserItemViewMixin, CreateWithInlinesView):
         initial = super().get_initial()
         initial['active'] = self.request.user.can_increase_active_items()
         return initial
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['category'] = self.category
-        return context
 
     def forms_valid(self, form, inlines):
         instance = form.save(commit=False)
@@ -183,10 +194,9 @@ class ItemSKUSizeInline(InlineFormSet):
     extra = 5
 
 
-class ItemSKUPhotoInline(InlineFormSet):
+class ItemSKUPhotoInline(PhotoInlineBase):
     model = ItemSKUPhoto
     form_class = UserItemSKUPhotoForm
-    extra = 5
 
 
 class SKUMixin(MustHaveShopMixin, NamedFormsetsMixin):
