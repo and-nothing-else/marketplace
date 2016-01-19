@@ -18,25 +18,26 @@
         <i class="filter icon"></i>
         <span class="text">Выберите раздел</span>
         <div class="menu">
-            <div class="ui search icon input">
-                <i class="search icon"></i>
-                <input type="text" name="search" placeholder="Найти">
-            </div>
-            <div class="scrolling menu">
 {% for category, info in categories %}
 {% if info.level == 0 %}
-                <div class="header">
-                    <i class="folder icon"></i>
-                    {{ category.name }}
-                </div>
-{% else %}
-                <div class="item" data-next-url="{% url "user:item_create_step2" category.id %}">
-                    <i class="icon"></i>
-                    {{ category.name }}
-                </div>
+            <div class="item" data-value="{{ category.id }}">
+                {{ category.name }}
+            </div>
 {% endif %}
 {% endfor %}
+        </div>
+    </div>
+    <div class="ui labeled icon top left pointing left floated dropdown disabled primary button" id="user_select_item_subcategory">
+        <i class="filter icon"></i>
+        <span class="text">Выберите подраздел</span>
+        <div class="menu">
+{% for category, info in categories %}
+{% if info.level == 1 %}
+            <div class="item filtered" data-next-url="{% url "user:item_create_step2" category.id %}" data-parent="{{ category.get_parent.id }}">
+                {{ category.name }}
             </div>
+{% endif %}
+{% endfor %}
         </div>
     </div>
 
