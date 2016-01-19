@@ -4,7 +4,7 @@
 
 {% block content %}
     <h1>Новый товар в разделе «{{ category }}»</h1>
-    {% item_create_steps 2 %}
+    {% item_create_steps 2 category.sku_allowed %}
 {% include "user/_item_form.html" %}
 {% endblock %}
 
