@@ -188,7 +188,7 @@ class ItemSKUManager(models.Manager):
 
 class ItemSKU(models.Model):
     item = models.ForeignKey(Item, verbose_name=_('catalog item'))
-    color = models.ForeignKey('dictionary.Color', verbose_name=_('color'), blank=True, null=True)
+    color = models.ForeignKey('dictionary.Color', verbose_name=_('color'))
     active = models.BooleanField(_('active'), default=True)
 
     objects = ItemSKUManager()

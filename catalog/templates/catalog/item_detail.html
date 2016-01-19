@@ -16,14 +16,14 @@
 {% endif %}
         <div class="six wide column">
 {% thumbnail item.get_image "405" as im %}
-            <a href="{{ item.get_image.url }}" class="fancybox ui fluid image" rel="gallery">
+            <div class="ui fluid image">
 {% if item.old_price %}
                 <div class="ui green ribbon label">
                     <i class="gift icon"></i> Акция!
                 </div>
 {% endif %}
                 <img src="{{ im.url }}" id="main_image">
-            </a>
+            </div>
 {% empty %}
             <div class="no_photo"><div class="no_photo__content">
                 <i class="massive photo icon"></i>
@@ -61,9 +61,9 @@
 {% if item.article %}
                             <div class="item"><b>Артикул:</b> {{ item.article }}</div>
 {% endif %}
-{#{% if item.color %}#}
+{% if item.get_color %}
                             <div class="item"><b>Цвет:</b> <span id="color_label">{{ item.get_color }}</span></div>
-{#{% endif %}#}
+{% endif %}
 {% if item.fabric %}
                             <div class="item"><b>Состав:</b> {{ item.fabric|safe }}</div>
 {% endif %}
@@ -86,9 +86,9 @@
                             </div>
                             <div class="item">
                                 <b>Размер производителя:</b>
-                                <div id="size_select">
+                                <div class="size_select" id="size_select">
 {% for size in item.get_sizes %}
-                                    <div class="ui basic label item_size"
+                                    <div class="ui black basic label item_size"
                                          data-size="{{ size.standard_size.value }}"
                                          data-html="<h4>Российский размер: {{ size.standard_size.value }}</h4>{{ size.standard_size.description|safe }}"
                                          data-position="bottom left"
