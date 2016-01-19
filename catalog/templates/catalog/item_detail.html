@@ -71,6 +71,7 @@
                             <div class="item"><b>{{ property.name }}:</b> {{ property.value|safe }}</div>
 {% endfor %}
                         </div>
+{% if item.category.sku_allowed %}
                         <div class="ui list">
                             <div class="item">
                                 <b>Выберите цвет:</b>
@@ -84,6 +85,7 @@
 {% endfor %}
                                 </div>
                             </div>
+{% if item.get_sizes %}
                             <div class="item">
                                 <b>Размер производителя:</b>
                                 <div class="size_select" id="size_select">
@@ -98,7 +100,9 @@
 {% endfor %}
                                 </div>
                             </div>
+{% endif %}
                         </div>
+{% endif %}
                     </div>
                     <div class="six wide column">
                         <table class="ui very basic table">
@@ -122,7 +126,6 @@
                 <div class="row">
                     <div class="sixteen wide column">
 {% with item.get_more_photos as photos %}
-{#{% if photos %}#}
                         <div class="ui small images item_gallery" id="item_gallery">
 {% for photo in photos %}
 {% thumbnail photo "150x150" crop="center" as im %}
@@ -133,7 +136,6 @@
 {% endthumbnail %}
 {% endfor %}
                         </div>
-{#{% endif %}#}
 {% endwith %}
                         {{ item.description|safe }}
                     </div>
