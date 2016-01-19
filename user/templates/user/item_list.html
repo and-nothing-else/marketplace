@@ -51,11 +51,11 @@
 {% endfor %}
 
             </td>
-            <td data-sort-value="{{ item.price }}">
+            <td data-sort-value="{{ item.price }}" class="right aligned">
 {% if item.old_price %}
-                (<del>{{ item.old_price|intcomma }}</del>)
+                <div class="ui grey mini label">(<del>{{ item.old_price|intcomma }}</del>)</div><br>
 {% endif %}
-                {{ item.price|intcomma }}
+                {{ item.price|intcomma }}<i class="rouble icon"></i>
             </td>
             <td>{% if item.active %}<i class="large green checkmark icon"></i>{% endif %}</td>
         </tr>
