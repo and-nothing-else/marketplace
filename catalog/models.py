@@ -157,7 +157,7 @@ class Photo(models.Model):
 
     class Meta:
         abstract = True
-        ordering = ['ordering']
+        ordering = ['ordering', 'id']
         verbose_name = _('photo')
         verbose_name_plural = _('photos')
 
