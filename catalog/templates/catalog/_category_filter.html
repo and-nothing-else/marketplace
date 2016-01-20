@@ -3,7 +3,7 @@
         <div class="header">Фильтр</div>
     </div>
     <form class="ui form attached fluid segment" method="get">
-{% if form.price and min_price and max_price %}
+{% if form.price and min_price and max_price and min_price < max_price %}
         <div class="field field-price_slider">
             <label>Цена</label>
             <div class="values">
