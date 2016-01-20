@@ -9,23 +9,23 @@
 {% endif %}
         </div>
 {% elif field|widget_type == 'checkboxselectmultiple' %}
-        <label>{{ field.label }}</label>
+        <label>{{ field.label|capfirst }}</label>
 {% for choice in field.field.choices %}
         <div class="ui list">
             <div class="ui checkbox item">
-                <input type="checkbox" name="{{ field.html_name }}" value="{{ choice.0|unlocalize }}">
+                <input type="checkbox" name="{{ field.html_name }}" value="{{ choice.0|unlocalize }}"{% if choice.0 in field.value or choice.0|stringformat:"s" in field.value or choice.0|stringformat:"s" == field.value|stringformat:"s" %} checked{% endif %}>
                 <label>{{ choice.1|unlocalize }}</label>
             </div>
         </div>
 {% endfor %}
 {% elif field|widget_type == 'select' %}
 {% if field.label %}
-        <label>{{ field.label }}</label>
+        <label>{{ field.label|capfirst }}</label>
 {% endif %}
         {{ field|add_class:"ui dropdown" }}
 {% else %}
 {% if field.label %}
-        <label>{{ field.label }}</label>
+        <label>{{ field.label|capfirst }}</label>
 {% endif %}
         {{ field }}
 {% endif %}
