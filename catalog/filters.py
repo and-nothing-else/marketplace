@@ -64,20 +64,35 @@ class ItemFilter(django_filters.FilterSet):
     def __init__(self, data=None, queryset=None, prefix=None, strict=None, category=None):
         super().__init__(data, queryset, prefix, strict)
         if category:
-            self.filters['size'].field.choices = [
-                (size['value'], size['value'])
-                for size in category.size_set.size_set.values('value').distinct()
-                ]
-            self.filters['fabric'].field.choices = [
+            sizes = category.get_sizes()
+            if sizes:
+                self.filters['size'].field.choices = [
+                    (size['value'], size['value'])
+                    for size in category.get_sizes().values('value').distinct()
+                    ]
+            else:
+                del self.filters['size']
+
+            fabric_choices = [
                 (item['fabric'], item['fabric'])
                 for item in category.item_set.active().values('fabric').order_by('fabric').distinct()
+                if item['fabric']
                 ]
-            self.filters['color'].field.choices = [
+            if fabric_choices:
+                self.filters['fabric'].field.choices = fabric_choices
+            else:
+                del self.filters['fabric']
+
+            color_choices = [
                 (item['color__name'], item['color__name'])
                 for item in ItemSKU.objects.filter(
                         item__category=category, item__active=True
                 ).values('color__name').order_by('color__name').distinct()
                 ]
+            if color_choices:
+                self.filters['color'].field.choices = color_choices
+            else:
+                del self.filters['color']
 
     class Meta:
         model = Item
