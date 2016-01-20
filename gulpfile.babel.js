@@ -29,6 +29,7 @@ const
             jquery: `${dirs.npm}/jquery/dist/jquery.min.js`,
             jqueryui: `${dirs.npm}/jqueryui/jquery-ui.min.js`,
             jqueryui_css: `${dirs.npm}/jqueryui/jquery-ui.structure.min.css`,
+            jqueryui_images: `${dirs.npm}/jqueryui/images/**/*.*`,
             fancybox: `${dirs.npm}/fancybox/dist/**/*.*`,
             iosslider: `${dirs.bower}/iosslider/_src/jquery.iosslider.min.js`,
             tablesort: `${dirs.npm}/jquery-tablesort/jquery.tablesort.min.js`
@@ -46,6 +47,7 @@ const
         },
         dest: {
             vendor: `${dirs.dest}/vendor`,
+            jqueryui: `${dirs.dest}/vendor/jqueryui`,
             fancybox: `${dirs.dest}/vendor/fancybox`,
             semantic: `${dirs.dest}/vendor/semantic`,
             semantic_theme: `${dirs.dest}/vendor/semantic/themes/default/`,
@@ -68,9 +70,11 @@ gulp.task('copy', () => {
         .pipe(newer(`${files.dest.vendor}/jquery.min.js`))
         .pipe(gulp.dest(files.dest.vendor));
     gulp.src(files.vendor.jqueryui)
-        .pipe(gulp.dest(files.dest.vendor));
+        .pipe(gulp.dest(files.dest.jqueryui));
     gulp.src(files.vendor.jqueryui_css)
-        .pipe(gulp.dest(files.dest.vendor));
+        .pipe(gulp.dest(files.dest.jqueryui));
+    gulp.src(files.vendor.jqueryui_images)
+        .pipe(gulp.dest(files.dest.jqueryui));
     gulp.src(files.vendor.tablesort)
         .pipe(newer(`${files.dest.vendor}/jquery.tablesort.min.js`))
         .pipe(gulp.dest(files.dest.vendor));
