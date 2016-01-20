@@ -24,8 +24,15 @@
             {% endwith %}
         </div>
         <div class="twelve wide column">
-            {% with filter as items %}
+{% with filter as items %}
+{% if items %}
                 {% include "catalog/_catalog_item_card_list.html" %}
+{% else %}
+                <div class="ui info message">
+                    По вашему запросу товаров не найдено.<br>
+                    Попробуйте смягчить условия фильтра
+                </div>
+{% endif %}
             {% endwith %}
         </div>
     </div>

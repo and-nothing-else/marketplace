@@ -159,11 +159,11 @@ class UserItemCreateView(UserItemViewMixin, CreateWithInlinesView):
         instance.category = self.category
         instance.shop = self.request.user.shop
         instance.save()
-        if self.request.POST.get('next') == 'sku':
-            self.success_url = reverse_lazy('user:item_create_step3', args=[instance.pk])
         messages.add_message(self.request, messages.SUCCESS,
                              _('%s has been added successfully' % form.instance.name)
                              )
+        if self.request.POST.get('next') == 'sku':
+            self.success_url = reverse_lazy('user:item_create_step3', args=[instance.pk])
         return super().forms_valid(form, inlines)
 
 
@@ -184,6 +184,8 @@ class UserItemUpdateView(UserItemViewMixin, UpdateWithInlinesView):
         messages.add_message(self.request, messages.SUCCESS,
                              _('%s has been updated successfully' % form.instance.name)
                              )
+        if self.request.POST.get('next') == 'sku':
+            self.success_url = reverse_lazy('user:item_create_sku', args=[self.get_object().pk])
         return super().forms_valid(form, inlines)
 
 

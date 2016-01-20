@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-18 22:19+0300\n"
+"POT-Creation-Date: 2016-01-20 17:52+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,6 +23,10 @@ msgstr ""
 #: apps.py:7
 msgid "Catalog"
 msgstr "Каталог"
+
+#: filters.py:23
+msgid "Size"
+msgstr "Размер"
 
 #: models.py:12
 msgid "name"
@@ -40,118 +44,118 @@ msgstr "торговые предложения разрешены"
 msgid "size set"
 msgstr "таблица размеров"
 
-#: models.py:37
+#: models.py:55
 msgid "catalog section"
 msgstr "раздел каталога"
 
-#: models.py:38
+#: models.py:56
 msgid "catalog sections"
 msgstr "разделы каталога"
 
-#: models.py:50
+#: models.py:68
 msgid "created at"
 msgstr "время создания"
 
-#: models.py:51
+#: models.py:69
 msgid "updated at"
 msgstr "время обновления"
 
-#: models.py:52
+#: models.py:70
 msgid "category"
 msgstr "раздел"
 
-#: models.py:53
+#: models.py:71
 msgid "shop"
 msgstr "магазин"
 
-#: models.py:55 models.py:189
+#: models.py:73 models.py:210
 msgid "active"
 msgstr "активность"
 
-#: models.py:56
+#: models.py:74
 msgctxt "item name"
 msgid "name"
 msgstr "название"
 
-#: models.py:57
+#: models.py:75
 msgctxt "catalog item article"
 msgid "article"
 msgstr "артикул"
 
-#: models.py:58
+#: models.py:76
 msgid "price"
 msgstr "цена"
 
-#: models.py:59
+#: models.py:77
 msgid "old price"
 msgstr "старая цена"
 
-#: models.py:61
+#: models.py:79
 msgid "description"
 msgstr "описание"
 
-#: models.py:62 models.py:188 models.py:196
+#: models.py:80 models.py:209 models.py:217
 msgid "color"
 msgstr "цвет"
 
-#: models.py:63 models.py:212
+#: models.py:81 models.py:236
 msgid "vendor size"
 msgstr "размер производителя"
 
-#: models.py:64 models.py:213
+#: models.py:82 models.py:237
 msgid "standard size"
 msgstr "российский размер"
 
-#: models.py:65
+#: models.py:83
 msgid "fabric structure"
 msgstr "состав"
 
-#: models.py:141 models.py:163 models.py:167 models.py:187
+#: models.py:162 models.py:184 models.py:188 models.py:208
 msgid "catalog item"
 msgstr "товар"
 
-#: models.py:142
+#: models.py:163
 msgid "catalog items"
 msgstr "товары"
 
-#: models.py:146
+#: models.py:167
 msgid "image"
 msgstr "картинка"
 
-#: models.py:147 models.py:170
+#: models.py:168 models.py:191
 msgid "ordering"
 msgstr "сортировка"
 
-#: models.py:158
+#: models.py:179
 msgid "photo"
 msgstr "фото"
 
-#: models.py:159
+#: models.py:180
 msgid "photos"
 msgstr "фотографии"
 
-#: models.py:168
+#: models.py:189
 msgid "property name"
 msgstr "название свойства"
 
-#: models.py:169
+#: models.py:190
 msgid "property value"
 msgstr "значение свойства"
 
-#: models.py:177
+#: models.py:198
 msgid "property"
 msgstr "свойство"
 
-#: models.py:178
+#: models.py:199
 msgid "properties"
 msgstr "свойства"
 
-#: models.py:198
+#: models.py:219
 #, fuzzy
 #| msgid "size set"
 msgid "sizes"
 msgstr "таблица размеров"
 
-#: models.py:220
+#: models.py:244
 msgid "SKU size"
 msgstr ""

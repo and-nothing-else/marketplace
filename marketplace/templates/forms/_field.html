@@ -1,4 +1,4 @@
-{% load widget_tweaks %}
+{% load widget_tweaks l10n %}
 
     <div class="field field-{{ field.html_name }}{% if field.field.required %} required{% endif %}{% if field.errors %} error{% endif %}">
 {% if field|widget_type == 'checkboxinput' %}
@@ -8,6 +8,16 @@
             <label>{{ field.label }}</label>
 {% endif %}
         </div>
+{% elif field|widget_type == 'checkboxselectmultiple' %}
+        <label>{{ field.label }}</label>
+{% for choice in field.field.choices %}
+        <div class="ui list">
+            <div class="ui checkbox item">
+                <input type="checkbox" name="{{ field.html_name }}" value="{{ choice.0|unlocalize }}">
+                <label>{{ choice.1|unlocalize }}</label>
+            </div>
+        </div>
+{% endfor %}
 {% elif field|widget_type == 'select' %}
 {% if field.label %}
         <label>{{ field.label }}</label>
