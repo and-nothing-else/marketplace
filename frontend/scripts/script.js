@@ -36,4 +36,3 @@ $(".item_size").popup();
 
 $('.fancybox').fancybox();
 $('table.sortable').tablesort();
-

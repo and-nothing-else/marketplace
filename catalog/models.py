@@ -37,7 +37,7 @@ class Category(MP_Node):
             return None
 
     def get_path(self):
-        path = [{'title': self.name}]
+        path = [{'title': self.name, 'link': self.get_absolute_url()}]
 
         def add_parent2path(p):
             parent = self.get_parent()

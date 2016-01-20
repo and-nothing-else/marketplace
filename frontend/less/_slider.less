@@ -1,0 +1,18 @@
+.ui-slider {
+  &&-horizontal {
+    height: 3px;
+    background: rgba(0, 0, 0, .15);
+  }
+  &&-horizontal &-handle {
+    top: -7px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, .05)) #fff;
+    box-shadow: 0 1px 2px 0 rgba(34, 36, 38, .15), 0 0 0 1px rgba(34, 36, 38, .15) inset;
+    border-radius: 50%;
+    &:focus {
+      outline: none;
+    }
+  }
+  &-range {
+    background: #21BA45;
+  }
+}

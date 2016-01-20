@@ -1,4 +1,5 @@
 from django.views.generic import DetailView
+from django.db.models import Min, Max
 from django.shortcuts import get_object_or_404
 from .models import Category, Item
 from .filters import ItemFilter
@@ -14,6 +15,8 @@ class CatalogCategoryView(DetailView):
         items = self.get_object().item_set.active_for_location(self.request.location)
         f = ItemFilter(self.request.GET, items)
         context['filter'] = f
+        context['min_price'] = items.aggregate(Min('price'))['price__min']
+        context['max_price'] = items.aggregate(Max('price'))['price__max']
         return context
 
 

@@ -36,6 +36,7 @@
     "gulp-util": "^3.0.7",
     "jquery": "^2.1.4",
     "jquery-tablesort": "0.0.7",
+    "jqueryui": "^1.11.1",
     "path": "^0.12.7",
     "semantic-ui": "^2.1.8",
     "vinyl-buffer": "^1.0.0",

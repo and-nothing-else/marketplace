@@ -31,3 +31,24 @@
     </div>
 </div>
 {% endblock %}
+
+
+{% block extra_scripts %}
+{{ block.super }}
+    <script>
+    $(function(){
+        $("#price-range").slider({
+            range: true,
+            min: {{ min_price }},
+            max: {{ max_price }},
+            values: [{{ filter.form.price.value.0|default:min_price }}, {{ filter.form.price.value.1|default:max_price }}],
+            slide: function( event, ui ) {
+                $("#min_price").text(ui.values[0]);
+                $("#max_price").text(ui.values[1]);
+                $("#id_price_0").val(ui.values[0]);
+                $("#id_price_1").val(ui.values[1]);
+            }
+        });
+    })
+    </script>
+{% endblock %}

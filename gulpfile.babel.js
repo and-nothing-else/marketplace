@@ -27,6 +27,8 @@ const
     files = {
         vendor: {
             jquery: `${dirs.npm}/jquery/dist/jquery.min.js`,
+            jqueryui: `${dirs.npm}/jqueryui/jquery-ui.min.js`,
+            jqueryui_css: `${dirs.npm}/jqueryui/jquery-ui.structure.min.css`,
             fancybox: `${dirs.npm}/fancybox/dist/**/*.*`,
             iosslider: `${dirs.bower}/iosslider/_src/jquery.iosslider.min.js`,
             tablesort: `${dirs.npm}/jquery-tablesort/jquery.tablesort.min.js`
@@ -64,6 +66,10 @@ gulp.task('clean', () => {
 gulp.task('copy', () => {
     gulp.src(files.vendor.jquery)
         .pipe(newer(`${files.dest.vendor}/jquery.min.js`))
+        .pipe(gulp.dest(files.dest.vendor));
+    gulp.src(files.vendor.jqueryui)
+        .pipe(gulp.dest(files.dest.vendor));
+    gulp.src(files.vendor.jqueryui_css)
         .pipe(gulp.dest(files.dest.vendor));
     gulp.src(files.vendor.tablesort)
         .pipe(newer(`${files.dest.vendor}/jquery.tablesort.min.js`))
