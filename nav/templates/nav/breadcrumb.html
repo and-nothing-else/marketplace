@@ -1,0 +1,16 @@
+<div class="ui breadcrumb">
+    <a class="section" href="{% url "home" %}"><i class="home icon"></i></a>
+    <i class="right chevron icon divider"></i>
+{% for section in path %}
+{% if forloop.last %}
+    <div class="active section">{{ section.title }}</div>
+{% else %}
+{% if section.link %}
+    <a class="section" href="{{ section.link }}">{{ section.title }}</a>
+{% else %}
+    <div class="section">{{ section.title }}</div>
+{% endif %}
+    <i class="right chevron icon divider"></i>
+{% endif %}
+{% endfor %}
+</div>

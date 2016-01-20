@@ -36,6 +36,21 @@ class Category(MP_Node):
         else:
             return None
 
+    def get_path(self):
+        path = [{'title': self.name}]
+
+        def add_parent2path(p):
+            parent = self.get_parent()
+            if parent:
+                p = [{
+                    'title': parent.name,
+                    'link': parent.get_absolute_url()
+                }] + p
+            return p
+
+        path = add_parent2path(path)
+        return path
+
     class Meta:
         verbose_name = _('catalog section')
         verbose_name_plural = _('catalog sections')
@@ -89,6 +104,9 @@ class Item(models.Model):
 
     def get_more_photos(self):
         return [photo.photo for photo in self.itemphoto_set.all()][1:]
+
+    def get_path(self):
+        return self.category.get_path() + [{'title': self.name}]
 
     def get_sku_data(self):
         sku_list = {}

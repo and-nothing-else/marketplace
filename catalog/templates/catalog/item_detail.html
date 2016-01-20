@@ -1,9 +1,14 @@
 {% extends "base.html" %}
-{% load thumbnail humanize pytils_numeral catalog_tags %}
+{% load thumbnail humanize pytils_numeral catalog_tags nav_tags %}
 
 
 {% block content %}
     <div class="ui stackable grid catalog_item_detail">
+    <div class="row">
+        <div class="sixteen wide column">
+            {% breadcrumb item.get_path%}
+        </div>
+    </div>
 {% if not item.active %}
     <div class="row">
     <div class="sixteen wide column">

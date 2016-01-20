@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'addresspicker',
     'user',
     'dictionary',
+    'nav',
     'shops',
     'tariff',
     'order',

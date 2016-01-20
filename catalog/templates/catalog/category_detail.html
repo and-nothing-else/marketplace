@@ -1,9 +1,14 @@
 {% extends "base.html" %}
-{% load catalog_tags %}
+{% load catalog_tags nav_tags %}
 
 
 {% block content %}
 <div class="ui stackable grid">
+    <div class="row">
+        <div class="sixteen wide column">
+            {% breadcrumb category.get_path %}
+        </div>
+    </div>
     <div class="row">
         <div class="ten wide column">
             <h1>{{ category.name }}</h1>
