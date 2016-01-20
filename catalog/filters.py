@@ -48,7 +48,10 @@ class ItemFilter(django_filters.FilterSet):
 
         def filter(self, qs, value):
             if value:
-                sku_allowed = True
+                try:
+                    sku_allowed = self.parent.category.sku_allowed
+                except:
+                    sku_allowed = True
                 if sku_allowed:
                     return qs.filter(itemsku__color__name__in=value).distinct()
                 else:
@@ -64,6 +67,7 @@ class ItemFilter(django_filters.FilterSet):
     def __init__(self, data=None, queryset=None, prefix=None, strict=None, category=None):
         super().__init__(data, queryset, prefix, strict)
         if category:
+            self.category = category
             sizes = category.get_sizes()
             if sizes:
                 self.filters['size'].field.choices = [
@@ -83,12 +87,18 @@ class ItemFilter(django_filters.FilterSet):
             else:
                 del self.filters['fabric']
 
-            color_choices = [
-                (item['color__name'], item['color__name'])
-                for item in ItemSKU.objects.filter(
-                        item__category=category, item__active=True
-                ).values('color__name').order_by('color__name').distinct()
-                ]
+            if category.sku_allowed:
+                color_choices = [
+                    (item['color__name'], item['color__name'])
+                    for item in ItemSKU.objects.filter(
+                            item__category=category, item__active=True
+                    ).values('color__name').order_by('color__name').distinct()
+                    ]
+            else:
+                color_choices = [
+                    (item['color__name'], item['color__name'])
+                    for item in category.item_set.active().values('color__name').order_by('color__name').distinct()
+                    ]
             if color_choices:
                 self.filters['color'].field.choices = color_choices
             else:
