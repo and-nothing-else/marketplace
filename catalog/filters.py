@@ -103,6 +103,14 @@ class ItemFilter(django_filters.FilterSet):
                 self.filters['color'].field.choices = color_choices
             else:
                 del self.filters['color']
+            if not category.filter_price_allowed:
+                del self.filters['price']
+            if not category.filter_size_allowed:
+                del self.filters['size']
+            if not category.filter_color_allowed:
+                del self.filters['color']
+            if not category.filter_fabric_allowed:
+                del self.filters['fabric']
 
     class Meta:
         model = Item

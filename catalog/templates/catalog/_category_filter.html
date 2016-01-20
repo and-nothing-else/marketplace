@@ -3,14 +3,16 @@
         <div class="header">Фильтр</div>
     </div>
     <form class="ui form attached fluid segment" method="get">
+{% if form.price %}
         <div class="field field-price_slider">
             <label>Цена</label>
             <div class="values">
-                от <span id="min_price">{{ filter.form.price.value.0|default:min_price }}</span>
-                до <span id="max_price">{{ filter.form.price.value.1|default:max_price }}</span><i class="rouble icon"></i>
+                от <span id="min_price">{{ form.price.value.0|default:min_price }}</span>
+                до <span id="max_price">{{ form.price.value.1|default:max_price }}</span><i class="rouble icon"></i>
             </div>
             <div id="price-range"></div>
         </div>
+{% endif %}
 {% for field in form %}
 {% if field.html_name != 'o' %}
 {% include "forms/_field.html" %}

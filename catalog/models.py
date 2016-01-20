@@ -14,6 +14,11 @@ class Category(MP_Node):
     sku_allowed = models.BooleanField(_('sku allowed'), default=True)
     size_set = models.ForeignKey('dictionary.SizeSet', verbose_name=_('size set'), blank=True, null=True)
 
+    filter_price_allowed = models.BooleanField(_('filter price allowed'), default=True)
+    filter_color_allowed = models.BooleanField(_('filter color allowed'), default=True)
+    filter_size_allowed = models.BooleanField(_('filter size allowed'), default=True)
+    filter_fabric_allowed = models.BooleanField(_('filter fabric allowed'), default=True)
+
     def __str__(self):
         return self.name
 
