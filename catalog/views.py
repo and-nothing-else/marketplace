@@ -12,8 +12,8 @@ class CatalogCategoryView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
-        items = self.get_object().item_set.active_for_location(self.request.location)
-        f = ItemFilter(self.request.GET, items, category=self.get_object())
+        items = self.get_object().get_items_for_location(self.request.location)
+        f = ItemFilter(self.request.GET, items, category=self.get_object(), location=self.request.location)
         context['filter'] = f
         context['min_price'] = items.aggregate(Min('price'))['price__min']
         context['max_price'] = items.aggregate(Max('price'))['price__max']

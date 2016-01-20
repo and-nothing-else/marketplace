@@ -56,6 +56,10 @@ class Category(MP_Node):
         path = add_parent2path(path)
         return path
 
+    def get_items_for_location(self, location):
+        category_ids = [category.id for category in self.get_tree(self)]
+        return Item.objects.active_for_location(location).filter(category__in=category_ids)
+
     class Meta:
         verbose_name = _('catalog section')
         verbose_name_plural = _('catalog sections')

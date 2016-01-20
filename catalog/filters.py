@@ -64,7 +64,7 @@ class ItemFilter(django_filters.FilterSet):
     fabric = FabricFilter()
     color = ColorFilter()
 
-    def __init__(self, data=None, queryset=None, prefix=None, strict=None, category=None):
+    def __init__(self, data=None, queryset=None, prefix=None, strict=None, category=None, location=None):
         super().__init__(data, queryset, prefix, strict)
         if category:
             self.category = category
@@ -79,7 +79,7 @@ class ItemFilter(django_filters.FilterSet):
 
             fabric_choices = [
                 (item['fabric'], item['fabric'])
-                for item in category.item_set.active().values('fabric').order_by('fabric').distinct()
+                for item in category.get_items_for_location(location).values('fabric').order_by('fabric').distinct()
                 if item['fabric']
                 ]
             if fabric_choices:
@@ -91,7 +91,7 @@ class ItemFilter(django_filters.FilterSet):
                 color_choices = [
                     (item['color__name'], item['color__name'])
                     for item in ItemSKU.objects.filter(
-                            item__category=category, item__active=True
+                            item__in=category.get_items_for_location(location)
                     ).values('color__name').order_by('color__name').distinct()
                     ]
             else:
