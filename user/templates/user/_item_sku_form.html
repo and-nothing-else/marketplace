@@ -35,6 +35,7 @@
                 <thead><tr>
                     <th><div class="field required"><label>Фото</label></div></th>
                     <th class="right aligned collapsing">Сортировка</th>
+                    <th>Удалить</th>
                 </tr></thead>
                 <tbody>
 {% for subform in sku_photo_inline %}
@@ -47,6 +48,9 @@
                         <td class="right aligned collapsing">
                             {{ subform.ordering }}
 {% if subform.ordering.errors %}{{ subform.ordering.errors }}{% endif %}
+                        </td>
+                        <td class="right aligned collapsing">
+                            {{ subform.DELETE }}
                         </td>
                     </tr>
 {% endfor %}

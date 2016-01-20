@@ -90,12 +90,14 @@ class ItemPropertiesInline(InlineFormSet):
 class UserItemViewMixin(MustHaveShopMixin, NamedFormsetsMixin):
     model = Item
     form_class = UserItemForm
-    inlines = [ItemPropertiesInline]
-    inlines_names = ['item_property_inline']
+    inlines = []
+    inlines_names = []
     success_url = reverse_lazy('user:item_list')
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
+        self.inlines = [ItemPropertiesInline]
+        self.inlines_names = ['item_property_inline']
         if self.category.sku_allowed:
             del form.fields['color']
             del form.fields['standard_size']
