@@ -2,6 +2,10 @@
 {% load catalog_tags nav_tags %}
 
 
+{% block head_title %}{{ category.get_browser_title }} | {{ block.super }}{% endblock %}
+{% block meta_description %}{{ category.get_meta_description }}{% endblock %}
+
+
 {% block content %}
 <div class="ui stackable grid">
     <div class="row">

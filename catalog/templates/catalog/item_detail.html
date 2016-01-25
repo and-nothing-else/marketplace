@@ -2,6 +2,10 @@
 {% load thumbnail humanize pytils_numeral catalog_tags nav_tags %}
 
 
+{% block head_title %}{{ item.get_browser_title }} | {{ block.super }}{% endblock %}
+{% block meta_description %}{{ item.get_meta_description }}{% endblock %}
+
+
 {% block content %}
     <div class="ui stackable grid catalog_item_detail">
     <div class="row">

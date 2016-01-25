@@ -5,10 +5,11 @@ from treebeard.mp_tree import MP_Node
 from ckeditor.fields import RichTextField
 from sorl.thumbnail import get_thumbnail
 from sorl.thumbnail.fields import ImageField
+from seo.models import SEOFieldsMixin
 import json
 
 
-class Category(MP_Node):
+class Category(SEOFieldsMixin, MP_Node):
     name = models.CharField(_('name'), max_length=64)
     slug = models.SlugField(_('slug'), unique=True)
     sku_allowed = models.BooleanField(_('sku allowed'), default=True)
@@ -60,6 +61,12 @@ class Category(MP_Node):
         category_ids = [category.id for category in self.get_tree(self)]
         return Item.objects.active_for_location(location).filter(category__in=category_ids)
 
+    def get_browser_title(self):
+        return self.browser_title or self.name
+
+    def get_meta_description(self):
+        return self.meta_description
+
     class Meta:
         verbose_name = _('catalog section')
         verbose_name_plural = _('catalog sections')
@@ -73,7 +80,7 @@ class ItemManager(models.Manager):
         return self.active().filter(shop__region__id=location.id)
 
 
-class Item(models.Model):
+class Item(SEOFieldsMixin, models.Model):
     created_at = models.DateTimeField(_('created at'), auto_now_add=True)
     updated_at = models.DateTimeField(_('updated at'), auto_now=True)
     category = models.ForeignKey(Category, verbose_name=_('category'))
@@ -165,6 +172,12 @@ class Item(models.Model):
         if user_items.count() >= self.shop.owner.tariff.goods:
             self.active = False
         super().save(*args, **kwargs)
+
+    def get_browser_title(self):
+        return self.browser_title or self.name
+
+    def get_meta_description(self):
+        return self.meta_description or self.description
 
     class Meta:
         ordering = ['-updated_at']

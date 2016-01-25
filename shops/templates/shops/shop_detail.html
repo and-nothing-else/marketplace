@@ -2,6 +2,10 @@
 {% load catalog_tags %}
 
 
+{% block head_title %}{{ shop.get_browser_title }} | {{ block.super }}{% endblock %}
+{% block meta_description %}{{ shop.get_meta_description }}{% endblock %}
+
+
 {% block content %}
     <h1>{{ shop.name }}</h1>
 {% if shop.map_point %}
