@@ -75,6 +75,7 @@ class CustomIndexDashboard(Dashboard):
                 'superbanner.models.SuperBanner',
                 'articles.models.Article',
                 'help.models.Help',
+                'extendflatpages.models.ExtendFlatpage'
             ]
         ))
 
