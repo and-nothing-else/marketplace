@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.flatpages',
     'django.contrib.humanize',
     'allauth',
     'allauth.account',
@@ -70,6 +71,7 @@ INSTALLED_APPS = [
     'superbanner',
     'articles',
     'seo',
+    'extendflatpages',
 ]
 
 THUMBNAIL_DEBUG = True
@@ -86,6 +88,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'seo.middleware.SEOFileMiddleware',
     'cuser.middleware.CuserMiddleware',
 ]

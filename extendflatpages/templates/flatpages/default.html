@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block head_title %}{{ flatpage.extendflatpage.get_browser_title }}{% endblock %}
+
+
+{% block meta_description %}{{ flatpage.extendflatpage.get_meta_description }}{% endblock %}
+
+{% block content %}
+{{ flatpage.content|safe }}
+{% endblock %}
