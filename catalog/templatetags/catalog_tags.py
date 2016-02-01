@@ -22,8 +22,10 @@ def catalog_latest_goods(context, number=4):
 
 
 @register.inclusion_tag('catalog/shop_goods.html', takes_context=True)
-def catalog_shop_goods(context, shop_id, number=4):
-    items = Item.objects.active().filter(shop__id=shop_id)[:number]
+def catalog_shop_goods(context, shop_id, number=None):
+    items = Item.objects.active().filter(shop__id=shop_id)
+    if number:
+        items = items[:number]
     return {
         'items': items
     }
