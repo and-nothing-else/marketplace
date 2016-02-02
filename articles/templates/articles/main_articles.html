@@ -1,14 +1,15 @@
+{% load thumbnail %}
+
 {% if articles %}
     <h3 class="ui dividing header">Актуальное</h3>
     <div class="ui stackable grid">
 {% for article in articles %}
         <div class="eight wide column">
-            <div class="ui piled segment">
-                <h4 class="ui header">
-                    <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-                </h4>
-                {{ article.announce|safe }}
-            </div>
+{% thumbnail article.image "550x300" crop="center" as im %}
+            <a href="{{ article.get_absolute_url }}" class="ui fluid image">
+                <img src="{{ im.url }}">
+{% endthumbnail %}
+            </a>
         </div>
 {% endfor %}
     </div>
