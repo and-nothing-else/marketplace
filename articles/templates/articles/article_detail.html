@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
 
+{% block head_title %}{{ article.get_browser_title }} | {{ block.super }}{% endblock %}
+{% block meta_description %}{{ article.get_meta_description }}{% endblock %}
+
+
 {% block content %}
     <h1>{{ article.title }}</h1>
     {{ article.text|safe }}
