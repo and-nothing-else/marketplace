@@ -13,7 +13,7 @@ class ArticleManager(models.Manager):
 
 class Article(SEOFieldsMixin, models.Model):
     created_at = models.DateTimeField(_('created at'), auto_now_add=True)
-    slug = models.SlugField(_('slug'))
+    slug = models.SlugField(_('slug'), unique=True)
     title = models.CharField(_('title'), max_length=128)
     image = ImageField(_('image'), upload_to='articles', help_text=_('550x300px'))
     text = RichTextUploadingField(_('text'))
