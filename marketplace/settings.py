@@ -180,6 +180,9 @@ STATICFILES_DIRS = (
 )
 
 
+DAYS_FREE = 30
+
+
 try:
     from .ckeditor_settings import *
 except ImportError:

@@ -12,3 +12,4 @@ django-treebeard==4.0
 sorl-thumbnail==12.4a1
 django-extra-views==0.7.1
 django-filter==0.12
+python-dateutil==2.5.2
