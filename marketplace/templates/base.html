@@ -1,7 +1,7 @@
 {% load staticfiles dictionary_tags user_tags catalog_tags search_tags %}
 <!doctype html>
 <meta charset="utf-8">
-<title>{% block head_title %}Marketplace{% endblock %}</title>
+<title>{% block head_title %}YouStore{% endblock %}</title>
 <meta name="description" content="{% block meta_description %}Marketplace description{% endblock %}">
 <link rel="stylesheet" href="{% static "vendor/semantic/semantic.min.css" %}">
 <link rel="stylesheet" href="{% static "vendor/fancybox/css/jquery.fancybox.css" %}">
@@ -16,7 +16,7 @@
         <header class="page_head">
             <div class="ui stackable grid container">
                 <div class="three wide column">
-                    <h1><a href="/">YouStore</a></h1>
+                    <a class="logo" href="{% url "home" %}"><img src="{% static "images/logo.png" %}"></a>
                 </div>
                 <div class="{% if request.user.has_unread_messages %}nine{% else %}ten{% endif %} wide column">
                     {% search_form %}
