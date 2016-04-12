@@ -74,7 +74,7 @@ class Category(SEOFieldsMixin, MP_Node):
 
 class ItemManager(models.Manager):
     def active(self):
-        return self.get_queryset().filter(active=True)
+        return self.get_queryset().filter(active=True, disabled=False)
 
     def active_for_location(self, location):
         return self.active().filter(shop__region__id=location.id)
@@ -87,6 +87,8 @@ class Item(SEOFieldsMixin, models.Model):
     shop = models.ForeignKey('shops.Shop', verbose_name=_('shop'))
 
     active = models.BooleanField(_('active'), default=True)
+    disabled = models.BooleanField(_('disabled'), default=False, help_text=_('disabled because of tariff'))
+
     name = models.CharField(pgettext_lazy('item name', 'name'), max_length=256)
     article = models.CharField(pgettext_lazy('catalog item article', 'article'), max_length=16)
     price = models.PositiveIntegerField(_('price'))
@@ -172,6 +174,14 @@ class Item(SEOFieldsMixin, models.Model):
         if user_items.count() >= self.shop.owner.tariff.goods:
             self.active = False
         super().save(*args, **kwargs)
+
+    def disable(self):
+        self.disabled = True
+        self.save()
+
+    def enable(self):
+        self.disabled = False
+        self.save()
 
     def get_browser_title(self):
         return self.browser_title or self.name

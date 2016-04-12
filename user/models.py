@@ -6,6 +6,7 @@ from django.core import validators
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse_lazy
 from tariff.models import Tariff
+from catalog.models import Item
 from logs.models import BalanceLog
 from math import floor
 
@@ -101,6 +102,9 @@ class MarketplaceUser(AbstractBaseUser, PermissionsMixin):
     def change_balance(self, b_sum):
         self.balance += b_sum
         self.save()
+        tariff = self.get_tariff()
+        if self.balance > tariff.price > 0:
+            self.service_enable()
 
     def daily_write_off(self):
         tariff = self.get_tariff()
@@ -132,8 +136,12 @@ class MarketplaceUser(AbstractBaseUser, PermissionsMixin):
                 )
 
     def service_disable(self):
-        # TODO: приостановить услуги
-        pass
+        for item in self.get_catalog_items():
+            item.disable()
+
+    def service_enable(self):
+        for item in self.get_catalog_items():
+            item.enable()
 
     def days_of_service_left(self):
         if self.tariff:
@@ -142,10 +150,16 @@ class MarketplaceUser(AbstractBaseUser, PermissionsMixin):
         return None
 
     def get_catalog_items(self):
-        return self.shop.item_set.all()
+        try:
+            return self.shop.item_set.all()
+        except:
+            return Item.objects.none()
 
     def get_catalog_active_items(self):
-        return self.shop.item_set.active()
+        try:
+            return self.shop.item_set.active()
+        except:
+            return Item.objects.none()
 
     def get_catalog_active_items_count(self):
         return self.get_catalog_active_items().count()

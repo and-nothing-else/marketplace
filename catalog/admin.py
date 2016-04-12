@@ -33,19 +33,22 @@ class ItemPhotoInline(AdminImageMixin, admin.TabularInline):
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ['name', 'article', 'price']
+    list_display = ['name', 'article', 'price', 'active', 'disabled']
     inlines = [ItemPhotoInline]
     readonly_fields = ['created_at', 'updated_at']
     fieldsets = (
         (None, {
-            'fields': ('name', 'article', 'price', 'old_price', 'description')
+            'fields': ('category', 'name', 'article', 'price', 'old_price', 'description')
+        }),
+        (_('owner'), {
+            'fields': ('shop',),
         }),
         (_('properties'), {
             'fields': ('color', 'size', 'standard_size', 'fabric'),
             'classes': ('collapse',)
         }),
         (_('display parameters'), {
-            'fields': ('created_at', 'updated_at', 'active'),
+            'fields': ('created_at', 'updated_at', 'active', 'disabled'),
             'classes': ('collapse',)
         }),
         SEO_ADMIN_FIELDSET
