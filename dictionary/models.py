@@ -11,9 +11,10 @@ class Region(GeoLocationFacade):
     @classmethod
     def get_by_ip_range(cls, ip_range):
         if ip_range:
-            return ip_range.region
-        else:
-            return cls.get_default_location()
+            r = ip_range.region.location.all()
+            if len(r) > 0:
+                return r.first()
+        return cls.get_default_location()
 
     @classmethod
     def get_default_location(cls):
