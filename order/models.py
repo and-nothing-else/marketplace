@@ -13,7 +13,8 @@ class Order(models.Model):
     date = models.DateTimeField(_('date'), auto_now_add=True)
     user = models.ForeignKey('user.MarketplaceUser', verbose_name=_('user'), blank=True, null=True)
     sum = models.FloatField(_('sum'))
-    paymentType = models.CharField(_('payment type'), choices=PAYMENT_TYPE_CHOICES, max_length=2, default='AC')
+    paymentType = models.CharField(_('payment type'), choices=PAYMENT_TYPE_CHOICES, max_length=2, default='AC',
+                                   blank=True, null=True)
     paid = models.BooleanField(_('paid'), default=False)
 
     def __str__(self):
